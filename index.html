@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr.ir. Rishi Relan - Digital Twin Expert</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Academicons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <!-- Flag Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.11.0/css/flag-icons.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#020617', // Slate 950
+                        secondary: '#0f172a', // Slate 900
+                        tertiary: '#1e293b', // Slate 800
+                        accent: '#38bdf8', // Sky 400
+                        accentDark: '#0284c7', // Sky 600
+                        highlight: '#fbbf24', // Amber 400
+                        success: '#10b981', // Emerald 500
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'grid-move': 'gridMove 20s linear infinite',
+                        'grow-bar': 'growBar 1.5s ease-out forwards',
+                        'blink': 'blink 1s infinite',
+                        'scan': 'scan 3s linear infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        gridMove: {
+                            '0%': { backgroundPosition: '0 0' },
+                            '100%': { backgroundPosition: '50px 50px' },
+                        },
+                        growBar: {
+                            '0%': { width: '0%' },
+                            '100%': { width: 'var(--w)' },
+                        },
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        },
+                        scan: {
+                            '0%': { top: '-5%' },
+                            '50%': { top: '105%' },
+                            '100%': { top: '-5%' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-1000px 0' },
+                            '100%': { backgroundPosition: '1000px 0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #e2e8f0; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* DIGITAL TWIN THEME: Technical Grid Background */
+        .tech-grid-bg {
+            background-image: 
+                linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 60s linear infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+
+        /* Advanced Spotlight Card Effect */
+        .spotlight-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(12px);
+        }
+        
+        .spotlight-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: radial-gradient(
+                800px circle at var(--mouse-x) var(--mouse-y),
+                rgba(56, 189, 248, 0.6),
+                transparent 40%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .spotlight-card:hover::before { opacity: 1; }
+
+        /* Shimmer Card Effect */
+        .shimmer-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(12px);
+        }
+        .shimmer-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 40px -10px rgba(56, 189, 248, 0.15);
+        }
+        .shimmer-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+            transform: skewX(-25deg);
+            transition: left 0.5s;
+            pointer-events: none;
+        }
+        .shimmer-card:hover::before {
+            animation: shimmer 1.5s infinite;
+            left: 200%;
+        }
+
+        /* Scanner Effect */
+        .scanner-container { position: relative; overflow: hidden; }
+        .scanner-line {
+            position: absolute; width: 100%; height: 2px; background: #38bdf8;
+            box-shadow: 0 0 10px #38bdf8, 0 0 20px #38bdf8; opacity: 0.6;
+            animation: scan 3s ease-in-out infinite; z-index: 10;
+        }
+
+        /* Interaction Classes for Skill Mapping */
+        .dimmed { opacity: 0.2 !important; filter: grayscale(100%) blur(1px); transition: all 0.3s ease; }
+        .highlighted { 
+            border-color: #38bdf8 !important; 
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+            transform: scale(1.01);
+            z-index: 10;
+            background: rgba(30, 41, 59, 0.95);
+        }
+
+        /* Boot Sequence Overlay */
+        #boot-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #020617; z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            font-family: 'JetBrains Mono', monospace; color: #38bdf8;
+            flex-direction: column;
+        }
+
+        /* Blueprint Modal */
+        #project-modal {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-color: #0f172a;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Typewriter Cursor */
+        .cursor { display: inline-block; width: 3px; background-color: #38bdf8; animation: blink 1s infinite; }
+        
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: #38bdf8; z-index: 100; width: 0%; transition: width 0.1s; }
+        #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .skill-fill { width: 0%; transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); }
+        .group:hover .skill-fill { width: var(--w) !important; }
+        .fi { width: 1.2em; border-radius: 2px; vertical-align: middle; }
+        .magnetic-item { display: inline-block; }
+        
+        .accordion-content {
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            opacity: 1;
+        }
+        
+        /* Custom Scrollbar for Recommendations */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+        @media print {
+            #boot-screen { display: none !important; }
+            .tech-grid-bg { animation: none; background: white; }
+            body { color: black; background: white; }
+            .text-white { color: black !important; }
+            .spotlight-card, .shimmer-card { background: none; border: 1px solid #ccc; box-shadow: none; }
+            .hidden-print { display: none !important; }
+            .skill-fill { width: var(--w) !important; }
+            .bg-cover { background: none !important; } /* Remove bg images for print */
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden selection:bg-accent selection:text-white antialiased bg-primary tech-grid-bg">
+
+    <!-- BOOT SEQUENCE OVERLAY -->
+    <div id="boot-screen">
+        <div class="w-80">
+            <div class="flex justify-between text-xs mb-1 font-mono text-slate-400">
+                <span>SYSTEM_INIT</span>
+                <span>v3.3.0</span>
+            </div>
+            <div class="h-1 bg-slate-800 w-full mb-4 rounded-full overflow-hidden">
+                <div id="boot-bar" class="h-full bg-accent w-0"></div>
+            </div>
+            <div id="boot-text" class="text-sm h-20 font-mono text-accent">
+                > Initializing Digital Twin Core...<br>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLUEPRINT MODAL -->
+    <div id="modal-overlay" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div id="project-modal" class="w-full max-w-3xl border border-accent/30 rounded-xl p-8 relative transform scale-95 transition-transform duration-300">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition"><i class="fas fa-times text-xl"></i></button>
+            <div class="flex items-center gap-3 mb-6 border-b border-slate-700 pb-4">
+                <i class="fas fa-project-diagram text-accent text-2xl"></i>
+                <h3 id="modal-title" class="text-2xl font-bold text-white font-mono tracking-tight">PROJECT_BLUEPRINT</h3>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 space-y-6">
+                    <div>
+                        <h4 class="text-accent text-xs uppercase tracking-widest mb-2 font-bold">Problem Statement</h4>
+                        <p id="modal-problem" class="text-slate-300 text-sm leading-relaxed">Loading...</p>
+                    </div>
+                    <div>
+                        <h4 class="text-accent text-xs uppercase tracking-widest mb-2 font-bold">Technical Solution</h4>
+                        <p id="modal-solution" class="text-slate-300 text-sm leading-relaxed">Loading...</p>
+                    </div>
+                </div>
+                <div class="bg-primary/80 p-5 rounded-lg border border-white/10 h-fit">
+                    <h4 class="text-accent text-xs uppercase tracking-widest mb-4 font-bold border-b border-white/10 pb-2">Key Metrics</h4>
+                    <ul id="modal-metrics" class="text-sm text-slate-300 space-y-3">
+                        <!-- Dynamic Content -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-primary/90 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white tracking-tight z-50 relative group">
+                Rishi Relan<span class="text-accent group-hover:text-white transition">.Ph.D</span>
+            </a>
+            <div class="hidden md:flex space-x-1 font-medium text-sm uppercase tracking-wider text-slate-300">
+                <a href="#about" class="magnetic-item px-3 py-2 hover:text-white transition rounded hover:bg-white/5">About</a>
+                <a href="#experience" class="magnetic-item px-3 py-2 hover:text-white transition rounded hover:bg-white/5">Experience</a>
+                <a href="#education" class="magnetic-item px-3 py-2 hover:text-white transition rounded hover:bg-white/5">Education</a>
+                <a href="#leadership" class="magnetic-item px-3 py-2 hover:text-white transition rounded hover:bg-white/5">Leadership</a>
+                <a href="#publications" class="magnetic-item px-3 py-2 hover:text-white transition rounded hover:bg-white/5">Research</a>
+                <a href="#awards" class="magnetic-item px-3 py-2 hover:text-white transition rounded hover:bg-white/5">Awards</a>
+                <a href="#recommendations" class="magnetic-item px-3 py-2 hover:text-white transition rounded hover:bg-white/5">Recommendations</a>
+                <a href="#contact" class="px-5 py-2 ml-4 border border-accent text-accent rounded hover:bg-accent hover:text-white transition duration-300">Contact</a>
+            </div>
+             <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none z-50 relative">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <div id="mobile-menu" class="fixed inset-0 bg-primary/98 backdrop-blur-xl z-40 hidden flex flex-col justify-center items-center space-y-6 transition-all duration-300 opacity-0 translate-y-[-20px]">
+            <a href="#about" class="text-2xl font-bold text-white hover:text-accent mobile-link">About</a>
+            <a href="#experience" class="text-2xl font-bold text-white hover:text-accent mobile-link">Experience</a>
+            <a href="#education" class="text-2xl font-bold text-white hover:text-accent mobile-link">Education</a>
+            <a href="#leadership" class="text-2xl font-bold text-white hover:text-accent mobile-link">Leadership</a>
+            <a href="#publications" class="text-2xl font-bold text-white hover:text-accent mobile-link">Research</a>
+            <a href="#awards" class="text-2xl font-bold text-white hover:text-accent mobile-link">Awards</a>
+            <a href="#recommendations" class="text-2xl font-bold text-white hover:text-accent mobile-link">Recommendations</a>
+            <a href="#contact" class="text-2xl font-bold text-accent border border-accent px-8 py-2 rounded-full mobile-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16" id="home">
+        <canvas id="hero-canvas"></canvas>
+
+        <div class="container mx-auto px-6 relative z-10 text-center" data-aos="zoom-out" data-aos-duration="1200">
+            <div class="w-40 h-40 md:w-48 md:h-48 mx-auto mb-8 rounded-full overflow-hidden border-4 border-accent/50 shadow-[0_0_60px_rgba(56,189,248,0.25)] relative group animate-float scanner-container">
+                <img src="Rishi2025 (1).jpg" alt="Dr. Rishi Relan" class="w-full h-full object-cover">
+                <!-- SCANNER EFFECT -->
+                <div class="scanner-line"></div>
+                <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-2xl">
+                Dr.ir. Rishi Relan
+            </h1>
+            
+            <div class="h-12 md:h-8 mb-8">
+                <p class="text-xl md:text-2xl text-slate-300 font-light leading-relaxed">
+                    <span id="typewriter-text" class="text-accent font-semibold"></span><span class="cursor">&nbsp;</span>
+                </p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-3 mb-12 max-w-4xl mx-auto">
+                <span class="px-4 py-2 bg-secondary/80 rounded-full text-sm border border-white/10 text-slate-200 backdrop-blur-sm hover:border-accent transition cursor-default">
+                    <i class="fas fa-bolt mr-2 text-highlight"></i>BESS Engineering
+                </span>
+                <span class="px-4 py-2 bg-secondary/80 rounded-full text-sm border border-white/10 text-slate-200 backdrop-blur-sm hover:border-accent transition cursor-default">
+                    <i class="fas fa-brain mr-2 text-pink-500"></i>Nonlinear System ID
+                </span>
+                <span class="px-4 py-2 bg-secondary/80 rounded-full text-sm border border-white/10 text-slate-200 backdrop-blur-sm hover:border-accent transition cursor-default">
+                    <i class="fas fa-digital-tachograph mr-2 text-green-400"></i>Digital Twins
+                </span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" class="bg-accent text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-primary transition shadow-[0_0_30px_rgba(56,189,248,0.3)] transform hover:-translate-y-1 flex items-center gap-2 justify-center">
+                    <i class="ai ai-google-scholar"></i> Google Scholar
+                </a>
+                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" class="border border-slate-600 text-white px-8 py-4 rounded-lg hover:border-accent hover:text-accent transition flex items-center justify-center gap-2 backdrop-blur-sm hover:bg-white/5">
+                    <i class="ai ai-researchgate"></i> ResearchGate
+                </a>
+            </div>
+        </div>
+        
+        <a href="#about" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-slate-500 hover:text-accent transition cursor-pointer z-20 hidden-print">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </a>
+    </header>
+
+    <!-- About & Industry Verticals -->
+    <section id="about" class="py-24 bg-secondary/80 backdrop-blur-sm relative border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-start mb-20">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl font-bold text-white mb-6 border-l-4 border-accent pl-6">Executive Summary</h2>
+                    <p class="text-lg text-slate-300 mb-6 leading-relaxed">
+                        Results-driven and visionary <strong class="text-white">Head of Department for Engineering and R&D</strong> with a proven track record in driving innovation, growth, and operational excellence. Leveraging deep technical expertise, strategic leadership, and stakeholder management to deliver measurable results in complex R&D environments.
+                    </p>
+                    <p class="text-lg text-slate-300 mb-6 leading-relaxed">
+                        Currently leading <strong>Battery Energy Storage Systems (BESS)</strong> Engineering at Siemens Energy India. I established the Battery Advanced AI Technology Lab (BATL) and build high-performing cross-functional teams fostering a culture of innovation.
+                    </p>
+
+                    <h4 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4 mt-8">Leadership DNA</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="flex items-center p-3 bg-tertiary/50 rounded-lg border border-white/5 hover:border-accent/50 transition group">
+                            <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent mr-3 group-hover:bg-accent group-hover:text-white transition"><i class="fas fa-lightbulb"></i></div>
+                            <span class="text-slate-200 text-sm font-medium">Initiative</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-tertiary/50 rounded-lg border border-white/5 hover:border-accent/50 transition group">
+                            <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent mr-3 group-hover:bg-accent group-hover:text-white transition"><i class="fas fa-search"></i></div>
+                            <span class="text-slate-200 text-sm font-medium">Curiosity</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-tertiary/50 rounded-lg border border-white/5 hover:border-accent/50 transition group">
+                            <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent mr-3 group-hover:bg-accent group-hover:text-white transition"><i class="fas fa-users"></i></div>
+                            <span class="text-slate-200 text-sm font-medium">Team Player</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-tertiary/50 rounded-lg border border-white/5 hover:border-accent/50 transition group">
+                            <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent mr-3 group-hover:bg-accent group-hover:text-white transition"><i class="fas fa-tasks"></i></div>
+                            <span class="text-slate-200 text-sm font-medium">Organize & Manage</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats -->
+                <div class="grid grid-cols-2 gap-6" data-aos="fade-left">
+                    <div class="shimmer-card p-6 rounded-xl text-center group">
+                        <i class="fas fa-users text-3xl text-accent mb-3 group-hover:text-white transition"></i>
+                        <h3 class="text-3xl font-bold text-white count-up" data-target="34">0</h3>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider">Direct Reports</p>
+                    </div>
+                    <div class="shimmer-card p-6 rounded-xl text-center group">
+                        <i class="fas fa-file-alt text-3xl text-accent mb-3 group-hover:text-white transition"></i>
+                        <h3 class="text-3xl font-bold text-white count-up" data-target="65">0</h3>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider">Publications</p>
+                    </div>
+                    <div class="shimmer-card p-6 rounded-xl text-center group">
+                        <i class="fas fa-globe text-3xl text-accent mb-3 group-hover:text-white transition"></i>
+                        <h3 class="text-3xl font-bold text-white count-up" data-target="5">0</h3>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider">Countries Worked</p>
+                    </div>
+                    <div class="shimmer-card p-6 rounded-xl text-center group">
+                        <i class="fas fa-calendar-alt text-3xl text-accent mb-3 group-hover:text-white transition"></i>
+                        <h3 class="text-3xl font-bold text-white count-up" data-target="20">0</h3>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider">Years Experience</p>
+                    </div>
+                    
+                     <div class="col-span-2 bg-tertiary/40 rounded-xl p-4 border border-white/5">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 text-center">Global Footprint</h4>
+                        <div class="flex justify-between items-center px-4">
+                             <div class="text-center"><span class="fi fi-in text-2xl"></span><p class="text-[10px] text-slate-500 mt-1">IN</p></div>
+                             <div class="h-0.5 bg-slate-700 flex-1 mx-2"></div>
+                             <div class="text-center"><span class="fi fi-de text-2xl"></span><p class="text-[10px] text-slate-500 mt-1">DE</p></div>
+                             <div class="h-0.5 bg-slate-700 flex-1 mx-2"></div>
+                             <div class="text-center"><span class="fi fi-gb text-2xl"></span><p class="text-[10px] text-slate-500 mt-1">UK</p></div>
+                             <div class="h-0.5 bg-slate-700 flex-1 mx-2"></div>
+                             <div class="text-center"><span class="fi fi-be text-2xl"></span><p class="text-[10px] text-slate-500 mt-1">BE</p></div>
+                             <div class="h-0.5 bg-slate-700 flex-1 mx-2"></div>
+                             <div class="text-center"><span class="fi fi-dk text-2xl"></span><p class="text-[10px] text-slate-500 mt-1">DK</p></div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+
+            <!-- Industry Verticals -->
+            <div data-aos="fade-up">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold text-white">Industry Verticals</h3>
+                    <p class="text-slate-400 text-sm">Applied Expertise Across Sectors</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <div class="bg-tertiary/60 backdrop-blur-md p-6 rounded-lg text-center border border-white/5 hover:border-yellow-400/50 hover:bg-yellow-400/5 transition group">
+                        <i class="fas fa-bolt text-2xl text-yellow-400 mb-3 group-hover:scale-110 transition transform"></i>
+                        <p class="text-sm font-bold text-slate-200">Energy</p>
+                    </div>
+                    <div class="bg-tertiary/60 backdrop-blur-md p-6 rounded-lg text-center border border-white/5 hover:border-blue-400/50 hover:bg-blue-400/5 transition group">
+                        <i class="fas fa-cogs text-2xl text-blue-400 mb-3 group-hover:scale-110 transition transform"></i>
+                        <p class="text-sm font-bold text-slate-200">Mechatronics</p>
+                    </div>
+                    <div class="bg-tertiary/60 backdrop-blur-md p-6 rounded-lg text-center border border-white/5 hover:border-purple-400/50 hover:bg-purple-400/5 transition group">
+                        <i class="fas fa-industry text-2xl text-purple-400 mb-3 group-hover:scale-110 transition transform"></i>
+                        <p class="text-sm font-bold text-slate-200">Industry 4.0</p>
+                    </div>
+                    <div class="bg-tertiary/60 backdrop-blur-md p-6 rounded-lg text-center border border-white/5 hover:border-red-400/50 hover:bg-red-400/5 transition group">
+                        <i class="fas fa-plane text-2xl text-red-400 mb-3 group-hover:scale-110 transition transform"></i>
+                        <p class="text-sm font-bold text-slate-200">Aerospace</p>
+                    </div>
+                    <div class="bg-tertiary/60 backdrop-blur-md p-6 rounded-lg text-center border border-white/5 hover:border-green-400/50 hover:bg-green-400/5 transition group">
+                        <i class="fas fa-car text-2xl text-green-400 mb-3 group-hover:scale-110 transition transform"></i>
+                        <p class="text-sm font-bold text-slate-200">Automotive</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Experience -->
+    <section id="experience" class="py-24 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-4xl font-bold text-white text-center mb-4" data-aos="fade-up">Professional Journey</h2>
+            <p class="text-center text-slate-400 mb-16">Detailed Roles, Projects & Industrial Collaborations</p>
+            
+            <div class="max-w-5xl mx-auto space-y-12">
+                
+                <!-- Siemens Energy (Current) -->
+                <div class="spotlight-card p-8 rounded-2xl border-l-4 border-accent experience-card" data-aos="fade-up" onmousemove="handleMouseMove(event)" data-tags="BESS DigitalTwin AI Management">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Head of Dept. & Digital Twin Expert</h3>
+                            <p class="text-accent">Siemens Energy India Limited (SEIL), India <span class="fi fi-in"></span></p>
+                        </div>
+                        <span class="px-4 py-1 bg-accent/10 text-accent rounded-full text-sm font-mono mt-2 md:mt-0">Aug 2019 - Present</span>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Leadership Roles -->
+                        <div>
+                            <h4 class="text-white font-bold mb-3 border-b border-slate-700 pb-2">Leadership & Roles</h4>
+                            <ul class="space-y-3 text-sm text-slate-300">
+                                <li><i class="fas fa-check text-accent mr-2"></i><strong>Head of Eng. & R&D (Storage):</strong> Built BESS department (34+ engineers). Managed budget, headcount, people development, and strategy.</li>
+                                <li><i class="fas fa-check text-accent mr-2"></i><strong>Product Owner (Global):</strong> BESS Digital Solutions, EMS, Digital Twins (Oct '22 - Sep '25).</li>
+                                <li><i class="fas fa-check text-accent mr-2"></i><strong>Technical Lead:</strong> Generator Reliability Twin (Surrogate modelling, 20X faster).</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Key Initiatives (New Section) -->
+                        <div>
+                            <h4 class="text-white font-bold mb-3 border-b border-slate-700 pb-2">Key Initiatives</h4>
+                            <ul class="space-y-3 text-sm text-slate-300">
+                                <li class="flex items-start">
+                                    <i class="fas fa-flask text-accent mr-2 mt-1"></i>
+                                    <span><strong>Founder:</strong> Battery Advanced AI Technology Lab (BATL).</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-handshake text-accent mr-2 mt-1"></i>
+                                    <span><strong>IGSTC:</strong> Single-handedly established a first-ever Indo-German collaboration network (Fraunhofer, IIT Bombay).</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Technical Projects (Interactive) -->
+                    <div class="mt-8 pt-6 border-t border-white/10">
+                         <h4 class="text-accent text-xs uppercase tracking-widest mb-3 font-bold">Technical Projects</h4>
+                         <ul class="space-y-2 text-sm text-slate-300 grid md:grid-cols-2 gap-x-4">
+                            <li><button onclick="openProject('kvbatt')" class="text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-file-blueprint mr-2 text-accent"></i>KV-Batt Project (High-Voltage BESS Design)</button>
+                                <span class="block text-xs text-slate-500 ml-6">Only non-German contributor to this public-funded project.</span>
+                            </li>
+                            <li><button onclick="openProject('genrel')" class="text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-file-blueprint mr-2 text-accent"></i>Generator Reliability Twin (Details)</button></li>
+                            <li><button onclick="openProject('rca')" class="text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-search mr-2 text-accent"></i>Root Cause Analysis (Blade-4)</button></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- DTU Compute -->
+                <div class="spotlight-card p-8 rounded-2xl border-l-4 border-slate-600 experience-card" data-aos="fade-up" onmousemove="handleMouseMove(event)" data-tags="SystemID SDEs Python">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Scientific Researcher</h3>
+                            <p class="text-slate-400">DTU Compute, Denmark <span class="fi fi-dk"></span></p>
+                        </div>
+                        <span class="px-4 py-1 bg-tertiary text-slate-400 rounded-full text-sm font-mono mt-2 md:mt-0">Sep 2017 - Aug 2019</span>
+                    </div>
+                    <p class="text-slate-300 mb-4">Led development of cyber-physical models for Industry 4.0, renewable energy, and smart cities. Expertise in System ID, SDEs, Optimization.</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h5 class="text-sm font-bold text-white mb-2">Key Projects</h5>
+                            <ul class="text-sm text-slate-400 list-disc list-inside">
+                                <li>MADE SPIR WP9</li>
+                                <li>Centre for IT-Intelligent Energy Systems (CITIES)</li>
+                                <li>FLEX-Coop H2020</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white mb-2">Industrial Partners</h5>
+                            <ul class="text-sm text-slate-400 list-disc list-inside">
+                                <li>Siemens Gamesa Renewable Energy (Denmark <span class="fi fi-dk"></span>)</li>
+                                <li>Fraunhofer-FOKUS (Germany <span class="fi fi-de"></span>)</li>
+                                <li>CIMNE (Spain <span class="fi fi-es"></span>)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VUB -->
+                <div class="spotlight-card p-8 rounded-2xl border-l-4 border-slate-600 experience-card" data-aos="fade-up" onmousemove="handleMouseMove(event)" data-tags="BatteryModelling NonlinearID MATLAB">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Scientific Researcher (PhD)</h3>
+                            <p class="text-slate-400">Vrije Universiteit Brussel (VUB), Belgium <span class="fi fi-be"></span></p>
+                        </div>
+                        <span class="px-4 py-1 bg-tertiary text-slate-400 rounded-full text-sm font-mono mt-2 md:mt-0">Oct 2013 - Oct 2017</span>
+                    </div>
+                    <p class="text-slate-300 mb-4">Developed theoretical frameworks for black-box modeling and stochastic identification of Li-ion battery dynamics. Nonlinearity detection & characterization.</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h5 class="text-sm font-bold text-white mb-2">Projects</h5>
+                            <ul class="text-sm text-slate-400 list-disc list-inside">
+                                <li>ERC Grant SNLSID</li>
+                                <li>BATTLE (Battery Modelling)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white mb-2">Industrial Partners</h5>
+                            <ul class="text-sm text-slate-400 list-disc list-inside">
+                                <li>Siemens Digital Industry Software (Belgium <span class="fi fi-be"></span>)</li>
+                                <li>Toyota Motors Europe <span class="fi fi-be"></span></li>
+                                <li>Volvo AB (Sweden <span class="fi fi-se"></span>)</li>
+                                <li>Umicore (Belgium <span class="fi fi-be"></span>)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Early Career Archive -->
+                <div class="border border-slate-800 rounded-xl overflow-hidden" data-aos="fade-up">
+                    <button onclick="toggleAccordion('early-career')" class="w-full p-6 flex justify-between items-center bg-tertiary/50 hover:bg-tertiary transition text-left group focus:outline-none">
+                        <span class="text-lg font-bold text-white group-hover:text-accent transition">Foundational Career (2002 - 2013)</span>
+                        <i class="fas fa-chevron-down text-accent transition-transform duration-300" id="early-career-icon"></i>
+                    </button>
+                    <div id="early-career" class="accordion-content bg-primary/50">
+                        <div class="p-6 grid gap-6">
+                            <!-- Rolls Royce -->
+                            <div class="border-l-2 border-slate-700 pl-4 experience-card" data-tags="GasTurbine SignalProcessing">
+                                <div class="flex justify-between"><h5 class="text-white font-bold">Rolls-Royce UTC (UK <span class="fi fi-gb"></span>)</h5><span class="text-xs font-mono text-slate-500">Feb 2012 - Sep 2013</span></div>
+                                <p class="text-sm text-accent mb-1">Industrial Researcher</p>
+                                <p class="text-sm text-slate-400">Gas turbine health monitoring using statistical signal processing & ML. Fault diagnosis, prognosis, FMECA, IPR patent analysis.</p>
+                            </div>
+                            
+                            <!-- IIT Delhi -->
+                            <div class="border-l-2 border-slate-700 pl-4 experience-card" data-tags="VibrationControl">
+                                <div class="flex justify-between"><h5 class="text-white font-bold">IIT Delhi (India <span class="fi fi-in"></span>)</h5><span class="text-xs font-mono text-slate-500">Sep 2008 - Sep 2010</span></div>
+                                <p class="text-sm text-accent mb-1">Senior Research Fellow</p>
+                                <p class="text-sm text-slate-400">Active vibration control for rotor shaft systems. Experiment design, simulation, control framework.</p>
+                            </div>
+                            
+                            <!-- dSPACE -->
+                            <div class="border-l-2 border-slate-700 pl-4 experience-card" data-tags="HIL dSPACE">
+                                <div class="flex justify-between"><h5 class="text-white font-bold">dSPACE GmbH (Germany <span class="fi fi-de"></span>)</h5><span class="text-xs font-mono text-slate-500">Oct 2006 - Sep 2008</span></div>
+                                <p class="text-sm text-accent mb-1">Application Engineer / Resident Engineer</p>
+                                <p class="text-sm text-slate-400">Resident Engineer at GM Europe. Integrated ESP, ABS, AWD on HIL simulators. Automated failsafe testing. Delivered simulator for Conti-Teves AG.</p>
+                            </div>
+                            
+                            <!-- Tox-Pressotechnik -->
+                            <div class="border-l-2 border-slate-700 pl-4 experience-card" data-tags="PLC LabView">
+                                <div class="flex justify-between"><h5 class="text-white font-bold">Tox-Pressotechnik (Germany <span class="fi fi-de"></span>)</h5><span class="text-xs font-mono text-slate-500">Feb 2005 - Jun 2006</span></div>
+                                <p class="text-sm text-accent mb-1">Industrial Researcher</p>
+                                <p class="text-sm text-slate-400">Control system for industrial clinching process. Nonlinear math modeling, PLC/Microcontroller algo design, HIL sims, Patent review.</p>
+                            </div>
+                            <div class="border-l-2 border-slate-700 pl-4">
+                                <div class="flex justify-between"><h5 class="text-white font-bold">AutoKame / a2Z Filtration (India <span class="fi fi-in"></span>)</h5><span class="text-xs font-mono text-slate-500">2003 - 2004</span></div>
+                                <p class="text-sm text-accent mb-1">Product Development Engineer</p>
+                                <p class="text-sm text-slate-400">PLC motion control, pneumatic circuits for CNC textile and filter machines.</p>
+                            </div>
+                             <div class="border-l-2 border-slate-700 pl-4">
+                                <div class="flex justify-between"><h5 class="text-white font-bold">New Era Controls / Haryana Sheet Glass (India <span class="fi fi-in"></span>)</h5><span class="text-xs font-mono text-slate-500">2002 - 2003</span></div>
+                                <p class="text-sm text-accent mb-1">Industrial Trainee</p>
+                                <p class="text-sm text-slate-400">Process instrumentation, closed-loop controllers, electrical drives.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Education -->
+    <section id="education" class="py-24 bg-secondary relative border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">Academic Excellence</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="spotlight-card p-8 rounded-xl group" data-aos="fade-up" onmousemove="handleMouseMove(event)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="bg-accent/20 p-3 rounded-lg text-accent"><i class="fas fa-graduation-cap text-xl"></i></div>
+                        <span class="text-sm font-mono text-slate-400">2013-2017</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Doctor of Engineering Sciences</h3>
+                    <p class="text-slate-400 mb-2">Vrije Universiteit Brussel, Belgium <span class="fi fi-be"></span></p>
+                    <div class="space-y-2">
+                        <span class="inline-block bg-success/20 text-success text-xs font-bold px-2 py-1 rounded">Summa Cum Laude</span>
+                        <p class="text-sm text-slate-300"><strong>Domain:</strong> Nonlinear System ID & ML.</p>
+                        <p class="text-sm text-slate-300">Siemens Digital Industries, Toyota ME, Volvo AB</p>
+                    </div>
+                </div>
+
+                <div class="spotlight-card p-8 rounded-xl group" data-aos="fade-up" data-aos-delay="100" onmousemove="handleMouseMove(event)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="bg-slate-700/50 p-3 rounded-lg text-slate-300"><i class="fas fa-university text-xl"></i></div>
+                        <span class="text-sm font-mono text-slate-400">2012-2014</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">M.Phil. in Control Systems</h3>
+                    <p class="text-slate-400 mb-2">The University of Sheffield, UK <span class="fi fi-gb"></span></p>
+                    <p class="text-sm text-slate-300">Partner: Rolls-Royce plc.</p>
+                </div>
+
+                <div class="spotlight-card p-8 rounded-xl group" data-aos="fade-up" data-aos-delay="200" onmousemove="handleMouseMove(event)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="bg-slate-700/50 p-3 rounded-lg text-slate-300"><i class="fas fa-brain text-xl"></i></div>
+                        <span class="text-sm font-mono text-slate-400">2010-2011</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Adv. MSc. in Artificial Intelligence</h3>
+                    <p class="text-slate-400 mb-2">KU Leuven, Belgium <span class="fi fi-be"></span></p>
+                    <span class="inline-block bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded">Cum Laude</span>
+                </div>
+
+                <div class="spotlight-card p-8 rounded-xl group" data-aos="fade-up" data-aos-delay="300" onmousemove="handleMouseMove(event)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="bg-slate-700/50 p-3 rounded-lg text-slate-300"><i class="fas fa-robot text-xl"></i></div>
+                        <span class="text-sm font-mono text-slate-400">2004-2006</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">MSc. in Mechatronics</h3>
+                    <p class="text-slate-400 mb-2">Hochschule Ravensburg-Weingarten, Germany <span class="fi fi-de"></span></p>
+                    <span class="inline-block bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded">Sehr Gut (A+)</span>
+                    <p class="text-sm text-slate-300 mt-2"><strong>Partner:</strong> Tox-Pressotechnik GmbH & Co. KG</p>
+                </div>
+
+                 <div class="spotlight-card p-8 rounded-xl group col-span-1 md:col-span-2" data-aos="fade-up" data-aos-delay="400" onmousemove="handleMouseMove(event)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="bg-slate-700/50 p-3 rounded-lg text-slate-300"><i class="fas fa-scroll text-xl"></i></div>
+                        <span class="text-sm font-mono text-slate-400">1998-2002</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">B.Tech in Instrumentation & Control Engr.</h3>
+                    <p class="text-slate-400 mb-2">Kurukshetra University, India <span class="fi fi-in"></span></p>
+                    <span class="inline-block bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded">First Class with Honours</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Scientific & Thought Leadership Sections -->
+    <section id="leadership" class="py-24 bg-primary relative border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                
+                <!-- Scientific Leadership -->
+                <div data-aos="fade-right">
+                    <h3 class="text-2xl font-bold text-white mb-8 flex items-center"><i class="fas fa-gavel text-accent mr-3"></i> Scientific Leadership</h3>
+                    <div class="space-y-6">
+                        <div class="bg-tertiary/40 backdrop-blur-sm p-5 rounded-xl border border-white/5">
+                            <h4 class="text-accent font-bold uppercase text-xs tracking-widest mb-3">Key Roles</h4>
+                            <ul class="space-y-3 text-sm text-slate-300">
+                                <li><i class="fas fa-microphone-alt w-6 text-accent"></i> <strong>Keynote Speaker:</strong> ICAMDM-2025 (India <span class="fi fi-in"></span>)</li>
+                                <li><i class="fas fa-users w-6 text-accent"></i> <strong>APAC Lead:</strong> Associated Events Subcommittee, IGTI/ASME (Jul 2024).</li>
+                                <li><i class="fas fa-users w-6 text-accent"></i> <strong>R&D Workstream Lead:</strong> RE-INVEST 2024 (with GIZ/German Embassy) (Sep 2024).</li>
+                                <li><i class="fas fa-users w-6 text-accent"></i> <strong>Panel Member:</strong> "Optimisation at Crossroads of ML & Gen AI", MDAO 2024, IISc Bangalore <span class="fi fi-in"></span>.</li>
+                                <li><i class="fas fa-balance-scale w-6 text-accent"></i> <strong>Jury Member:</strong> Smart India Hackathon 2020 <span class="fi fi-in"></span>.</li>
+                                <li><i class="fas fa-search w-6 text-accent"></i> <strong>Remote Reviewer:</strong> ERC Starting Grant 2020 <span class="fi fi-eu"></span>.</li>
+                                <li><i class="fas fa-book-open w-6 text-accent"></i> <strong>Commissioning Editor:</strong> Dove Medical Press, UK <span class="fi fi-gb"></span> (2012-14).</li>
+                                <li><i class="fas fa-chair w-6 text-accent"></i> <strong>Session Co-chair:</strong> Indian Control Conference (ICC) 2019 <span class="fi fi-in"></span>.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Visiting Research Positions (NEW SECTION) -->
+                        <div class="bg-tertiary/40 backdrop-blur-sm p-5 rounded-xl border border-white/5">
+                             <h4 class="text-accent font-bold uppercase text-xs tracking-widest mb-3">Visiting Research Positions</h4>
+                             <ul class="space-y-3 text-sm text-slate-300">
+                                 <li><span class="fi fi-ch mr-2 text-lg align-middle"></span><strong>ETH Zürich:</strong> Visiting Researcher (Aug 2016 - Sep 2016).</li>
+                                 <li><span class="fi fi-be mr-2 text-lg align-middle"></span><strong>Vrije Universiteit Brussel:</strong> Visiting Researcher (Apr 2013 - Jun 2013).</li>
+                             </ul>
+                        </div>
+
+                        <div class="bg-tertiary/40 backdrop-blur-sm p-5 rounded-xl border border-white/5">
+                             <h4 class="text-accent font-bold uppercase text-xs tracking-widest mb-3">University Engagement</h4>
+                             <ul class="space-y-2 text-sm text-slate-300">
+                                 <li><strong>Guest Professor:</strong> BML Munjal University <span class="fi fi-in"></span> (2025).</li>
+                                 <li><strong>Adjunct Professor:</strong> SRM University <span class="fi fi-in"></span> (2023-24), BML Munjal University <span class="fi fi-in"></span> (2019-20).</li>
+                                 <li><strong>PhD Co-Supervision:</strong> Michael Nauheimer (Siemens Gamesa/DTU <span class="fi fi-dk"></span>), Rune Grøborg Junker (CITIES/DTU <span class="fi fi-dk"></span>).</li>
+                             </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thought Leadership -->
+                <div data-aos="fade-left">
+                    <h3 class="text-2xl font-bold text-white mb-8 flex items-center"><i class="fas fa-lightbulb text-highlight mr-3"></i> Thought Leadership</h3>
+                    <div class="space-y-6">
+                        <div class="bg-tertiary/40 backdrop-blur-sm p-5 rounded-xl border border-white/5">
+                            <h4 class="text-highlight font-bold uppercase text-xs tracking-widest mb-3">Invited Talks & Seminars</h4>
+                            <ul class="space-y-3 text-sm text-slate-300">
+                                <li><strong>ASME E-Fest Careers Seminar:</strong> "Accelerating Energy Transition... Digital Twin & AI". 1200+ attendees (Sep 2024).</li>
+                                <li><strong>IEEE Technical Seminar:</strong> "Modelling of Nonlinear Systems" at IIT Delhi <span class="fi fi-in"></span> (2018).</li>
+                                <li><strong>Invited Lecture:</strong> "Digital Twin and AI: Industry 4.0" at SRM University <span class="fi fi-in"></span> (2024).</li>
+                                <li><strong>ASME Seminar:</strong> Chandigarh University <span class="fi fi-in"></span> (300+ participants).</li>
+                                <li><strong>Presentations:</strong> ETH Zürich <span class="fi fi-ch"></span>, Hausdorff Center <span class="fi fi-de"></span>, IITs (Delhi, Mandi, Ropar) <span class="fi fi-in"></span>, Rolls-Royce (UK <span class="fi fi-gb"></span>), Volvo AB <span class="fi fi-se"></span>, Toyota ME <span class="fi fi-be"></span>, Umicore <span class="fi fi-be"></span>.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-tertiary/40 backdrop-blur-sm p-5 rounded-xl border border-white/5">
+                             <h4 class="text-highlight font-bold uppercase text-xs tracking-widest mb-3">Knowledge Dissemination</h4>
+                             <p class="text-sm text-slate-300 mb-4">Active contributor to European Research Network in System Identification (ERNSI <span class="fi fi-eu"></span>).</p>
+                             <h5 class="text-xs font-bold text-slate-400 uppercase mb-2">Peer Reviewer For:</h5>
+                             <p class="text-sm text-slate-400">Automatica, IEEE Trans. on Control Systems Tech, SIAM Journal of Control, IFAC, ICC, ACC, CDC.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Impact & Publications (Consolidated) -->
+    <section id="publications" class="py-24 bg-primary border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold text-white mb-12 text-center">Research Impact & Publications</h3>
+            
+             <!-- Filter Buttons -->
+             <div class="flex justify-center gap-4 mb-12 flex-wrap">
+                 <button onclick="filterPubs('all')" class="px-6 py-2 rounded-full border border-white/10 text-sm text-white hover:bg-accent hover:text-primary transition bg-accent/10">All</button>
+                 <button onclick="filterPubs('BESS')" class="px-6 py-2 rounded-full border border-white/10 text-sm text-slate-400 hover:bg-accent hover:text-primary transition">BESS & Energy</button>
+                 <button onclick="filterPubs('AI')" class="px-6 py-2 rounded-full border border-white/10 text-sm text-slate-400 hover:bg-accent hover:text-primary transition">AI & System ID</button>
+                 <button onclick="filterPubs('Aero')" class="px-6 py-2 rounded-full border border-white/10 text-sm text-slate-400 hover:bg-accent hover:text-primary transition">Aerospace</button>
+             </div>
+
+             <div class="grid lg:grid-cols-3 gap-12">
+                 <!-- Research Metrics Infographic -->
+                 <div class="lg:col-span-1" data-aos="fade-right">
+                     <div class="bg-tertiary/50 p-6 rounded-xl border border-white/5 sticky top-24">
+                         <h4 class="text-lg font-bold text-white mb-6">Publication Metrics</h4>
+                         <div class="mb-6">
+                             <div class="flex justify-between items-end mb-2">
+                                 <span class="text-sm text-slate-400">Total Publications</span>
+                                 <span class="text-2xl font-bold text-white">65+</span>
+                             </div>
+                             <div class="w-full bg-slate-800 rounded-full h-2">
+                                 <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
+                             </div>
+                         </div>
+                         
+                         <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-slate-300">Journals (Elsevier, IEEE)</span>
+                                <span class="text-sm font-mono text-accent">High Impact</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-1.5">
+                                <div class="bg-blue-500 h-1.5 rounded-full" style="width: 70%"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-slate-300">Conferences (ASME, IFAC)</span>
+                                <span class="text-sm font-mono text-accent">Regular</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-1.5">
+                                <div class="bg-purple-500 h-1.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-slate-300">Patents / Disclosures</span>
+                                <span class="text-sm font-mono text-accent">3</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-1.5">
+                                <div class="bg-yellow-500 h-1.5 rounded-full" style="width: 20%"></div>
+                            </div>
+                         </div>
+                         
+                         <div class="mt-8 pt-6 border-t border-white/5">
+                             <div class="flex items-center gap-3">
+                                 <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
+                                     <i class="fas fa-check-circle"></i>
+                                 </div>
+                                 <div>
+                                     <p class="text-white font-bold text-sm">Highly Cited Status</p>
+                                     <p class="text-xs text-slate-500">Recognized by Applied Energy</p>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+                 <!-- Publications List -->
+                 <div class="lg:col-span-2" data-aos="fade-left">
+                    <div class="space-y-4" id="pub-list">
+                        
+                        <!-- Media Featured Paper (Updated) -->
+                        <div class="pub-item block p-6 bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition group shadow-[0_0_15px_rgba(56,189,248,0.15)]" data-cat="AI">
+                            <div class="flex flex-wrap justify-between gap-2 mb-2">
+                                <span class="text-xs font-bold text-primary bg-highlight px-2 py-0.5 rounded">Global Media Feature</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mt-1">Exploring non-linear associations between atmospheric new-particle formation and ambient variables: a mutual information approach</h4>
+                            <p class="text-xs text-slate-400 mt-1">Martha A. Zaidan, Ville Haapasilta, <strong class="text-slate-200">Rishi Relan</strong>, Pauli Paasonen, Veli-Matti Kerminen, Heikki Junninen, Markku Kulmala, Adam S. Foster</p>
+                            <div class="flex gap-3 mt-2 text-xs">
+                                <span class="text-slate-500">Atmospheric Chemistry and Physics (2018)</span>
+                                <a href="https://doi.org/10.5194/acp-18-12699-2018" target="_blank" class="text-accent hover:underline flex items-center"><i class="fas fa-link mr-1"></i> DOI: 10.5194/acp-18-12699-2018</a>
+                            </div>
+                            
+                            <div class="mt-4 pt-3 border-t border-white/10">
+                                <p class="text-xs text-slate-500 uppercase tracking-widest mb-2">Featured In:</p>
+                                <ul class="space-y-1 text-sm text-slate-300">
+                                    <li class="flex items-center"><i class="fas fa-newspaper w-5 text-accent"></i> EurekAlert! (AAAS)</li>
+                                    <li><a href="https://www.kanazawa-u.ac.jp/latest-research/61550?fbclid=IwAR1Z1VY0-zn4-8grQCb4CHK5gRI0qLOADd4zJeB4diOAN9fvaEun7bAZJ1o" target="_blank" class="flex items-center hover:text-accent transition"><i class="fas fa-external-link-alt w-5 text-accent"></i> Kanazawa University Press (Japan)</a></li>
+                                    <li><a href="https://phys.org/news/2018-10-atmospheric-analysis.html?fbclid=IwAR3rC23r1WwO0Sd8WRtO_rSwCpvuMfJ1SQx2wQ_PpaNCdMe3fFGgltuAaxU" target="_blank" class="flex items-center hover:text-accent transition"><i class="fas fa-external-link-alt w-5 text-accent"></i> Phys.org</a></li>
+                                    <li><a href="https://www.sciencedaily.com/releases/2018/10/181026102715.htm?fbclid=IwAR11cwa6gB5-6vFk9FJTPn0B40Eh9MJZfS9tYZ9zKdmXGQH_9eTFXDiuHKA" target="_blank" class="flex items-center hover:text-accent transition"><i class="fas fa-external-link-alt w-5 text-accent"></i> ScienceDaily.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- CASML -->
+                        <a href="#" class="pub-item block p-6 bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition group shadow-[0_0_15px_rgba(56,189,248,0.15)]" data-cat="BESS AI">
+                            <div class="flex flex-wrap justify-between gap-2 mb-2">
+                                <span class="text-xs font-bold text-primary bg-accent px-2 py-0.5 rounded">Spotlight Presentation</span>
+                                <span class="text-xs font-bold text-highlight bg-highlight/10 px-2 py-0.5 rounded border border-highlight/20">Honourable Mention</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mt-1 group-hover:text-accent transition">Digital twin framework for enhancing BESS performance, safety and reliability</h4>
+                            <p class="text-sm text-slate-400 mt-2">Vishnu Nair, Vikas... <strong class="text-slate-200">Rishi Relan</strong></p>
+                            <p class="text-xs text-slate-500 mt-1">CASML 2024, IISc Bangalore <span class="fi fi-in"></span></p>
+                        </a>
+                        <!-- IEEE SEFET -->
+                        <a href="#" class="pub-item block p-6 bg-tertiary/40 rounded-xl border border-white/5 hover:border-accent transition group" data-cat="BESS AI">
+                            <div class="flex justify-between"><span class="text-xs font-bold text-highlight bg-highlight/10 px-2 py-1 rounded">Best Paper Award</span></div>
+                            <h4 class="text-lg font-bold text-white mt-2 group-hover:text-accent transition">BAT-TEC: Battery Anomaly Tracking via Time Delay Embedding...</h4>
+                            <p class="text-sm text-slate-500 mt-1">IEEE SEFET 2025</p>
+                        </a>
+                        <!-- Applied Energy -->
+                        <a href="#" class="pub-item block p-6 bg-tertiary/40 rounded-xl border border-white/5 hover:border-accent transition group" data-cat="Energy">
+                            <div class="flex justify-between"><span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-1 rounded">480+ Citations</span></div>
+                            <h4 class="text-lg font-bold text-white mt-2 group-hover:text-accent transition">Characterizing the energy flexibility of buildings and districts</h4>
+                            <p class="text-sm text-slate-500 mt-1">Applied Energy (2018)</p>
+                        </a>
+                        <!-- Expert Systems -->
+                        <a href="#" class="pub-item block p-6 bg-tertiary/40 rounded-xl border border-white/5 hover:border-accent transition group" data-cat="Aero AI">
+                            <div class="flex justify-between"><span class="text-xs font-bold text-blue-400 bg-blue-400/10 px-2 py-1 rounded">60+ Citations</span></div>
+                            <h4 class="text-lg font-bold text-white mt-2 group-hover:text-accent transition">Prognostics of gas turbine engine: An integrated approach</h4>
+                            <p class="text-sm text-slate-500 mt-1">Expert Systems with Applications (2015)</p>
+                        </a>
+                         <!-- IEEE Trans -->
+                        <a href="#" class="pub-item block p-6 bg-tertiary/40 rounded-xl border border-white/5 hover:border-accent transition group" data-cat="BESS AI">
+                            <div class="flex justify-between"><span class="text-xs font-bold text-blue-400 bg-blue-400/10 px-2 py-1 rounded">49+ Citations</span></div>
+                            <h4 class="text-lg font-bold text-white mt-2 group-hover:text-accent transition">Data-driven nonlinear identification of Li-ion battery based on frequency...</h4>
+                            <p class="text-sm text-slate-500 mt-1">IEEE Trans. on Control Systems Tech (2016)</p>
+                        </a>
+                         <!-- Energy -->
+                        <a href="#" class="pub-item block p-6 bg-tertiary/40 rounded-xl border border-white/5 hover:border-accent transition group" data-cat="BESS AI">
+                            <div class="flex justify-between"><span class="text-xs font-bold text-blue-400 bg-blue-400/10 px-2 py-1 rounded">43+ Citations</span></div>
+                            <h4 class="text-lg font-bold text-white mt-2 group-hover:text-accent transition">Advanced lithium ion battery modeling and nonlinear analysis...</h4>
+                            <p class="text-sm text-slate-500 mt-1">Energy (2016)</p>
+                        </a>
+
+                        <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" class="block text-center py-4 mt-4 text-sm text-accent hover:underline hover:text-white transition border border-dashed border-white/10 rounded-xl flex items-center justify-center gap-2">
+                            <i class="ai ai-google-scholar"></i> View all 65+ Publications on Google Scholar
+                        </a>
+                    </div>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="py-24 bg-secondary relative border-t border-white/5">
+        <div class="container mx-auto px-6">
+             <h3 class="text-3xl font-bold text-white mb-12 text-center">Honours, Awards & Grants</h3>
+             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                 
+                 <!-- APAC Lead (Updated) -->
+                 <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
+                     <div class="text-accent mb-2 text-xl"><i class="fas fa-globe-asia"></i></div>
+                     <h4 class="text-white font-bold">APAC Lead - Associated Events Subcommittee</h4>
+                     <p class="text-sm text-slate-400 mt-1">IGTI / ASME (Jul 2024)</p>
+                 </div>
+                 
+                 <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
+                     <div class="text-highlight mb-2 text-xl"><i class="fas fa-trophy"></i></div>
+                     <h4 class="text-white font-bold">Ingenuity Award (2020)</h4>
+                     <p class="text-sm text-slate-400 mt-1">Siemens Generator R&D (India <span class="fi fi-in"></span>)</p>
+                 </div>
+
+                 <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
+                     <div class="text-green-400 mb-2 text-xl"><i class="fas fa-file-contract"></i></div>
+                     <h4 class="text-white font-bold">Highly cited research paper award 2018</h4>
+                     <p class="text-sm text-slate-400 mt-1">Journal of Applied Energy, Elsevier (Jun 2020)</p>
+                 </div>
+
+                 <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
+                     <div class="text-purple-400 mb-2 text-xl"><i class="fas fa-award"></i></div>
+                     <h4 class="text-white font-bold">Postdoctoral Fellowship</h4>
+                     <p class="text-sm text-slate-400 mt-1">DTU, Denmark (Sep 2017)</p>
+                     <p class="text-xs text-slate-500 mt-1">Grey-box modelling & Smart Energy Systems</p>
+                 </div>
+
+                 <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
+                     <div class="text-purple-400 mb-2 text-xl"><i class="fas fa-award"></i></div>
+                     <h4 class="text-white font-bold">Doctoral Research Fellowship</h4>
+                     <p class="text-sm text-slate-400 mt-1">VUB / IWT (SBO) (Oct 2013)</p>
+                 </div>
+                 
+                 <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
+                     <div class="text-purple-400 mb-2 text-xl"><i class="fas fa-award"></i></div>
+                     <h4 class="text-white font-bold">Short-term Visiting Researcher Award</h4>
+                     <p class="text-sm text-slate-400 mt-1">FWO - Flanders (Jul 2016)</p>
+                     <p class="text-xs text-slate-500 mt-1">Visit to Prof. Roy Smith, ETH Zurich</p>
+                 </div>
+
+                 <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
+                     <div class="text-blue-400 mb-2 text-xl"><i class="fas fa-plane"></i></div>
+                     <h4 class="text-white font-bold">Travel Awards (Multiple)</h4>
+                     <ul class="text-xs text-slate-400 mt-1 list-disc list-inside">
+                         <li>Otto Mønsteds Fond (IEEE Sensors 2018)</li>
+                         <li>EECI (Paris 2016)</li>
+                         <li>Hausdorff Center (Bonn 2016 x3)</li>
+                         <li>VUB Doctoral School (ICC 2016)</li>
+                         <li>UKIERI (IIT Kanpur 2012)</li>
+                     </ul>
+                 </div>
+
+                 <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
+                     <div class="text-yellow-500 mb-2 text-xl"><i class="fas fa-medal"></i></div>
+                     <h4 class="text-white font-bold">Dorothy Hodgkin Award (DHPA)</h4>
+                     <p class="text-sm text-slate-400 mt-1">EPSRC & Rolls-Royce plc (Feb 2012)</p>
+                 </div>
+
+                 <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
+                     <div class="text-yellow-500 mb-2 text-xl"><i class="fas fa-medal"></i></div>
+                     <h4 class="text-white font-bold">Senior Research Fellowship</h4>
+                     <p class="text-sm text-slate-400 mt-1">DST India & IIT Delhi (Sep 2008)</p>
+                 </div>
+                 
+                  <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
+                     <div class="text-yellow-500 mb-2 text-xl"><i class="fas fa-flask"></i></div>
+                     <h4 class="text-white font-bold">Research Funding</h4>
+                     <p class="text-sm text-slate-400 mt-1">Tox-Pressotechnik GmbH & Co KG (Oct 2005)</p>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section id="recommendations" class="py-24 bg-primary relative border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold text-white mb-12 text-center">What Colleagues Say</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Vignesh -->
+                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
+                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                        <p class="text-sm text-slate-300 italic leading-relaxed">
+                            "I had the privilege of working with Rishi Relan as a fellow researcher. Rishi is very pragmatic, creative with well grounded research knowledge. His domain knowledge spans across unique inter disciplinary areas such as Control systems, System identification, Machine learning and Systems health monitoring.
+                            <br><br>
+                            This ability of his helped me very much through my research work and eventually lead to produce a research paper on wireless-real time control. He is also a very good critic who has the ability to look into both analytic and logical aspects of a problem which I believe is something only very few people are gifted with. We have also had many fruitful discussions throughout our research period and I have always admired his in-depth knowledge in multiple areas. His brilliance has shone upon many research sessions and workshops.
+                            <br><br>
+                            As a person, he is a good adviser with a guiding spirit. He is not only helpful and innovative but also very inspiring. I would not be surprised to see Rishi as a top notch researcher in near future. I would be more than happy to recommend Rishi as a successful researcher, experienced industrialist and an extraordinary team player."
+                        </p>
+                    </div>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                        <p class="text-white font-bold text-sm">Vigneshwaran Venugopalan</p>
+                        <p class="text-xs text-slate-500">Software Engineering Manager at Boeing</p>
+                    </div>
+                </div>
+
+                <!-- Ishita -->
+                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
+                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                        <p class="text-sm text-slate-300 italic leading-relaxed">
+                            "I have worked with many professionals throughout my journey, but Rishi is a unique one. His expertise in various domains like System identification & predictive modeling and simulation, AI and Machine learning and Control Engineering was unparalleled in our team. In addition to domain expertise, he also brings a clarity to problem solving and project execution that is a reflection of his expansive academic and industrial experience.
+                            <br><br>
+                            He is honest and transparent in his actions but is also open to criticism and always strives to constantly improve and grow. He is blessed with extraordinary interpersonal and leadership skills. It was a pure delight working with him.
+                            <br><br>
+                            I wish him a very successful and satisfying career ahead. He is truly an asset for any team or organization that he is a part of."
+                        </p>
+                    </div>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                        <p class="text-white font-bold text-sm">Ishita Bansal</p>
+                        <p class="text-xs text-slate-500">General Manager at BSES</p>
+                    </div>
+                </div>
+
+                <!-- Rune -->
+                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
+                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                        <p class="text-sm text-slate-300 italic leading-relaxed">
+                            "Fortunately for me Rishi and I worked together for two years. During this time Rishi took it upon himself to teach me how research is and should be done. Furthermore, with his enormous experience-to-age-ratio he always participates actively in discussions, be they personal or professional. The way he does so is always friendly and inviting, which describes him as a person as well. Always arriving at work with a smile on his face, you will be hard pressed to remove it, and if you do, it will be back in a matter of moments.
+                            <br><br>
+                            No matter what position he is hired in, I am confident that he will make himself useful by producing high quality solutions and by making everyone at work have a good time.
+                            <br><br>
+                            Rishi has my wholehearted recommendations."
+                        </p>
+                    </div>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                        <p class="text-white font-bold text-sm">Rune Grønborg Junker</p>
+                        <p class="text-xs text-slate-500">Assistant Professor, Technical University of Denmark, Copenhagen</p>
+                    </div>
+                </div>
+
+                <!-- Gurdev -->
+                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
+                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                        <p class="text-sm text-slate-300 italic leading-relaxed">
+                            "It is a pleasure to work alongside Rishi on the 'Gas Turbine Autonomous Control & Optimization' project. This ambitious project aimed to develop a cutting-edge autonomous control system platform to optimize combustion process for emissions reduction and to maximize thermal performance of power plants over time.
+                            <br><br>
+                            Rishi's expertise in modeling complex stochastic combustion processes and signals and utilizing them for optimization to create robust controllers played a pivotal role in the project's success. The models he designed for various operational scenarios of the power plants demonstrated good accuracy and generalization, owing to their self-adaptive nature in near real-time. His profound understanding of process dynamics, optimization, soft-sensing, time series modeling, uncertainty analysis, signal processing and advanced process controls provided invaluable insights and implementable ideas throughout the project.
+                            <br><br>
+                            Beyond his technical expertise, Rishi proved to be an exceptional team member, collaborator, and mentor. He consistently motivated and inspired the team, and his willingness to share knowledge and expertise was evident in every interaction. Even before I brought Rishi on board as a team member, he had been providing me with valuable guidance and support. For instance, his passion for supporting others, led him to obtain special permission from management, 'allowing him to utilize electronics accessories for online teaching and knowledge sharing on the company network'. This thoughtful initiative enabled him to go the extra mile in assisting team members in grasping fundamental concepts remotely.
+                            <br><br>
+                            Rishi's approachable and supportive nature fostered an inclusive work environment where team members felt at ease seeking guidance. His patience in explaining complex topics was truly commendable, making complex subjects accessible to everyone. Throughout our collaboration, Rishi exhibited openness to constructive criticism, reflecting his adaptability and growth mindset. His empathetic communication style cultivated strong relationships with team members and stakeholders.
+                            <br><br>
+                            It is a privilege for me to recommend Rishi for any position that can benefit from his expertise and empathetic nature. Having Rishi on any team would greatly increase the probability of meeting project goals and would add an element of enjoyment/fun to the work!"
+                        </p>
+                    </div>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                        <p class="text-white font-bold text-sm">Gurdev Singh</p>
+                        <p class="text-xs text-slate-500">Lead- Autonomous Control Systems, Siemens Energy</p>
+                    </div>
+                </div>
+
+                <!-- Stefan -->
+                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
+                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                        <p class="text-sm text-slate-300 italic leading-relaxed">
+                            "Rishi Relan has a strong vision for Digital Twins in complex integrated environments. Paired with experiences from different industries, analytical background and social skills, Rishi is enriching any team, he is working with.
+                            <br><br>
+                            Rishi worked with me in a corporate wide program to create data driven analytics and digital twins with customers to induce cutting these technologies into the enterprise. I was the technical program lead and Rishi acted as consultant with his industrial and analytical background. He was the person to fill the programs initially theoretical system-of-system digital twin approach with real life examples for applying on compressors and energy management of energy systems and turning these use cases to requirements for software development. As Product Manager for development of System-of-System capabilities Rishi acted as interface between the development team, the project teams (to apply the capabilities) and solution architects according SAFe. The outcome was a series of PoC's in a couple of months until I left the program.
+                            <br><br>
+                            I experienced Rishi as a forward looking, visionary and consensus driving person with strong technical background. I am certain he will have a bright professional future."
+                        </p>
+                    </div>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                        <p class="text-white font-bold text-sm">Stefan Lichtenberger</p>
+                        <p class="text-xs text-slate-500">Technical Program Lead, Siemens Energy AG, Germany</p>
+                    </div>
+                </div>
+
+                <!-- Peter -->
+                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
+                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                        <p class="text-sm text-slate-300 italic leading-relaxed">
+                            "Rishi worked for me as a resident engineer during his work at the dSPACE headquarters as well as a resident engineer at Opel in Ruesselsheim (hardware-in-the-loop systems for vehicle dynamics controllers).
+                            <br><br>
+                            Rishi is a very experienced applications engineer in the area of automotive electronics and automatic control. He has very good knowledge in control, C-programming, modeling and real-time simulation. Additionally, he is a specialist in Matlab/Simulink and the dSPACE tool chain and has good exprience in the automotive bus systems (CAN-Bus), measurement technology and equipment.
+                            <br><br>
+                            Rishi is very enthusiastic in his work and has a lot of intercultural experience. He was very well accepted internally in the company as well as by his customers. He speaks German fluently. Rishi left dSPACE to bring his research career in automatic control to the next step."
+                        </p>
+                    </div>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                        <p class="text-white font-bold text-sm">Peter Waeltermann</p>
+                        <p class="text-xs text-slate-500">CEO at dSPACE Inc</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-24 bg-secondary relative border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                
+                <!-- Language Skills (Stars) -->
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-8">Language Proficiency</h3>
+                    <div class="space-y-4 bg-tertiary/20 p-6 rounded-xl border border-white/5">
+                        <!-- English -->
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300 font-medium w-32">English <span class="fi fi-gb"></span></span>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <!-- German (4 Stars) -->
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300 font-medium w-32">German <span class="fi fi-de"></span></span>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star text-slate-600"></i>
+                            </div>
+                        </div>
+                        <!-- Hindi -->
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300 font-medium w-32">Hindi <span class="fi fi-in"></span></span>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <!-- Punjabi -->
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300 font-medium w-32">Punjabi <span class="fi fi-in"></span></span>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Programming Skills (New Infographic Bars) -->
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-8">Technical Toolkit</h3>
+                    <div class="space-y-4 group">
+                        <div class="skill-badge" data-skill="Python">
+                            <div class="flex justify-between text-xs text-slate-400 mb-1"><span>Python (AI/ML)</span> <span>Expert</span></div>
+                            <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-accent skill-fill" style="--w: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-badge" data-skill="MATLAB">
+                            <div class="flex justify-between text-xs text-slate-400 mb-1"><span>MATLAB/Simulink</span> <span>Expert</span></div>
+                            <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-accent skill-fill" style="--w: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-badge" data-skill="C">
+                            <div class="flex justify-between text-xs text-slate-400 mb-1"><span>C/C++</span> <span>Advanced</span></div>
+                            <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-accent skill-fill" style="--w: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-badge" data-skill="dSPACE">
+                            <div class="flex justify-between text-xs text-slate-400 mb-1"><span>dSPACE Tools / HIL</span> <span>Advanced</span></div>
+                            <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-accent skill-fill" style="--w: 85%"></div>
+                            </div>
+                        </div>
+                         <div class="skill-badge" data-skill="PLC">
+                            <div class="flex justify-between text-xs text-slate-400 mb-1"><span>LabView / PLC</span> <span>Intermediate</span></div>
+                            <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-accent skill-fill" style="--w: 75%"></div>
+                            </div>
+                        </div>
+                        <!-- Added Robotics -->
+                        <div class="skill-badge" data-skill="Robotics">
+                            <div class="flex justify-between text-xs text-slate-400 mb-1"><span>Robotics</span> <span>Intermediate</span></div>
+                            <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-accent skill-fill" style="--w: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- OS Preference -->
+                    <div class="mt-8 space-y-4">
+                        <h4 class="text-sm text-slate-400 uppercase tracking-widest mb-2">OS Preference</h4>
+                        <div class="flex gap-8 text-3xl text-slate-500">
+                            <div class="text-center hover:text-white transition group">
+                                <i class="fab fa-linux group-hover:text-accent" title="Linux (5/5)"></i>
+                                <p class="text-[10px] mt-1 opacity-0 group-hover:opacity-100 transition text-accent">Native</p>
+                            </div>
+                            <div class="text-center hover:text-white transition group">
+                                <i class="fab fa-apple group-hover:text-accent" title="MacOS (5/5)"></i>
+                            </div>
+                            <div class="text-center hover:text-white transition group">
+                                <i class="fab fa-windows group-hover:text-accent" title="Windows (5/5)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-[#010409] py-12 border-t border-white/5">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-white mb-8">Let's Collaborate</h2>
+            
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="mailto:rishirelan@gmail.com" class="w-12 h-12 rounded-full bg-tertiary flex items-center justify-center text-slate-400 hover:text-white hover:bg-accent transition"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+919599502962" class="w-12 h-12 rounded-full bg-tertiary flex items-center justify-center text-slate-400 hover:text-white hover:bg-accent transition"><i class="fas fa-phone"></i></a>
+                <a href="https://www.linkedin.com/in/rishirelan/" target="_blank" class="w-12 h-12 rounded-full bg-tertiary flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#0077b5] transition"><i class="fab fa-linkedin"></i></a>
+                <a href="skype:rishirelan?chat" class="w-12 h-12 rounded-full bg-tertiary flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#00aff0] transition" title="Skype: rishirelan"><i class="fab fa-skype"></i></a>
+            </div>
+            
+            <div class="flex justify-center gap-6 text-sm text-slate-500 mb-8">
+                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" class="hover:text-accent transition flex items-center gap-2"><i class="ai ai-google-scholar"></i> Google Scholar</a>
+                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" class="hover:text-accent transition flex items-center gap-2"><i class="ai ai-researchgate"></i> ResearchGate</a>
+            </div>
+
+            <p class="text-slate-600 text-sm">&copy; 2025 Dr.ir. Rishi Relan.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+
+        function handleMouseMove(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+            e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+        }
+
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+        let mouse = { x: null, y: null, radius: 150 }
+
+        window.addEventListener('mousemove', function(event) { mouse.x = event.x; mouse.y = event.y; });
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initParticles(); });
+
+        class Particle {
+            constructor(x, y, size, color) {
+                this.x = x; this.y = y; this.size = size; this.color = color;
+                this.baseX = x; this.baseY = y;
+                this.density = (Math.random() * 30) + 1;
+            }
+            draw() {
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color; ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+                let forceDirectionX = dx / distance; let forceDirectionY = dy / distance;
+                let maxDistance = mouse.radius; let force = (maxDistance - distance) / maxDistance;
+                let directionX = forceDirectionX * force * this.density;
+                let directionY = forceDirectionY * force * this.density;
+                if (distance < mouse.radius) { this.x -= directionX; this.y -= directionY; } 
+                else { 
+                    if (this.x !== this.baseX) { let dx = this.x - this.baseX; this.x -= dx/10; }
+                    if (this.y !== this.baseY) { let dy = this.y - this.baseY; this.y -= dy/10; }
+                }
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.width * canvas.height) / 12000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = Math.random() * 2 + 0.5;
+                let x = Math.random() * innerWidth;
+                let y = Math.random() * innerHeight;
+                particlesArray.push(new Particle(x, y, size, 'rgba(56, 189, 248, 0.6)'));
+            }
+        }
+        function animate() {
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); }
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                    + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width/9) * (canvas.height/9)) {
+                        let opacityValue = 1 - (distance/15000);
+                        if(opacityValue > 0) {
+                            ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue * 0.15 + ')';
+                            ctx.lineWidth = 1; ctx.beginPath();
+                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        initParticles(); animate();
+
+        const texts = ["Strategic Leader", "Digital Twin Expert", "AI & Machine Learning", "BESS Engineering"];
+        let count = 0, index = 0, currentText = "", letter = "";
+        (function type() {
+            if (count === texts.length) count = 0;
+            currentText = texts[count]; letter = currentText.slice(0, ++index);
+            document.getElementById('typewriter-text').textContent = letter;
+            if (letter.length === currentText.length) { count++; index = 0; setTimeout(type, 2000); } 
+            else { setTimeout(type, 100); }
+        })();
+
+        // Boot Sequence
+        setTimeout(() => {
+            const bootBar = document.getElementById('boot-bar');
+            const bootText = document.getElementById('boot-text');
+            const bootScreen = document.getElementById('boot-screen');
+            
+            if (bootBar) {
+                bootBar.style.width = '100%';
+                bootBar.style.transition = 'width 1.5s ease-in-out';
+            }
+            
+            if (bootText) {
+                setTimeout(() => { bootText.innerHTML += '> Loading Modules... OK<br>> Connecting to Grid... OK<br>> Access Granted.'; }, 800);
+            }
+            
+            if (bootScreen) {
+                setTimeout(() => { bootScreen.style.opacity = '0'; bootScreen.style.pointerEvents = 'none'; }, 2200);
+            }
+        }, 100);
+
+        // Modals
+        function openProject(id) {
+            const modal = document.getElementById('modal-overlay');
+            const title = document.getElementById('modal-title');
+            const prob = document.getElementById('modal-problem');
+            const sol = document.getElementById('modal-solution');
+            const met = document.getElementById('modal-metrics');
+            
+            const data = {
+                'kvbatt': {
+                    title: 'KV-Batt: High-Voltage BESS',
+                    prob: 'Designing future-proof high-voltage battery storage systems requires handling extreme thermal loads and ensuring safety compliance.',
+                    sol: 'Developed a comprehensive system architecture integrating advanced thermal management and AI-driven safety protocols.',
+                    metrics: ['<li>Partners: Fraunhofer, IIT Bombay</li><li>Status: Completed</li><li>Focus: Future Grid Stability</li>']
+                },
+                'genrel': {
+                    title: 'Generator Reliability Twin',
+                    prob: 'Traditional finite element analysis for generator retaining rings was too slow for rapid design iteration.',
+                    sol: 'Created a surrogate AI model to predict stress and fatigue, replacing computationally expensive simulations.',
+                    metrics: ['<li>Speedup: 20X Faster Design Cycle</li><li>Status: Completed</li><li>Impact: Global Design Standard</li>']
+                },
+                'rca': {
+                    title: 'Root Cause Analysis: Blade-4',
+                    prob: 'Identifying the specific failure mechanisms in turbine blade cracks (Blade-4) to prevent recurrence and ensure operational safety.',
+                    sol: 'Contributed to a deep-dive forensic analysis, utilizing diagnostic data to pinpoint structural weaknesses and operational stressors.',
+                    metrics: ['<li>Focus: Structural Integrity</li><li>Status: Completed</li><li>Outcome: Enhanced Component Reliability</li>']
+                }
+            };
+            
+            if(data[id]) {
+                title.innerText = data[id].title;
+                prob.innerText = data[id].prob;
+                sol.innerText = data[id].sol;
+                met.innerHTML = data[id].metrics.join('');
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            }
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('modal-overlay');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // Filter Publications
+        function filterPubs(cat) {
+            const allPubs = document.querySelectorAll('.pub-item');
+            allPubs.forEach(item => {
+                const categories = item.getAttribute('data-cat');
+                if (cat === 'all' || (categories && categories.includes(cat))) {
+                    item.style.display = 'block';
+                    item.style.opacity = '0';
+                    setTimeout(() => item.style.opacity = '1', 10);
+                    item.style.transition = 'opacity 0.3s ease';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // UPDATED FUNCTION: More robust accordion toggling with class-based state
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+            
+            if (!content || !icon) {
+                console.error("Accordion element not found: " + id);
+                return;
+            }
+
+            if (content.classList.contains('active')) {
+                // Close it
+                content.classList.remove('active');
+                content.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Open it
+                content.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Skill Mapping Interaction
+        document.querySelectorAll('.skill-badge').forEach(skill => {
+            skill.addEventListener('mouseenter', () => {
+                const skillName = skill.getAttribute('data-skill');
+                document.querySelectorAll('.experience-card').forEach(card => {
+                    if(card.getAttribute('data-tags') && card.getAttribute('data-tags').includes(skillName)) {
+                        card.classList.add('highlighted');
+                    } else {
+                        card.classList.add('dimmed');
+                    }
+                });
+            });
+            skill.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.experience-card').forEach(card => {
+                    card.classList.remove('highlighted', 'dimmed');
+                });
+            });
+        });
+
+        // Intersection Observer for Counters (Renamed to counterObserver)
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.count-up');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        let current = 0; const inc = target / 50;
+                        const update = () => {
+                            if(current < target) { 
+                                current += inc; 
+                                counter.innerText = Math.ceil(current); 
+                                setTimeout(update, 30); 
+                            } else {
+                                counter.innerText = target;
+                            }
+                        }; 
+                        update();
+                    });
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        });
+        
+        // Attach observer to the About section
+        const aboutSection = document.querySelector('#about');
+        if (aboutSection) counterObserver.observe(aboutSection);
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = document.getElementById('scroll-progress');
+            if(progress) {
+                progress.style.width = (scrollTop / scrollHeight) * 100 + "%";
+            }
+        });
+        
+        // Mobile Menu
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const links = document.querySelectorAll('.mobile-link');
+        
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                if(!menu.classList.contains('hidden')) { 
+                    setTimeout(() => { 
+                        menu.classList.remove('opacity-0', 'translate-y-[-20px]'); 
+                        menu.classList.add('opacity-100', 'translate-y-0'); 
+                    }, 10); 
+                } else { 
+                    menu.classList.remove('opacity-100', 'translate-y-0'); 
+                    menu.classList.add('opacity-0', 'translate-y-[-20px]'); 
+                }
+            });
+
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('opacity-0', 'translate-y-[-20px]');
+                    setTimeout(() => menu.classList.add('hidden'), 300);
+                });
+            });
+        }
+        
+        // Magnetic Button Effect for Menu
+        const magneticItems = document.querySelectorAll(".magnetic-item");
+        magneticItems.forEach((btn) => {
+            btn.addEventListener("mousemove", (e) => {
+                const position = btn.getBoundingClientRect();
+                const x = e.pageX - position.left - position.width / 2;
+                const y = e.pageY - position.top - position.height / 2;
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+            btn.addEventListener("mouseleave", () => {
+                btn.style.transform = "translate(0px, 0px)";
+            });
+        });
+
+    </script>
+</body>
+</html>
