@@ -235,10 +235,62 @@
         #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         
         /* Technical Toolkit Skill Bars */
-        .skill-track { width: 100%; height: 6px; background-color: #e2e8f0; border-radius: 999px; overflow: hidden; }
+        .skill-track { width: 100%; height: 6px; background-color: #e2e8f0; border-radius: 999px; transition: height 0.3s ease; }
         html.dark .skill-track { background-color: #1e293b; }
-        .skill-fill { height: 100%; background-color: #38bdf8; width: 0%; transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); border-radius: 999px; }
-        .skill-fill.active, .group:hover .skill-fill { width: var(--w) !important; }
+        .skill-fill { height: 100%; background-color: #38bdf8; width: 0%; transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1), background-color 0.3s ease, box-shadow 0.3s ease; border-radius: 999px; }
+        .skill-fill.active { width: var(--w) !important; }
+        
+        .skill-badge { 
+            padding: 8px 12px; 
+            margin: -8px -12px; 
+            border-radius: 8px; 
+            transition: all 0.3s ease; 
+            cursor: pointer; 
+            border: 1px solid transparent; 
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .skill-badge::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            background: radial-gradient(
+                200px circle at var(--mouse-x, -100px) var(--mouse-y, -100px),
+                rgba(56, 189, 248, 0.15),
+                transparent 40%
+            );
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .skill-badge:hover { 
+            background: rgba(56, 189, 248, 0.02); 
+            border-color: rgba(56, 189, 248, 0.2); 
+            transform: translateX(8px); 
+        }
+        .skill-badge:hover::before {
+            opacity: 1;
+        }
+        .skill-badge:hover .skill-track {
+            height: 10px;
+        }
+        .skill-badge:hover .skill-fill { 
+            background-color: #fbbf24; 
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.6); 
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
+            background-size: 20px 20px;
+            animation: moveStripes 0.8s linear infinite;
+        }
+        .skill-badge .flex span { transition: color 0.3s ease; }
+        .skill-badge:hover .flex span { color: #38bdf8 !important; }
+        
+        @keyframes moveStripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 0; }
+        }
         
         .fi { width: 1.2em; border-radius: 2px; vertical-align: middle; }
         .magnetic-item { display: inline-block; }
@@ -1293,29 +1345,29 @@
                 <!-- Programming Skills (New Infographic Bars) -->
                 <div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8">Technical Toolkit</h3>
-                    <div class="space-y-4 group">
-                        <div class="skill-badge" data-skill="Python">
-                            <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>Python / R (AI/ML)</span> <span>Expert</span></div>
+                    <div class="space-y-4">
+                        <div class="skill-badge" data-skill="MATLAB" onmousemove="handleMouseMove(event)">
+                            <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>MATLAB/Simulink</span> <span>Expert</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 95%"></div></div>
                         </div>
-                        <div class="skill-badge" data-skill="MATLAB">
-                            <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>MATLAB/Simulink</span> <span>Expert</span></div>
+                        <div class="skill-badge" data-skill="Python" onmousemove="handleMouseMove(event)">
+                            <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>Python / R (AI/ML)</span> <span>Expert</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 90%"></div></div>
                         </div>
-                        <div class="skill-badge" data-skill="C">
+                        <div class="skill-badge" data-skill="C" onmousemove="handleMouseMove(event)">
                             <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>C/C++</span> <span>Advanced</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 85%"></div></div>
                         </div>
-                        <div class="skill-badge" data-skill="dSPACE">
+                        <div class="skill-badge" data-skill="dSPACE" onmousemove="handleMouseMove(event)">
                             <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>dSPACE Tools / HIL</span> <span>Advanced</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 85%"></div></div>
                         </div>
-                         <div class="skill-badge" data-skill="PLC">
+                         <div class="skill-badge" data-skill="PLC" onmousemove="handleMouseMove(event)">
                             <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>LabView / PLC</span> <span>Intermediate</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 75%"></div></div>
                         </div>
                         <!-- Added Robotics -->
-                        <div class="skill-badge" data-skill="Robotics">
+                        <div class="skill-badge" data-skill="Robotics" onmousemove="handleMouseMove(event)">
                             <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>Robotics</span> <span>Intermediate</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 70%"></div></div>
                         </div>
