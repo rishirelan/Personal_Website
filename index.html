@@ -118,6 +118,12 @@
             animation: gridMove 60s linear infinite;
         }
 
+        /* Active Navigation Link Indicator */
+        .active-nav-link {
+            color: #38bdf8 !important;
+            font-weight: 600;
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
@@ -305,10 +311,6 @@
             opacity: 1;
         }
         
-        /* Custom Scrollbar for Recommendations */
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-
         @media print {
             #boot-screen { display: none !important; }
             .tech-grid-bg { animation: none; background: white; }
@@ -373,17 +375,17 @@
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-white/90 dark:bg-primary/90 backdrop-blur-md border-b border-slate-200 dark:border-white/5 transition-all duration-300" id="navbar">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight z-50 relative group">
+            <a href="#home" class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight z-50 relative group">
                 Rishi Relan<span class="text-accent group-hover:text-slate-900 dark:group-hover:text-white transition">.Ph.D</span>
             </a>
             <div class="hidden md:flex items-center space-x-1 font-medium text-sm uppercase tracking-wider text-slate-600 dark:text-slate-300">
-                <a href="#about" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5">About</a>
-                <a href="#experience" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5">Experience</a>
-                <a href="#education" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5">Education</a>
-                <a href="#leadership" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5">Leadership</a>
-                <a href="#publications" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5">Research</a>
-                <a href="#awards" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5">Awards</a>
-                <a href="#recommendations" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5">Recommendations</a>
+                <a href="#about" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">About</a>
+                <a href="#experience" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Experience</a>
+                <a href="#education" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Education</a>
+                <a href="#leadership" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Leadership</a>
+                <a href="#publications" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Research</a>
+                <a href="#awards" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Awards</a>
+                <a href="#recommendations" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Recommendations</a>
                 <a href="#contact" class="px-5 py-2 ml-4 border border-accent text-accent rounded hover:bg-accent hover:text-white transition duration-300">Contact</a>
                 
                 <!-- Theme Toggle Button -->
@@ -847,7 +849,10 @@
                         <div class="bg-white dark:bg-tertiary/40 backdrop-blur-sm p-5 rounded-xl border border-slate-200 dark:border-white/5">
                              <h4 class="text-accent font-bold uppercase text-xs tracking-widest mb-3">Visiting Research Positions</h4>
                              <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
-                                 <li><span class="fi fi-ch mr-2 text-lg align-middle"></span><strong>ETH Zürich:</strong> Visiting Researcher (Aug 2016 - Sep 2016).</li>
+                                 <li>
+                                     <span class="fi fi-ch mr-2 text-lg align-middle"></span><strong>ETH Zürich:</strong> Visiting Researcher (Aug 2016 - Sep 2016).
+                                     <p class="mt-1 ml-7 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Hosted by <a href="https://people.ee.ethz.ch/~rsmith/people.html" target="_blank" class="text-accent hover:underline">Prof. Roy S. Smith</a> at the Automatic Control Laboratory (IfA). Fully sponsored by a research and travel grant from the <a href="https://fwo.be/en/" target="_blank" class="text-accent hover:underline">FWO</a> (Research Foundation - Flanders).</p>
+                                 </li>
                                  <li><span class="fi fi-be mr-2 text-lg align-middle"></span><strong>Vrije Universiteit Brussel:</strong> Visiting Researcher (Apr 2013 - Jun 2013).</li>
                              </ul>
                         </div>
@@ -1175,10 +1180,11 @@
                 <!-- Aditya -->
                 <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
                     <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
-                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
-                        <p class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed">
+                    <div class="flex-grow mb-4 relative">
+                        <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "In the last 5 years of working together with Rishi in different capabilities, I was continuously inspired by his unique blend of technical know-how, strategic brilliance and visionary leadership. His excellent multilingual skills, combined with his rich and diverse cultural experiences in India and abroad, make him a great storyteller with the ability to capture anyone's attention within a short span of time. My interaction with him began with accidental meeting over a topic which is one of his expertise, and later, I also had opportunity to work in his team. He consistently pushed me outside of my comfort zone, placing me in challenging, unfamiliar, and often uncomfortable situations, while always supporting me with unwavering guidance. Whenever/wherever I ever stumbled, he was there with constructive advice, helping me turn those uncomfortable moments into great learnings. He has a strong innovation mindset and always emphasizes on taking complete ownership. Any organization, team, or individual would be incredibly fortunate to have him as leader and mentor. Thank you, Rishi, for all your guidance and for shaping me into the professional that I am today."
-                        </p>
+                        </div>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Aditya Dubey</p>
@@ -1189,14 +1195,15 @@
                 <!-- Vignesh -->
                 <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
                     <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
-                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
-                        <p class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed">
+                    <div class="flex-grow mb-4 relative">
+                        <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "I had the privilege of working with Rishi Relan as a fellow researcher. Rishi is very pragmatic, creative with well grounded research knowledge. His domain knowledge spans across unique inter disciplinary areas such as Control systems, System identification, Machine learning and Systems health monitoring.
                             <br><br>
                             This ability of his helped me very much through my research work and eventually lead to produce a research paper on wireless-real time control. He is also a very good critic who has the ability to look into both analytic and logical aspects of a problem which I believe is something only very few people are gifted with. We have also had many fruitful discussions throughout our research period and I have always admired his in-depth knowledge in multiple areas. His brilliance has shone upon many research sessions and workshops.
                             <br><br>
                             As a person, he is a good adviser with a guiding spirit. He is not only helpful and innovative but also very inspiring. I would not be surprised to see Rishi as a top notch researcher in near future. I would be more than happy to recommend Rishi as a successful researcher, experienced industrialist and an extraordinary team player."
-                        </p>
+                        </div>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Vigneshwaran Venugopalan</p>
@@ -1207,14 +1214,15 @@
                 <!-- Ishita -->
                 <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
                     <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
-                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
-                        <p class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed">
+                    <div class="flex-grow mb-4 relative">
+                        <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "I have worked with many professionals throughout my journey, but Rishi is a unique one. His expertise in various domains like System identification & predictive modeling and simulation, AI and Machine learning and Control Engineering was unparalleled in our team. In addition to domain expertise, he also brings a clarity to problem solving and project execution that is a reflection of his expansive academic and industrial experience.
                             <br><br>
                             He is honest and transparent in his actions but is also open to criticism and always strives to constantly improve and grow. He is blessed with extraordinary interpersonal and leadership skills. It was a pure delight working with him.
                             <br><br>
                             I wish him a very successful and satisfying career ahead. He is truly an asset for any team or organization that he is a part of."
-                        </p>
+                        </div>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Ishita Bansal</p>
@@ -1225,14 +1233,15 @@
                 <!-- Rune -->
                 <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
                     <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
-                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
-                        <p class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed">
+                    <div class="flex-grow mb-4 relative">
+                        <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "Fortunately for me Rishi and I worked together for two years. During this time Rishi took it upon himself to teach me how research is and should be done. Furthermore, with his enormous experience-to-age-ratio he always participates actively in discussions, be they personal or professional. The way he does so is always friendly and inviting, which describes him as a person as well. Always arriving at work with a smile on his face, you will be hard pressed to remove it, and if you do, it will be back in a matter of moments.
                             <br><br>
                             No matter what position he is hired in, I am confident that he will make himself useful by producing high quality solutions and by making everyone at work have a good time.
                             <br><br>
                             Rishi has my wholehearted recommendations."
-                        </p>
+                        </div>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Rune Grønborg Junker</p>
@@ -1243,8 +1252,8 @@
                 <!-- Gurdev -->
                 <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
                     <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
-                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
-                        <p class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed">
+                    <div class="flex-grow mb-4 relative">
+                        <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "It is a pleasure to work alongside Rishi on the 'Gas Turbine Autonomous Control & Optimization' project. This ambitious project aimed to develop a cutting-edge autonomous control system platform to optimize combustion process for emissions reduction and to maximize thermal performance of power plants over time.
                             <br><br>
                             Rishi's expertise in modeling complex stochastic combustion processes and signals and utilizing them for optimization to create robust controllers played a pivotal role in the project's success. The models he designed for various operational scenarios of the power plants demonstrated good accuracy and generalization, owing to their self-adaptive nature in near real-time. His profound understanding of process dynamics, optimization, soft-sensing, time series modeling, uncertainty analysis, signal processing and advanced process controls provided invaluable insights and implementable ideas throughout the project.
@@ -1254,7 +1263,8 @@
                             Rishi's approachable and supportive nature fostered an inclusive work environment where team members felt at ease seeking guidance. His patience in explaining complex topics was truly commendable, making complex subjects accessible to everyone. Throughout our collaboration, Rishi exhibited openness to constructive criticism, reflecting his adaptability and growth mindset. His empathetic communication style cultivated strong relationships with team members and stakeholders.
                             <br><br>
                             It is a privilege for me to recommend Rishi for any position that can benefit from his expertise and empathetic nature. Having Rishi on any team would greatly increase the probability of meeting project goals and would add an element of enjoyment/fun to the work!"
-                        </p>
+                        </div>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Gurdev Singh</p>
@@ -1265,14 +1275,15 @@
                 <!-- Stefan -->
                 <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
                     <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
-                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
-                        <p class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed">
+                    <div class="flex-grow mb-4 relative">
+                        <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "Rishi Relan has a strong vision for Digital Twins in complex integrated environments. Paired with experiences from different industries, analytical background and social skills, Rishi is enriching any team, he is working with.
                             <br><br>
                             Rishi worked with me in a corporate wide program to create data driven analytics and digital twins with customers to induce cutting these technologies into the enterprise. I was the technical program lead and Rishi acted as consultant with his industrial and analytical background. He was the person to fill the programs initially theoretical system-of-system digital twin approach with real life examples for applying on compressors and energy management of energy systems and turning these use cases to requirements for software development. As Product Manager for development of System-of-System capabilities Rishi acted as interface between the development team, the project teams (to apply the capabilities) and solution architects according SAFe. The outcome was a series of PoC's in a couple of months until I left the program.
                             <br><br>
                             I experienced Rishi as a forward looking, visionary and consensus driving person with strong technical background. I am certain he will have a bright professional future."
-                        </p>
+                        </div>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Stefan Lichtenberger</p>
@@ -1283,14 +1294,15 @@
                 <!-- Peter -->
                 <div class="spotlight-card p-6 rounded-xl flex flex-col h-full" onmousemove="handleMouseMove(event)">
                     <div class="text-accent text-4xl mb-4"><i class="fas fa-quote-left"></i></div>
-                    <div class="flex-grow mb-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
-                        <p class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed">
+                    <div class="flex-grow mb-4 relative">
+                        <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "Rishi worked for me as a resident engineer during his work at the dSPACE headquarters as well as a resident engineer at Opel in Ruesselsheim (hardware-in-the-loop systems for vehicle dynamics controllers).
                             <br><br>
                             Rishi is a very experienced applications engineer in the area of automotive electronics and automatic control. He has very good knowledge in control, C-programming, modeling and real-time simulation. Additionally, he is a specialist in Matlab/Simulink and the dSPACE tool chain and has good exprience in the automotive bus systems (CAN-Bus), measurement technology and equipment.
                             <br><br>
                             Rishi is very enthusiastic in his work and has a lot of intercultural experience. He was very well accepted internally in the company as well as by his customers. He speaks German fluently. Rishi left dSPACE to bring his research career in automatic control to the next step."
-                        </p>
+                        </div>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Peter Waeltermann</p>
@@ -1459,10 +1471,19 @@
             e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
         }
 
+        // --- PERFORMANCE OPTIMIZATION: Pause Canvas when not visible ---
         const canvas = document.getElementById('hero-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray;
         let mouse = { x: null, y: null, radius: 150 }
+        let isCanvasVisible = true;
+
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                isCanvasVisible = entry.isIntersecting;
+            });
+        }, { threshold: 0 });
+        heroObserver.observe(document.getElementById('home'));
 
         window.addEventListener('mousemove', function(event) { mouse.x = event.x; mouse.y = event.y; });
         window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initParticles(); });
@@ -1508,20 +1529,22 @@
             }
         }
         function animate() {
-            ctx.clearRect(0, 0, innerWidth, innerHeight);
-            for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); }
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
-                    + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width/9) * (canvas.height/9)) {
-                        let opacityValue = 1 - (distance/15000);
-                        if(opacityValue > 0) {
-                            ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue * 0.15 + ')';
-                            ctx.lineWidth = 1; ctx.beginPath();
-                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                            ctx.stroke();
+            if (isCanvasVisible) {
+                ctx.clearRect(0, 0, innerWidth, innerHeight);
+                for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); }
+                for (let a = 0; a < particlesArray.length; a++) {
+                    for (let b = a; b < particlesArray.length; b++) {
+                        let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                        + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        if (distance < (canvas.width/9) * (canvas.height/9)) {
+                            let opacityValue = 1 - (distance/15000);
+                            if(opacityValue > 0) {
+                                ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue * 0.15 + ')';
+                                ctx.lineWidth = 1; ctx.beginPath();
+                                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                                ctx.stroke();
+                            }
                         }
                     }
                 }
@@ -1541,25 +1564,33 @@
             else { setTimeout(type, 100); }
         })();
 
-        // Boot Sequence
-        setTimeout(() => {
-            const bootBar = document.getElementById('boot-bar');
-            const bootText = document.getElementById('boot-text');
-            const bootScreen = document.getElementById('boot-screen');
-            
-            if (bootBar) {
-                bootBar.style.width = '100%';
-                bootBar.style.transition = 'width 1.5s ease-in-out';
-            }
-            
-            if (bootText) {
-                setTimeout(() => { bootText.innerHTML += '> Loading Modules... OK<br>> Connecting to Grid... OK<br>> Access Granted.'; }, 800);
-            }
-            
+        // --- UX POLISH: Single Session Boot Sequence ---
+        const bootScreen = document.getElementById('boot-screen');
+        if (!sessionStorage.getItem('bootSequencePlayed')) {
+            sessionStorage.setItem('bootSequencePlayed', 'true');
+            setTimeout(() => {
+                const bootBar = document.getElementById('boot-bar');
+                const bootText = document.getElementById('boot-text');
+                
+                if (bootBar) {
+                    bootBar.style.width = '100%';
+                    bootBar.style.transition = 'width 1.5s ease-in-out';
+                }
+                
+                if (bootText) {
+                    setTimeout(() => { bootText.innerHTML += '> Loading Modules... OK<br>> Connecting to Grid... OK<br>> Access Granted.'; }, 800);
+                }
+                
+                if (bootScreen) {
+                    setTimeout(() => { bootScreen.style.opacity = '0'; bootScreen.style.pointerEvents = 'none'; }, 2200);
+                }
+            }, 100);
+        } else {
+            // Bypass sequence if already played in this browser tab session
             if (bootScreen) {
-                setTimeout(() => { bootScreen.style.opacity = '0'; bootScreen.style.pointerEvents = 'none'; }, 2200);
+                bootScreen.style.display = 'none';
             }
-        }, 100);
+        }
 
         // Modals
         function openProject(id) {
@@ -1634,7 +1665,7 @@
             });
         }
 
-        // UPDATED FUNCTION: More robust accordion toggling with class-based state
+        // Accordion Toggling
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             const icon = document.getElementById(id + '-icon');
@@ -1657,6 +1688,20 @@
             }
         }
 
+        // --- UX POLISH: Recommendations "Read More" Toggle ---
+        document.querySelectorAll('.read-more-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const textContainer = e.target.previousElementSibling;
+                if (textContainer.classList.contains('line-clamp-6')) {
+                    textContainer.classList.remove('line-clamp-6');
+                    e.target.innerHTML = 'Read Less <i class="fas fa-chevron-up ml-1"></i>';
+                } else {
+                    textContainer.classList.add('line-clamp-6');
+                    e.target.innerHTML = 'Read More <i class="fas fa-chevron-down ml-1"></i>';
+                }
+            });
+        });
+
         // Skill Mapping Interaction
         document.querySelectorAll('.skill-badge').forEach(skill => {
             skill.addEventListener('mouseenter', () => {
@@ -1676,7 +1721,7 @@
             });
         });
 
-        // Intersection Observer for Counters (Renamed to counterObserver)
+        // Intersection Observer for Counters
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1714,14 +1759,35 @@
         if (aboutSection) counterObserver.observe(aboutSection);
         if (skillsSection) counterObserver.observe(skillsSection);
 
-        // Scroll Progress
+        // --- UX POLISH: Scroll Progress & Active Navigation (ScrollSpy) ---
+        const sections = document.querySelectorAll("section[id], header[id]");
+        const navLinksDesktop = document.querySelectorAll(".nav-link");
+
         window.addEventListener('scroll', () => {
             const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            
+            // Progress Bar
             const progress = document.getElementById('scroll-progress');
             if(progress) {
                 progress.style.width = (scrollTop / scrollHeight) * 100 + "%";
             }
+
+            // ScrollSpy
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 250) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinksDesktop.forEach((link) => {
+                link.classList.remove("active-nav-link");
+                if (link.getAttribute("href") === `#${current}`) {
+                    link.classList.add("active-nav-link");
+                }
+            });
         });
         
         // Mobile Menu
