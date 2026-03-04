@@ -233,8 +233,13 @@
         
         #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: #38bdf8; z-index: 100; width: 0%; transition: width 0.1s; }
         #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-        .skill-fill { width: 0%; transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); }
-        .group:hover .skill-fill { width: var(--w) !important; }
+        
+        /* Technical Toolkit Skill Bars */
+        .skill-track { width: 100%; height: 6px; background-color: #e2e8f0; border-radius: 999px; overflow: hidden; }
+        html.dark .skill-track { background-color: #1e293b; }
+        .skill-fill { height: 100%; background-color: #38bdf8; width: 0%; transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); border-radius: 999px; }
+        .skill-fill.active, .group:hover .skill-fill { width: var(--w) !important; }
+        
         .fi { width: 1.2em; border-radius: 2px; vertical-align: middle; }
         .magnetic-item { display: inline-block; }
         
@@ -1290,7 +1295,7 @@
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8">Technical Toolkit</h3>
                     <div class="space-y-4 group">
                         <div class="skill-badge" data-skill="Python">
-                            <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>Python (AI/ML)</span> <span>Expert</span></div>
+                            <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>Python / R (AI/ML)</span> <span>Expert</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 95%"></div></div>
                         </div>
                         <div class="skill-badge" data-skill="MATLAB">
@@ -1711,4 +1716,3 @@
     </script>
 </body>
 </html>
-
