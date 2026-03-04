@@ -447,12 +447,16 @@
                 </span>
             </div>
 
+            <!-- NEW: Upgraded Button Array with Download CV -->
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" class="bg-accent text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-primary transition shadow-[0_0_30px_rgba(56,189,248,0.3)] transform hover:-translate-y-1 flex items-center gap-2 justify-center">
-                    <i class="ai ai-google-scholar"></i> Google Scholar
+                <a href="Dr_Rishi_Relan_CV.pdf" target="_blank" class="bg-accent text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-primary transition shadow-[0_0_30px_rgba(56,189,248,0.4)] transform hover:-translate-y-1 flex items-center gap-2 justify-center group border border-accent">
+                    <i class="fas fa-file-download group-hover:animate-bounce"></i> Download CV
                 </a>
-                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" class="border border-slate-400 dark:border-slate-600 text-slate-800 dark:text-white px-8 py-4 rounded-lg hover:border-accent hover:text-accent transition flex items-center justify-center gap-2 backdrop-blur-sm hover:bg-white/5">
-                    <i class="ai ai-researchgate"></i> ResearchGate
+                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" class="bg-slate-800 dark:bg-white/10 text-white px-8 py-4 rounded-lg hover:bg-slate-700 dark:hover:bg-white/20 transition transform hover:-translate-y-1 flex items-center gap-2 justify-center border border-transparent dark:border-white/5">
+                    <i class="ai ai-google-scholar text-lg"></i> Google Scholar
+                </a>
+                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" class="bg-white/50 dark:bg-transparent border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 px-8 py-4 rounded-lg hover:border-accent hover:text-accent dark:hover:text-accent transition flex items-center justify-center gap-2 backdrop-blur-sm hover:bg-slate-50 dark:hover:bg-white/5 transform hover:-translate-y-1">
+                    <i class="ai ai-researchgate text-lg"></i> ResearchGate
                 </a>
             </div>
         </div>
@@ -472,7 +476,7 @@
                         Results-driven and visionary <strong class="text-slate-900 dark:text-white">Head of Engineering and R&D</strong> with a proven track record of scaling high-growth departments and steering highly specialized, elite engineering teams. I leverage deep technical expertise, strategic leadership, and stakeholder management to pioneer next-generation solutions in complex energy environments.
                     </p>
                     <p class="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-                        Currently leading a highly specialized team of <strong>Core R&D Specialists</strong> as the <strong>Head of Grid Flow Platform Engineering and R&D</strong> at Siemens Energy India Limited (SEIL), while concurrently steering the <strong>Battery Energy Storage Systems (BESS)</strong> department through a strategic transition. In this dual-leadership capacity, my mandate builds upon my success in scaling the BESS engineering team to 40+ members, establishing the Battery Advanced AI Technology Lab (BATL), and fostering a robust culture of cross-functional innovation.
+                        Currently leading a highly specialized team of <strong>Core R&D Specialists</strong> as the <strong>Head of Grid Flow Platform Engineering and R&D</strong> at Siemens Energy India Limited (SEIL), while concurrently steering the <strong>Battery Energy Storage Systems (BESS)</strong> department through a strategic transition. In this dual-leadership capacity, my mandate builds upon my success in scaling the BESS engineering team to 35+ members, establishing the Battery Advanced AI Technology Lab (BATL), and fostering a robust culture of cross-functional innovation.
                     </p>
 
                     <h4 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4 mt-8">Leadership DNA</h4>
@@ -502,14 +506,14 @@
                         <div class="flex-grow">
                             <i class="fas fa-users text-3xl text-accent mb-3 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
                             <div class="flex justify-center items-baseline">
-                                <h3 class="text-3xl font-bold text-slate-900 dark:text-white count-up" data-target="40">0</h3>
+                                <h3 class="text-3xl font-bold text-slate-900 dark:text-white count-up" data-target="35">0</h3>
                                 <span class="text-3xl font-bold text-slate-900 dark:text-white">+</span>
                             </div>
                             <p class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-1 font-bold">Engineers Led</p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-200 dark:border-white/10 text-[10px] space-y-1.5 text-left">
                             <div class="flex justify-between items-center"><span class="uppercase tracking-wide text-slate-500 dark:text-slate-400">Platform R&D (GFP)</span> <span class="text-accent font-bold">9 Core R&D Specialists</span></div>
-                            <div class="flex justify-between items-center"><span class="uppercase tracking-wide text-slate-500 dark:text-slate-400">Dept. Mgmt (BESS)</span> <span class="text-slate-700 dark:text-slate-300 font-bold">Scaled to 40+</span></div>
+                            <div class="flex justify-between items-center"><span class="uppercase tracking-wide text-slate-500 dark:text-slate-400">Dept. Mgmt (BESS)</span> <span class="text-slate-700 dark:text-slate-300 font-bold">Scaled to 35+</span></div>
                         </div>
                     </div>
                     <div class="spotlight-card p-6 rounded-xl text-center group flex flex-col justify-center" onmousemove="handleMouseMove(event)">
@@ -583,173 +587,198 @@
         </div>
     </section>
 
-    <!-- Detailed Experience -->
+    <!-- NEW: Interactive Timeline Experience Section -->
     <section id="experience" class="py-24 relative">
         <div class="container mx-auto px-6 relative z-10">
             <h2 class="text-4xl font-bold text-slate-900 dark:text-white text-center mb-4" data-aos="fade-up">Professional Journey</h2>
             <p class="text-center text-slate-500 dark:text-slate-400 mb-16">Detailed Roles, Projects & Industrial Collaborations</p>
             
-            <div class="max-w-5xl mx-auto space-y-12">
+            <div class="max-w-5xl mx-auto relative">
                 
-                <!-- Siemens Energy (Current) -->
-                <div class="spotlight-card p-8 rounded-2xl border-l-4 border-accent experience-card" data-aos="fade-up" onmousemove="handleMouseMove(event)" data-tags="BESS DigitalTwin AI Management">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Technology Leadership Roles</h3>
-                            <p class="text-accent mt-1">Siemens Energy India Limited (SEIL) <span class="text-slate-500 dark:text-slate-400 text-sm ml-1">(Mar 2025 - Present)</span> <span class="fi fi-in ml-1"></span></p>
-                            <p class="text-slate-600 dark:text-slate-400 text-sm mt-0.5">Siemens India Limited (SIL) <span class="text-slate-500 dark:text-slate-500 ml-1">(Aug 2019 - Mar 2025)</span></p>
+                <!-- Central Timeline Line -->
+                <div class="absolute left-[16px] md:left-[32px] top-8 bottom-0 w-0.5 bg-gradient-to-b from-accent via-slate-300 dark:via-slate-700 to-transparent hidden sm:block z-0"></div>
+                
+                <div class="space-y-12">
+                    <!-- Siemens Energy (Current) -->
+                    <div class="relative sm:pl-12 md:pl-20" data-aos="fade-up">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-[9px] md:left-[25px] top-12 w-4 h-4 rounded-full bg-accent ring-4 ring-white dark:ring-primary shadow-[0_0_15px_rgba(56,189,248,0.6)] hidden sm:block z-10"></div>
+                        
+                        <div class="spotlight-card p-8 rounded-2xl border-l-4 border-accent experience-card" onmousemove="handleMouseMove(event)" data-tags="BESS DigitalTwin AI Management">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Technology Leadership Roles</h3>
+                                    <p class="text-accent mt-1">Siemens Energy India Limited (SEIL) <span class="text-slate-500 dark:text-slate-400 text-sm ml-1">(Mar 2025 - Present)</span> <span class="fi fi-in ml-1"></span></p>
+                                    <p class="text-slate-600 dark:text-slate-400 text-sm mt-0.5">Siemens India Limited (SIL) <span class="text-slate-500 dark:text-slate-500 ml-1">(Aug 2019 - Mar 2025)</span></p>
+                                </div>
+                                <span class="px-4 py-1 bg-accent/10 text-accent rounded-full text-sm font-mono mt-2 md:mt-0">Aug 2019 - Present</span>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <!-- Leadership Roles -->
+                                <div>
+                                    <h4 class="text-slate-900 dark:text-white font-bold mb-3 border-b border-slate-200 dark:border-slate-700 pb-2">Leadership & Roles</h4>
+                                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                                        <li><i class="fas fa-check text-accent mr-2"></i><strong>Head of Eng. & R&D (Grid Flow Platform, Jan 2026 - Present):</strong> Leading an elite core of R&D specialists. Responsible for high-performance platform R&D and operational engineering feature development.</li>
+                                        <li><i class="fas fa-check text-accent mr-2"></i><strong>Head of Eng. & R&D (BESS, April '23 - Present):</strong> Managing a strategic dual-portfolio transition. Built and scaled the BESS department to 35+ engineers, overseeing budget, headcount, and technology roadmaps.</li>
+                                        <li><i class="fas fa-check text-accent mr-2"></i><strong>Global Technical Advisor (CbSI) & Digital Twin Tech Advisor (LGT R&D) (Jul '22 - Sep '23):</strong> Advised globally on Condition Based Service Intervention (one of 5 major SE FoAs) and Real-Time Soft-Sensing Solutions for Gas Turbine Thermal Modelling.</li>
+                                        <li><i class="fas fa-check text-accent mr-2"></i><strong>Product Owner (Global):</strong> BESS Digital Solutions, EMS, Digital Twins (Oct '22 - Sep '25).</li>
+                                        <li><i class="fas fa-check text-accent mr-2"></i><strong>Technical Consultant & Former Tech Lead (Oct '22 - Dec '24):</strong> Generator Reliability Twin, Large Generator Engg. R&D. Directed development as Tech Lead (achieving 20X faster surrogate modelling), followed by an advisory role as Tech Consultant.</li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- Key Initiatives (New Section) -->
+                                <div>
+                                    <h4 class="text-slate-900 dark:text-white font-bold mb-3 border-b border-slate-200 dark:border-slate-700 pb-2">Key Initiatives</h4>
+                                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-flask text-accent mr-2 mt-1"></i>
+                                            <span><strong>Founder:</strong> Battery Advanced AI Technology Lab (BATL).</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-handshake text-accent mr-2 mt-1"></i>
+                                            <span><strong>IGSTC:</strong> Single-handedly established a first-ever Indo-German collaboration network (Fraunhofer, IIT Bombay).</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Technical Projects (Interactive) -->
+                            <div class="mt-8 pt-6 border-t border-slate-200 dark:border-white/10">
+                                 <h4 class="text-accent text-xs uppercase tracking-widest mb-3 font-bold">Technical Projects</h4>
+                                 <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 grid md:grid-cols-2 gap-x-4">
+                                    <li><button onclick="openProject('kvbatt')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-file-blueprint mr-2 text-accent"></i>KV-Batt Project (High-Voltage BESS)</button>
+                                        <span class="block text-xs text-slate-500 ml-6">Only non-German contributor to this public-funded project.</span>
+                                    </li>
+                                    <li><button onclick="openProject('cbsi')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-network-wired mr-2 text-accent"></i>CbSI Advisory (Global)</button></li>
+                                    <li><button onclick="openProject('genrel')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-file-blueprint mr-2 text-accent"></i>Generator Reliability Twin</button></li>
+                                    <li><button onclick="openProject('lre')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-cogs mr-2 text-accent"></i>LRE Digital Twin (Hot Components)</button></li>
+                                    <li><button onclick="openProject('rca')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-search mr-2 text-accent"></i>Root Cause Analysis (Blade-4)</button></li>
+                                </ul>
+                            </div>
                         </div>
-                        <span class="px-4 py-1 bg-accent/10 text-accent rounded-full text-sm font-mono mt-2 md:mt-0">Aug 2019 - Present</span>
+                    </div>
+
+                    <!-- DTU Compute -->
+                    <div class="relative sm:pl-12 md:pl-20" data-aos="fade-up">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-[9px] md:left-[25px] top-12 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-500 ring-4 ring-white dark:ring-primary hidden sm:block z-10"></div>
+                        
+                        <div class="spotlight-card p-8 rounded-2xl border-l-4 border-slate-600 experience-card" onmousemove="handleMouseMove(event)" data-tags="SystemID SDEs Python">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                                <div>
+                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Scientific Researcher</h3>
+                                    <p class="text-slate-500 dark:text-slate-400">DTU Compute, Denmark <span class="fi fi-dk"></span></p>
+                                </div>
+                                <span class="px-4 py-1 bg-slate-100 dark:bg-tertiary text-slate-600 dark:text-slate-400 rounded-full text-sm font-mono mt-2 md:mt-0">Sep 2017 - Aug 2019</span>
+                            </div>
+                            <p class="text-slate-600 dark:text-slate-300 mb-4">Led development of cyber-physical models for Industry 4.0, renewable energy, and smart cities. Expertise in System ID, SDEs, Optimization.</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Key Projects</h5>
+                                    <ul class="text-sm text-slate-600 dark:text-slate-400 list-disc list-inside">
+                                        <li>MADE SPIR WP9</li>
+                                        <li>Centre for IT-Intelligent Energy Systems (CITIES)</li>
+                                        <li>FLEX-Coop H2020</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Industrial Partners</h5>
+                                    <ul class="text-sm text-slate-600 dark:text-slate-400 list-disc list-inside">
+                                        <li>Siemens Gamesa Renewable Energy (Denmark <span class="fi fi-dk"></span>)</li>
+                                        <li>Fraunhofer-FOKUS (Germany <span class="fi fi-de"></span>)</li>
+                                        <li>CIMNE (Spain <span class="fi fi-es"></span>)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VUB -->
+                    <div class="relative sm:pl-12 md:pl-20" data-aos="fade-up">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-[9px] md:left-[25px] top-12 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-500 ring-4 ring-white dark:ring-primary hidden sm:block z-10"></div>
+                        
+                        <div class="spotlight-card p-8 rounded-2xl border-l-4 border-slate-600 experience-card" onmousemove="handleMouseMove(event)" data-tags="BatteryModelling NonlinearID MATLAB">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                                <div>
+                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Scientific Researcher (PhD)</h3>
+                                    <p class="text-slate-500 dark:text-slate-400">Vrije Universiteit Brussel (VUB), Belgium <span class="fi fi-be"></span></p>
+                                </div>
+                                <span class="px-4 py-1 bg-slate-100 dark:bg-tertiary text-slate-600 dark:text-slate-400 rounded-full text-sm font-mono mt-2 md:mt-0">Oct 2013 - Oct 2017</span>
+                            </div>
+                            <p class="text-slate-600 dark:text-slate-300 mb-4">Developed theoretical frameworks for black-box modeling and stochastic identification of Li-ion battery dynamics. Nonlinearity detection & characterization.</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Projects</h5>
+                                    <ul class="text-sm text-slate-600 dark:text-slate-400 list-disc list-inside">
+                                        <li>ERC Grant SNLSID</li>
+                                        <li>BATTLE (Battery Modelling)</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Industrial Partners</h5>
+                                    <ul class="text-sm text-slate-600 dark:text-slate-400 list-disc list-inside">
+                                        <li>Siemens Digital Industry Software (Belgium <span class="fi fi-be"></span>)</li>
+                                        <li>Toyota Motors Europe <span class="fi fi-be"></span></li>
+                                        <li>Volvo AB (Sweden <span class="fi fi-se"></span>)</li>
+                                        <li>Umicore (Belgium <span class="fi fi-be"></span>)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <!-- Leadership Roles -->
-                        <div>
-                            <h4 class="text-slate-900 dark:text-white font-bold mb-3 border-b border-slate-200 dark:border-slate-700 pb-2">Leadership & Roles</h4>
-                            <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
-                                <li><i class="fas fa-check text-accent mr-2"></i><strong>Head of Eng. & R&D (Grid Flow Platform, Jan 2026 - Present):</strong> Leading an elite core of R&D specialists. Responsible for high-performance platform R&D and operational engineering feature development.</li>
-                                <li><i class="fas fa-check text-accent mr-2"></i><strong>Head of Eng. & R&D (BESS, April '23 - Present):</strong> Managing a strategic dual-portfolio transition. Built and scaled the BESS department to 40+ engineers, overseeing budget, headcount, and technology roadmaps.</li>
-                                <li><i class="fas fa-check text-accent mr-2"></i><strong>Global Technical Advisor (CbSI) & Digital Twin Tech Advisor (LGT R&D) (Jul '22 - Sep '23):</strong> Advised globally on Condition Based Service Intervention (one of 5 major SE FoAs) and Real-Time Soft-Sensing Solutions for Gas Turbine Thermal Modelling.</li>
-                                <li><i class="fas fa-check text-accent mr-2"></i><strong>Product Owner (Global):</strong> BESS Digital Solutions, EMS, Digital Twins (Oct '22 - Sep '25).</li>
-                                <li><i class="fas fa-check text-accent mr-2"></i><strong>Technical Consultant & Former Tech Lead (Oct '22 - Dec '24):</strong> Generator Reliability Twin, Large Generator Engg. R&D. Directed development as Tech Lead (achieving 20X faster surrogate modelling), followed by an advisory role as Tech Consultant.</li>
-                            </ul>
-                        </div>
+                    <!-- Early Career Archive -->
+                    <div class="relative sm:pl-12 md:pl-20" data-aos="fade-up">
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-[9px] md:left-[25px] top-10 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-600 ring-4 ring-white dark:ring-primary hidden sm:block z-10"></div>
                         
-                        <!-- Key Initiatives (New Section) -->
-                        <div>
-                            <h4 class="text-slate-900 dark:text-white font-bold mb-3 border-b border-slate-200 dark:border-slate-700 pb-2">Key Initiatives</h4>
-                            <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
-                                <li class="flex items-start">
-                                    <i class="fas fa-flask text-accent mr-2 mt-1"></i>
-                                    <span><strong>Founder:</strong> Battery Advanced AI Technology Lab (BATL).</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-handshake text-accent mr-2 mt-1"></i>
-                                    <span><strong>IGSTC:</strong> Single-handedly established a first-ever Indo-German collaboration network (Fraunhofer, IIT Bombay).</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Technical Projects (Interactive) -->
-                    <div class="mt-8 pt-6 border-t border-slate-200 dark:border-white/10">
-                         <h4 class="text-accent text-xs uppercase tracking-widest mb-3 font-bold">Technical Projects</h4>
-                         <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 grid md:grid-cols-2 gap-x-4">
-                            <li><button onclick="openProject('kvbatt')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-file-blueprint mr-2 text-accent"></i>KV-Batt Project (High-Voltage BESS)</button>
-                                <span class="block text-xs text-slate-500 ml-6">Only non-German contributor to this public-funded project.</span>
-                            </li>
-                            <li><button onclick="openProject('cbsi')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-network-wired mr-2 text-accent"></i>CbSI Advisory (Global)</button></li>
-                            <li><button onclick="openProject('genrel')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-file-blueprint mr-2 text-accent"></i>Generator Reliability Twin</button></li>
-                            <li><button onclick="openProject('lre')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-cogs mr-2 text-accent"></i>LRE Digital Twin (Hot Components)</button></li>
-                            <li><button onclick="openProject('rca')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-search mr-2 text-accent"></i>Root Cause Analysis (Blade-4)</button></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- DTU Compute -->
-                <div class="spotlight-card p-8 rounded-2xl border-l-4 border-slate-600 experience-card" data-aos="fade-up" onmousemove="handleMouseMove(event)" data-tags="SystemID SDEs Python">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Scientific Researcher</h3>
-                            <p class="text-slate-500 dark:text-slate-400">DTU Compute, Denmark <span class="fi fi-dk"></span></p>
-                        </div>
-                        <span class="px-4 py-1 bg-slate-100 dark:bg-tertiary text-slate-600 dark:text-slate-400 rounded-full text-sm font-mono mt-2 md:mt-0">Sep 2017 - Aug 2019</span>
-                    </div>
-                    <p class="text-slate-600 dark:text-slate-300 mb-4">Led development of cyber-physical models for Industry 4.0, renewable energy, and smart cities. Expertise in System ID, SDEs, Optimization.</p>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <h5 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Key Projects</h5>
-                            <ul class="text-sm text-slate-600 dark:text-slate-400 list-disc list-inside">
-                                <li>MADE SPIR WP9</li>
-                                <li>Centre for IT-Intelligent Energy Systems (CITIES)</li>
-                                <li>FLEX-Coop H2020</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h5 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Industrial Partners</h5>
-                            <ul class="text-sm text-slate-600 dark:text-slate-400 list-disc list-inside">
-                                <li>Siemens Gamesa Renewable Energy (Denmark <span class="fi fi-dk"></span>)</li>
-                                <li>Fraunhofer-FOKUS (Germany <span class="fi fi-de"></span>)</li>
-                                <li>CIMNE (Spain <span class="fi fi-es"></span>)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- VUB -->
-                <div class="spotlight-card p-8 rounded-2xl border-l-4 border-slate-600 experience-card" data-aos="fade-up" onmousemove="handleMouseMove(event)" data-tags="BatteryModelling NonlinearID MATLAB">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Scientific Researcher (PhD)</h3>
-                            <p class="text-slate-500 dark:text-slate-400">Vrije Universiteit Brussel (VUB), Belgium <span class="fi fi-be"></span></p>
-                        </div>
-                        <span class="px-4 py-1 bg-slate-100 dark:bg-tertiary text-slate-600 dark:text-slate-400 rounded-full text-sm font-mono mt-2 md:mt-0">Oct 2013 - Oct 2017</span>
-                    </div>
-                    <p class="text-slate-600 dark:text-slate-300 mb-4">Developed theoretical frameworks for black-box modeling and stochastic identification of Li-ion battery dynamics. Nonlinearity detection & characterization.</p>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <h5 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Projects</h5>
-                            <ul class="text-sm text-slate-600 dark:text-slate-400 list-disc list-inside">
-                                <li>ERC Grant SNLSID</li>
-                                <li>BATTLE (Battery Modelling)</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h5 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Industrial Partners</h5>
-                            <ul class="text-sm text-slate-600 dark:text-slate-400 list-disc list-inside">
-                                <li>Siemens Digital Industry Software (Belgium <span class="fi fi-be"></span>)</li>
-                                <li>Toyota Motors Europe <span class="fi fi-be"></span></li>
-                                <li>Volvo AB (Sweden <span class="fi fi-se"></span>)</li>
-                                <li>Umicore (Belgium <span class="fi fi-be"></span>)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Early Career Archive -->
-                <div class="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden" data-aos="fade-up">
-                    <button onclick="toggleAccordion('early-career')" class="w-full p-6 flex justify-between items-center bg-slate-100 dark:bg-tertiary/50 hover:bg-slate-200 dark:hover:bg-tertiary transition text-left group focus:outline-none">
-                        <span class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-accent transition">Foundational Career (2002 - 2013)</span>
-                        <i class="fas fa-chevron-down text-accent transition-transform duration-300" id="early-career-icon"></i>
-                    </button>
-                    <div id="early-career" class="accordion-content bg-slate-50 dark:bg-primary/50">
-                        <div class="p-6 grid gap-6">
-                            <!-- Rolls Royce -->
-                            <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="GasTurbine SignalProcessing">
-                                <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">Rolls-Royce UTC (UK <span class="fi fi-gb"></span>)</h5><span class="text-xs font-mono text-slate-500">Feb 2012 - Sep 2013</span></div>
-                                <p class="text-sm text-accent mb-1">Industrial Researcher</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400">Gas turbine health monitoring using statistical signal processing & ML. Fault diagnosis, prognosis, FMECA, IPR patent analysis.</p>
-                            </div>
-                            
-                            <!-- IIT Delhi -->
-                            <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="VibrationControl">
-                                <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">IIT Delhi (India <span class="fi fi-in"></span>)</h5><span class="text-xs font-mono text-slate-500">Sep 2008 - Sep 2010</span></div>
-                                <p class="text-sm text-accent mb-1">Senior Research Fellow</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400">Active vibration control for rotor shaft systems. Experiment design, simulation, control framework.</p>
-                            </div>
-                            
-                            <!-- dSPACE -->
-                            <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="HIL dSPACE">
-                                <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">dSPACE GmbH (Germany <span class="fi fi-de"></span>)</h5><span class="text-xs font-mono text-slate-500">Oct 2006 - Sep 2008</span></div>
-                                <p class="text-sm text-accent mb-1">Application Engineer / Resident Engineer</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400">Resident Engineer at GM Europe. Integrated ESP, ABS, AWD on HIL simulators. Automated failsafe testing. Delivered simulator for Conti-Teves AG.</p>
-                            </div>
-                            
-                            <!-- Tox-Pressotechnik -->
-                            <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="PLC LabView">
-                                <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">Tox-Pressotechnik (Germany <span class="fi fi-de"></span>)</h5><span class="text-xs font-mono text-slate-500">Feb 2005 - Jun 2006</span></div>
-                                <p class="text-sm text-accent mb-1">Industrial Researcher</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400">Control system for industrial clinching process. Nonlinear math modeling, PLC/Microcontroller algo design, HIL sims, Patent review.</p>
-                            </div>
-                            <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4">
-                                <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">AutoKame / a2Z Filtration (India <span class="fi fi-in"></span>)</h5><span class="text-xs font-mono text-slate-500">2003 - 2004</span></div>
-                                <p class="text-sm text-accent mb-1">Product Development Engineer</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400">PLC motion control, pneumatic circuits for CNC textile and filter machines.</p>
-                            </div>
-                             <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4">
-                                <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">New Era Controls / Haryana Sheet Glass (India <span class="fi fi-in"></span>)</h5><span class="text-xs font-mono text-slate-500">2002 - 2003</span></div>
-                                <p class="text-sm text-accent mb-1">Industrial Trainee</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400">Process instrumentation, closed-loop controllers, electrical drives.</p>
+                        <div class="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm dark:shadow-none">
+                            <button onclick="toggleAccordion('early-career')" class="w-full p-6 flex justify-between items-center bg-slate-100 dark:bg-tertiary/50 hover:bg-slate-200 dark:hover:bg-tertiary transition text-left group focus:outline-none">
+                                <span class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-accent transition">Foundational Career (2002 - 2013)</span>
+                                <i class="fas fa-chevron-down text-accent transition-transform duration-300" id="early-career-icon"></i>
+                            </button>
+                            <div id="early-career" class="accordion-content bg-slate-50 dark:bg-primary/50">
+                                <div class="p-6 grid gap-6">
+                                    <!-- Rolls Royce -->
+                                    <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="GasTurbine SignalProcessing">
+                                        <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">Rolls-Royce UTC (UK <span class="fi fi-gb"></span>)</h5><span class="text-xs font-mono text-slate-500">Feb 2012 - Sep 2013</span></div>
+                                        <p class="text-sm text-accent mb-1">Industrial Researcher</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400">Gas turbine health monitoring using statistical signal processing & ML. Fault diagnosis, prognosis, FMECA, IPR patent analysis.</p>
+                                    </div>
+                                    
+                                    <!-- IIT Delhi -->
+                                    <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="VibrationControl">
+                                        <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">IIT Delhi (India <span class="fi fi-in"></span>)</h5><span class="text-xs font-mono text-slate-500">Sep 2008 - Sep 2010</span></div>
+                                        <p class="text-sm text-accent mb-1">Senior Research Fellow</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400">Active vibration control for rotor shaft systems. Experiment design, simulation, control framework.</p>
+                                    </div>
+                                    
+                                    <!-- dSPACE -->
+                                    <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="HIL dSPACE">
+                                        <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">dSPACE GmbH (Germany <span class="fi fi-de"></span>)</h5><span class="text-xs font-mono text-slate-500">Oct 2006 - Sep 2008</span></div>
+                                        <p class="text-sm text-accent mb-1">Application Engineer / Resident Engineer</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400">Resident Engineer at GM Europe. Integrated ESP, ABS, AWD on HIL simulators. Automated failsafe testing. Delivered simulator for Conti-Teves AG.</p>
+                                    </div>
+                                    
+                                    <!-- Tox-Pressotechnik -->
+                                    <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="PLC LabView">
+                                        <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">Tox-Pressotechnik (Germany <span class="fi fi-de"></span>)</h5><span class="text-xs font-mono text-slate-500">Feb 2005 - Jun 2006</span></div>
+                                        <p class="text-sm text-accent mb-1">Industrial Researcher</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400">Control system for industrial clinching process. Nonlinear math modeling, PLC/Microcontroller algo design, HIL sims, Patent review.</p>
+                                    </div>
+                                    <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4">
+                                        <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">AutoKame / a2Z Filtration (India <span class="fi fi-in"></span>)</h5><span class="text-xs font-mono text-slate-500">2003 - 2004</span></div>
+                                        <p class="text-sm text-accent mb-1">Product Development Engineer</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400">PLC motion control, pneumatic circuits for CNC textile and filter machines.</p>
+                                    </div>
+                                     <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4">
+                                        <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold">New Era Controls / Haryana Sheet Glass (India <span class="fi fi-in"></span>)</h5><span class="text-xs font-mono text-slate-500">2002 - 2003</span></div>
+                                        <p class="text-sm text-accent mb-1">Industrial Trainee</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400">Process instrumentation, closed-loop controllers, electrical drives.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1102,8 +1131,9 @@
 
                  <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
                      <div class="text-yellow-500 mb-2 text-xl"><i class="fas fa-medal"></i></div>
-                     <h4 class="text-slate-900 dark:text-white font-bold">Dorothy Hodgkin Award</h4>
-                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">EPSRC & Rolls-Royce plc (UK <span class="fi fi-gb"></span>)</p>
+                     <h4 class="text-slate-900 dark:text-white font-bold">Dorothy Hodgkin Postgraduate Award (DHPA)</h4>
+                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1"><strong>Conferrer:</strong> EPSRC & Rolls-Royce plc (UK <span class="fi fi-gb"></span>)</p>
+                     <p class="text-xs text-slate-500 dark:text-slate-500 mt-2 border-t border-slate-200 dark:border-white/10 pt-2">Only awarded to 30 candidates/year in the developing world.</p>
                  </div>
 
                  <div class="spotlight-card p-6 rounded-xl" onmousemove="handleMouseMove(event)">
