@@ -132,6 +132,20 @@
         
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
         
+        /* CUSTOM DIGITAL TWIN CURSOR */
+        @media (pointer: fine) {
+            body, a, button, .clickable { cursor: none; }
+            
+            #cursor-dot {
+                position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: #38bdf8; border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: width 0.2s cubic-bezier(0.25, 1, 0.5, 1), height 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s; box-shadow: 0 0 10px #38bdf8;
+            }
+            #cursor-ring {
+                position: fixed; top: 0; left: 0; width: 36px; height: 36px; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, background-color 0.3s; transition-property: width, height, border-color, background-color;
+            }
+            .cursor-hover #cursor-dot { width: 12px; height: 12px; background: #fbbf24; box-shadow: 0 0 15px #fbbf24; }
+            .cursor-hover-ring { width: 50px !important; height: 50px !important; border-color: rgba(251, 191, 36, 0.8) !important; background: rgba(251, 191, 36, 0.1); }
+        }
+
         /* DIGITAL TWIN THEME: Technical Grid Background */
         .tech-grid-bg {
             background-image: 
@@ -147,11 +161,14 @@
             font-weight: 600;
         }
 
-        /* Custom Scrollbar */
+        /* Custom Scrollbar & Hidden Scrollbar for Carousel */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+        
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* Advanced Spotlight Card Effect (Transforms handled by VanillaTilt) */
         .spotlight-card {
@@ -323,7 +340,17 @@
         }
         
         .fi { width: 1.2em; border-radius: 2px; vertical-align: middle; }
-        .magnetic-item { display: inline-block; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+        
+        /* --- NEW PROFESSIONAL NAV HOVER EFFECT --- */
+        .nav-link { position: relative; transition: color 0.3s ease; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
+            bottom: -4px; left: 0; background-color: #38bdf8; transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        .nav-link:hover::after, .active-nav-link::after {
+            transform: scaleX(1); transform-origin: bottom left;
+        }
         
         .accordion-content {
             transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out;
@@ -338,7 +365,8 @@
         @media print {
             #boot-screen { display: none !important; }
             .tech-grid-bg { animation: none; background: white; }
-            body { color: black; background: white; }
+            body, a, button { cursor: auto !important; }
+            #cursor-dot, #cursor-ring { display: none !important; }
             .text-white { color: black !important; }
             .spotlight-card, .shimmer-card { background: none; border: 1px solid #ccc; box-shadow: none; transform: none !important; }
             .hidden-print { display: none !important; }
@@ -347,6 +375,15 @@
     </style>
 </head>
 <body class="overflow-x-hidden selection:bg-accent selection:text-white antialiased tech-grid-bg transition-colors duration-300">
+
+    <!-- CUSTOM DIGITAL TWIN CURSOR -->
+    <div id="cursor-dot" class="hidden md:block"></div>
+    <div id="cursor-ring" class="hidden md:block"></div>
+
+    <!-- STICKY BACK TO TOP BUTTON -->
+    <button id="backToTop" aria-label="Back to top" class="fixed bottom-8 right-8 w-12 h-12 bg-accent text-primary rounded-full shadow-[0_0_20px_rgba(56,189,248,0.5)] flex items-center justify-center z-50 opacity-0 translate-y-10 transition-all duration-300 pointer-events-none hover:bg-white hover:scale-110 focus:outline-none">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- BOOT SEQUENCE OVERLAY -->
     <div id="boot-screen" role="presentation">
@@ -402,15 +439,15 @@
             <a href="#home" class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight z-50 relative group" aria-label="Home">
                 Rishi Relan<span class="text-accent group-hover:text-slate-900 dark:group-hover:text-white transition">.Ph.D</span>
             </a>
-            <div class="hidden md:flex items-center space-x-1 font-medium text-sm uppercase tracking-wider text-slate-600 dark:text-slate-300">
-                <a href="#about" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">About</a>
-                <a href="#experience" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Experience</a>
-                <a href="#education" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Education</a>
-                <a href="#leadership" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Leadership</a>
-                <a href="#publications" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Research</a>
-                <a href="#awards" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Awards</a>
-                <a href="#recommendations" class="magnetic-item px-3 py-2 hover:text-slate-900 dark:hover:text-white transition rounded hover:bg-slate-100 dark:hover:bg-white/5 nav-link">Recommendations</a>
-                <a href="#contact" class="magnetic-item px-5 py-2 ml-4 border border-accent text-accent rounded hover:bg-accent hover:text-white transition duration-300">Contact</a>
+            <div class="hidden md:flex items-center space-x-2 font-medium text-sm uppercase tracking-wider text-slate-600 dark:text-slate-300">
+                <a href="#about" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">About</a>
+                <a href="#experience" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Experience</a>
+                <a href="#education" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Education</a>
+                <a href="#leadership" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Leadership</a>
+                <a href="#publications" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Research</a>
+                <a href="#awards" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Awards</a>
+                <a href="#recommendations" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Recommendations</a>
+                <a href="#contact" class="px-5 py-2 ml-4 border border-accent text-accent rounded hover:bg-accent hover:text-white transition duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(56,189,248,0.4)]">Contact</a>
                 
                 <!-- Theme Toggle Button -->
                 <button id="theme-toggle" aria-label="Toggle dark mode" class="ml-4 px-3 py-2 rounded-full text-slate-500 hover:text-accent focus:outline-none transition">
@@ -444,7 +481,7 @@
                 <div class="absolute inset-0 rounded-full bg-accent/40 animate-ping z-0"></div>
                 <!-- Profile Container -->
                 <div class="absolute inset-0 rounded-full overflow-hidden border-4 border-accent/50 shadow-[0_0_60px_rgba(56,189,248,0.25)] scanner-container z-10 bg-primary">
-                    <img src="BusinessRishiRelan8.jpg" alt="Dr. Rishi Relan Profile Photo" class="w-full h-full object-cover relative z-10">
+                    <img src="BusinessRishiRelan8.jpg" alt="Dr. Rishi Relan Profile Photo" loading="eager" decoding="async" class="w-full h-full object-cover relative z-10">
                     <!-- SCANNER EFFECT -->
                     <div class="scanner-line z-20"></div>
                     <div class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition duration-300 z-30 pointer-events-none"></div>
@@ -476,15 +513,15 @@
                 </span>
             </div>
 
-            <!-- Upgraded Magnetic Button Array -->
+            <!-- Upgraded Clean Buttons (Removed magnetic and bounce) -->
             <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
-                <a href="https://drive.google.com/file/d/1iystB-1Pw6_GeTDxbX0KCmjdzUXeBb85/view?usp=drive_link" target="_blank" aria-label="Download CV from Google Drive" class="magnetic-item bg-accent text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-primary transition shadow-[0_0_30px_rgba(56,189,248,0.4)] flex items-center gap-2 justify-center group border border-accent">
-                    <i class="fas fa-file-download group-hover:animate-bounce" aria-hidden="true"></i> Download CV
+                <a href="https://drive.google.com/file/d/1iystB-1Pw6_GeTDxbX0KCmjdzUXeBb85/view?usp=drive_link" target="_blank" aria-label="Download CV from Google Drive" class="bg-accent text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-primary transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,189,248,0.6)] hover:-translate-y-1 flex items-center gap-2 justify-center border border-accent">
+                    <i class="fas fa-file-download" aria-hidden="true"></i> Download CV
                 </a>
-                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" aria-label="Visit Google Scholar Profile" class="magnetic-item bg-slate-800 dark:bg-white/10 text-white px-8 py-4 rounded-lg hover:bg-slate-700 dark:hover:bg-white/20 transition flex items-center gap-2 justify-center border border-transparent dark:border-white/5">
+                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" aria-label="Visit Google Scholar Profile" class="bg-slate-800 dark:bg-white/10 text-white px-8 py-4 rounded-lg hover:bg-slate-700 dark:hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 justify-center border border-transparent dark:border-white/5 hover:shadow-lg">
                     <i class="ai ai-google-scholar text-lg" aria-hidden="true"></i> Google Scholar
                 </a>
-                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" aria-label="Visit ResearchGate Profile" class="magnetic-item bg-white/50 dark:bg-transparent border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 px-8 py-4 rounded-lg hover:border-accent hover:text-accent dark:hover:text-accent transition flex items-center justify-center gap-2 backdrop-blur-sm hover:bg-slate-50 dark:hover:bg-white/5">
+                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" aria-label="Visit ResearchGate Profile" class="bg-white/50 dark:bg-transparent border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 px-8 py-4 rounded-lg hover:border-accent hover:text-accent dark:hover:text-accent transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm hover:bg-slate-50 dark:hover:bg-white/5 hover:-translate-y-1 hover:shadow-lg">
                     <i class="ai ai-researchgate text-lg" aria-hidden="true"></i> ResearchGate
                 </a>
             </div>
@@ -683,13 +720,13 @@
                             <div class="mt-8 pt-6 border-t border-slate-200 dark:border-white/10 transform transition-transform group-hover:translate-z-[15px]">
                                  <h4 class="text-accent text-xs uppercase tracking-widest mb-3 font-bold">Technical Projects</h4>
                                  <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 grid md:grid-cols-2 gap-x-4">
-                                    <li><button onclick="openProject('kvbatt')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-file-blueprint mr-2 text-accent" aria-hidden="true"></i>KV-Batt Project (High-Voltage BESS)</button>
+                                    <li><button onclick="openProject('kvbatt')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition clickable"><i class="fas fa-file-blueprint mr-2 text-accent" aria-hidden="true"></i>KV-Batt Project (High-Voltage BESS)</button>
                                         <span class="block text-xs text-slate-500 ml-6">Only non-German contributor to this public-funded project.</span>
                                     </li>
-                                    <li><button onclick="openProject('cbsi')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-network-wired mr-2 text-accent" aria-hidden="true"></i>CbSI Advisory (Global)</button></li>
-                                    <li><button onclick="openProject('genrel')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-file-blueprint mr-2 text-accent" aria-hidden="true"></i>Generator Reliability Twin</button></li>
-                                    <li><button onclick="openProject('lre')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-cogs mr-2 text-accent" aria-hidden="true"></i>LRE Digital Twin (Hot Components)</button></li>
-                                    <li><button onclick="openProject('rca')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition"><i class="fas fa-search mr-2 text-accent" aria-hidden="true"></i>Root Cause Analysis (Blade-4)</button></li>
+                                    <li><button onclick="openProject('cbsi')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition clickable"><i class="fas fa-network-wired mr-2 text-accent" aria-hidden="true"></i>CbSI Advisory (Global)</button></li>
+                                    <li><button onclick="openProject('genrel')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition clickable"><i class="fas fa-file-blueprint mr-2 text-accent" aria-hidden="true"></i>Generator Reliability Twin</button></li>
+                                    <li><button onclick="openProject('lre')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition clickable"><i class="fas fa-cogs mr-2 text-accent" aria-hidden="true"></i>LRE Digital Twin (Hot Components)</button></li>
+                                    <li><button onclick="openProject('rca')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition clickable"><i class="fas fa-search mr-2 text-accent" aria-hidden="true"></i>Root Cause Analysis (Blade-4)</button></li>
                                 </ul>
                             </div>
                         </div>
@@ -771,7 +808,7 @@
                         <div class="timeline-dot absolute left-[9px] md:left-[25px] top-10 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 ring-4 ring-white dark:ring-primary hidden sm:block z-10 transition-all duration-500 shadow-none"></div>
                         
                         <div class="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm dark:shadow-none">
-                            <button onclick="toggleAccordion('early-career')" aria-expanded="false" aria-controls="early-career" class="w-full p-6 flex justify-between items-center bg-slate-100 dark:bg-tertiary/50 hover:bg-slate-200 dark:hover:bg-tertiary transition text-left group focus:outline-none">
+                            <button onclick="toggleAccordion('early-career')" aria-expanded="false" aria-controls="early-career" class="w-full p-6 flex justify-between items-center bg-slate-100 dark:bg-tertiary/50 hover:bg-slate-200 dark:hover:bg-tertiary transition text-left group focus:outline-none clickable">
                                 <span class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-accent transition">Foundational Career (2002 - 2013)</span>
                                 <i class="fas fa-chevron-down text-accent transition-transform duration-300" id="early-career-icon" aria-hidden="true"></i>
                             </button>
@@ -829,9 +866,9 @@
             <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center">Academic Excellence</h2>
             <div class="grid md:grid-cols-2 gap-6">
                 
-                <div class="spotlight-card p-8 rounded-xl group" data-aos="fade-up" data-tilt data-tilt-max="3" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                <div class="spotlight-card p-8 rounded-xl group border-l-4 border-orange-500 hover:shadow-[0_0_25px_rgba(249,115,22,0.15)] dark:hover:shadow-[0_0_25px_rgba(249,115,22,0.3)] transition-all duration-300" data-aos="fade-up" data-tilt data-tilt-max="3" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
                     <div class="flex justify-between items-start mb-4 transform transition-transform group-hover:translate-z-[20px]">
-                        <div class="bg-accent/20 p-3 rounded-lg text-accent"><i class="fas fa-graduation-cap text-xl" aria-hidden="true"></i></div>
+                        <div class="bg-orange-500/10 p-3 rounded-lg text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300"><i class="fas fa-graduation-cap text-xl" aria-hidden="true"></i></div>
                         <span class="text-sm font-mono text-slate-500 dark:text-slate-400">2013-2017</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1 transform transition-transform group-hover:translate-z-[15px]">Doctor of Engineering Sciences</h3>
@@ -843,9 +880,9 @@
                     </div>
                 </div>
 
-                <div class="spotlight-card p-8 rounded-xl group" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="3" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                <div class="spotlight-card p-8 rounded-xl group border-l-4 border-yellow-500 hover:shadow-[0_0_25px_rgba(234,179,8,0.15)] dark:hover:shadow-[0_0_25px_rgba(234,179,8,0.3)] transition-all duration-300" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="3" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
                     <div class="flex justify-between items-start mb-4 transform transition-transform group-hover:translate-z-[20px]">
-                        <div class="bg-slate-200 dark:bg-slate-700/50 p-3 rounded-lg text-slate-600 dark:text-slate-300"><i class="fas fa-university text-xl" aria-hidden="true"></i></div>
+                        <div class="bg-yellow-500/10 p-3 rounded-lg text-yellow-500 group-hover:bg-yellow-500 group-hover:text-white transition-colors duration-300"><i class="fas fa-university text-xl" aria-hidden="true"></i></div>
                         <span class="text-sm font-mono text-slate-500 dark:text-slate-400">2012-2014</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1 transform transition-transform group-hover:translate-z-[15px]">M.Phil. in Control Systems</h3>
@@ -853,35 +890,35 @@
                     <p class="text-sm text-slate-600 dark:text-slate-300 transform transition-transform group-hover:translate-z-[15px]">Partners: Rolls-Royce plc, Aero-engine controls.</p>
                 </div>
 
-                <div class="spotlight-card p-8 rounded-xl group" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="3" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                <div class="spotlight-card p-8 rounded-xl group border-l-4 border-blue-500 hover:shadow-[0_0_25px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] transition-all duration-300" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="3" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
                     <div class="flex justify-between items-start mb-4 transform transition-transform group-hover:translate-z-[20px]">
-                        <div class="bg-slate-200 dark:bg-slate-700/50 p-3 rounded-lg text-slate-600 dark:text-slate-300"><i class="fas fa-brain text-xl" aria-hidden="true"></i></div>
+                        <div class="bg-blue-500/10 p-3 rounded-lg text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-colors duration-300"><i class="fas fa-brain text-xl" aria-hidden="true"></i></div>
                         <span class="text-sm font-mono text-slate-500 dark:text-slate-400">2010-2011</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1 transform transition-transform group-hover:translate-z-[15px]">Adv. MSc. in Artificial Intelligence</h3>
                     <p class="text-slate-600 dark:text-slate-400 mb-2 transform transition-transform group-hover:translate-z-[10px]">KU Leuven, Belgium <span class="fi fi-be"></span></p>
-                    <span class="inline-block bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded transform transition-transform group-hover:translate-z-[15px]">Cum Laude</span>
+                    <span class="inline-block bg-blue-500/20 text-blue-500 dark:text-blue-400 text-xs font-bold px-2 py-1 rounded transform transition-transform group-hover:translate-z-[15px]">Cum Laude</span>
                 </div>
 
-                <div class="spotlight-card p-8 rounded-xl group" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="3" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                <div class="spotlight-card p-8 rounded-xl group border-l-4 border-red-500 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)] dark:hover:shadow-[0_0_25px_rgba(239,68,68,0.3)] transition-all duration-300" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="3" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
                     <div class="flex justify-between items-start mb-4 transform transition-transform group-hover:translate-z-[20px]">
-                        <div class="bg-slate-200 dark:bg-slate-700/50 p-3 rounded-lg text-slate-600 dark:text-slate-300"><i class="fas fa-robot text-xl" aria-hidden="true"></i></div>
+                        <div class="bg-red-500/10 p-3 rounded-lg text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors duration-300"><i class="fas fa-robot text-xl" aria-hidden="true"></i></div>
                         <span class="text-sm font-mono text-slate-500 dark:text-slate-400">2004-2006</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1 transform transition-transform group-hover:translate-z-[15px]">MSc. in Mechatronics</h3>
                     <p class="text-slate-600 dark:text-slate-400 mb-2 transform transition-transform group-hover:translate-z-[10px]">Hochschule Ravensburg-Weingarten, Germany <span class="fi fi-de"></span></p>
-                    <span class="inline-block bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded transform transition-transform group-hover:translate-z-[15px]">Sehr Gut (A+)</span>
+                    <span class="inline-block bg-blue-500/20 text-blue-500 dark:text-blue-400 text-xs font-bold px-2 py-1 rounded transform transition-transform group-hover:translate-z-[15px]">Sehr Gut (A+)</span>
                     <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 transform transition-transform group-hover:translate-z-[15px]"><strong>Partner:</strong> Tox-Pressotechnik GmbH & Co. KG</p>
                 </div>
 
-                 <div class="spotlight-card p-8 rounded-xl group col-span-1 md:col-span-2" data-aos="fade-up" data-aos-delay="400" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                 <div class="spotlight-card p-8 rounded-xl group col-span-1 md:col-span-2 border-l-4 border-rose-500 hover:shadow-[0_0_25px_rgba(225,29,72,0.15)] dark:hover:shadow-[0_0_25px_rgba(225,29,72,0.3)] transition-all duration-300" data-aos="fade-up" data-aos-delay="400" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
                     <div class="flex justify-between items-start mb-4 transform transition-transform group-hover:translate-z-[20px]">
-                        <div class="bg-slate-200 dark:bg-slate-700/50 p-3 rounded-lg text-slate-600 dark:text-slate-300"><i class="fas fa-scroll text-xl" aria-hidden="true"></i></div>
+                        <div class="bg-rose-500/10 p-3 rounded-lg text-rose-500 group-hover:bg-rose-500 group-hover:text-white transition-colors duration-300"><i class="fas fa-scroll text-xl" aria-hidden="true"></i></div>
                         <span class="text-sm font-mono text-slate-500 dark:text-slate-400">1998-2002</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1 transform transition-transform group-hover:translate-z-[15px]">B.Tech in Instrumentation & Control Engr.</h3>
                     <p class="text-slate-600 dark:text-slate-400 mb-2 transform transition-transform group-hover:translate-z-[10px]">Kurukshetra University, India <span class="fi fi-in"></span></p>
-                    <span class="inline-block bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded transform transition-transform group-hover:translate-z-[15px]">First Class with Honours</span>
+                    <span class="inline-block bg-blue-500/20 text-blue-500 dark:text-blue-400 text-xs font-bold px-2 py-1 rounded transform transition-transform group-hover:translate-z-[15px]">First Class with Honours</span>
                 </div>
             </div>
         </div>
@@ -917,7 +954,7 @@
                              <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
                                  <li>
                                      <span class="fi fi-ch mr-2 text-lg align-middle"></span><strong>ETH Zürich:</strong> Visiting Researcher (Aug 2016 - Sep 2016).
-                                     <p class="mt-1 ml-7 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Hosted by <a href="https://people.ee.ethz.ch/~rsmith/people.html" target="_blank" class="text-accent hover:underline">Prof. Roy S. Smith</a> at the Automatic Control Laboratory (IfA). Fully sponsored by a research and travel grant from the <a href="https://fwo.be/en/" target="_blank" class="text-accent hover:underline">FWO</a> (Research Foundation - Flanders).</p>
+                                     <p class="mt-1 ml-7 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Hosted by <a href="https://people.ee.ethz.ch/~rsmith/people.html" target="_blank" class="text-accent hover:underline clickable">Prof. Roy S. Smith</a> at the Automatic Control Laboratory (IfA). Fully sponsored by a research and travel grant from the <a href="https://fwo.be/en/" target="_blank" class="text-accent hover:underline clickable">FWO</a> (Research Foundation - Flanders).</p>
                                  </li>
                                  <li><span class="fi fi-be mr-2 text-lg align-middle"></span><strong>Vrije Universiteit Brussel:</strong> Visiting Researcher (Apr 2013 - Jun 2013).</li>
                              </ul>
@@ -966,16 +1003,16 @@
     </section>
 
     <!-- Research Impact & Publications (Consolidated) -->
-    <section id="publications" class="py-24 bg-slate-50 dark:bg-primary border-t border-slate-200 dark:border-white/5">
-        <div class="container mx-auto px-6">
+    <section id="publications" class="py-24 bg-slate-50 dark:bg-primary border-t border-slate-200 dark:border-white/5 relative">
+        <div class="container mx-auto px-6 relative z-10">
             <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center">Research Impact & Publications</h3>
             
              <!-- Filter Buttons -->
              <div class="flex justify-center gap-4 mb-12 flex-wrap">
-                 <button onclick="filterPubs('all')" class="px-6 py-2 rounded-full border border-slate-300 dark:border-white/10 text-sm text-slate-700 dark:text-white hover:bg-accent hover:text-primary transition bg-slate-200 dark:bg-accent/10">All</button>
-                 <button onclick="filterPubs('BESS')" class="px-6 py-2 rounded-full border border-slate-300 dark:border-white/10 text-sm text-slate-600 dark:text-slate-400 hover:bg-accent hover:text-primary transition">BESS & Energy</button>
-                 <button onclick="filterPubs('AI')" class="px-6 py-2 rounded-full border border-slate-300 dark:border-white/10 text-sm text-slate-600 dark:text-slate-400 hover:bg-accent hover:text-primary transition">AI & System ID</button>
-                 <button onclick="filterPubs('Aero')" class="px-6 py-2 rounded-full border border-slate-300 dark:border-white/10 text-sm text-slate-600 dark:text-slate-400 hover:bg-accent hover:text-primary transition">Aerospace</button>
+                 <button onclick="filterPubs('all')" class="px-6 py-2 rounded-full border border-slate-300 dark:border-white/10 text-sm text-slate-700 dark:text-white hover:bg-accent hover:text-primary transition bg-slate-200 dark:bg-accent/10 clickable">All</button>
+                 <button onclick="filterPubs('BESS')" class="px-6 py-2 rounded-full border border-slate-300 dark:border-white/10 text-sm text-slate-600 dark:text-slate-400 hover:bg-accent hover:text-primary transition clickable">BESS & Energy</button>
+                 <button onclick="filterPubs('AI')" class="px-6 py-2 rounded-full border border-slate-300 dark:border-white/10 text-sm text-slate-600 dark:text-slate-400 hover:bg-accent hover:text-primary transition clickable">AI & System ID</button>
+                 <button onclick="filterPubs('Aero')" class="px-6 py-2 rounded-full border border-slate-300 dark:border-white/10 text-sm text-slate-600 dark:text-slate-400 hover:bg-accent hover:text-primary transition clickable">Aerospace</button>
              </div>
 
              <div class="grid lg:grid-cols-3 gap-12">
@@ -1042,10 +1079,10 @@
 
                  <!-- Publications List -->
                  <div class="lg:col-span-2" data-aos="fade-left">
-                    <div class="space-y-4" id="pub-list">
+                    <div class="space-y-4 relative" id="pub-list">
                         
                         <!-- NEW ASME 2025 Paper from ResearchGate -->
-                        <div class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition group" data-cat="BESS AI">
+                        <div class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group" data-cat="BESS AI">
                             <div class="flex flex-wrap justify-between gap-2 mb-2">
                                 <span class="text-xs font-bold text-primary bg-accent px-2 py-0.5 rounded">Latest Release</span>
                             </div>
@@ -1054,8 +1091,8 @@
                             <p class="text-sm text-slate-500 mt-2">Proceedings of the ASME (2025)</p>
                         </div>
 
-                        <!-- Media Featured Paper (Updated) -->
-                        <div class="pub-item block p-6 bg-white dark:bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition group shadow-[0_0_15px_rgba(56,189,248,0.15)]" data-cat="AI">
+                        <!-- Media Featured Paper -->
+                        <div class="pub-item block p-6 bg-white dark:bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition-all duration-300 transform group shadow-[0_0_15px_rgba(56,189,248,0.15)]" data-cat="AI">
                             <div class="flex flex-wrap justify-between gap-2 mb-2">
                                 <span class="text-xs font-bold text-primary bg-highlight px-2 py-0.5 rounded">Global Media Feature</span>
                                 <span class="text-xs font-bold text-blue-500 dark:text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">33 Citations</span>
@@ -1064,22 +1101,22 @@
                             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Martha A. Zaidan, Ville Haapasilta, <strong class="text-slate-700 dark:text-slate-200">Rishi Relan</strong>, Pauli Paasonen, Veli-Matti Kerminen, Heikki Junninen, Markku Kulmala, Adam S. Foster</p>
                             <div class="flex gap-3 mt-2 text-xs">
                                 <span class="text-slate-500">Atmospheric Chemistry and Physics (2018)</span>
-                                <a href="https://doi.org/10.5194/acp-18-12699-2018" target="_blank" class="text-accent hover:underline flex items-center"><i class="fas fa-link mr-1" aria-hidden="true"></i> DOI: 10.5194/acp-18-12699-2018</a>
+                                <a href="https://doi.org/10.5194/acp-18-12699-2018" target="_blank" class="text-accent hover:underline flex items-center clickable"><i class="fas fa-link mr-1" aria-hidden="true"></i> DOI: 10.5194/acp-18-12699-2018</a>
                             </div>
                             
                             <div class="mt-4 pt-3 border-t border-slate-200 dark:border-white/10">
                                 <p class="text-xs text-slate-500 uppercase tracking-widest mb-2">Featured In:</p>
                                 <ul class="space-y-1 text-sm text-slate-600 dark:text-slate-300">
                                     <li class="flex items-center"><i class="fas fa-newspaper w-5 text-accent" aria-hidden="true"></i> EurekAlert! (AAAS)</li>
-                                    <li><a href="https://www.kanazawa-u.ac.jp/latest-research/61550?fbclid=IwAR1Z1VY0-zn4-8grQCb4CHK5gRI0qLOADd4zJeB4diOAN9fvaEun7bAZJ1o" target="_blank" class="flex items-center hover:text-accent transition"><i class="fas fa-external-link-alt w-5 text-accent" aria-hidden="true"></i> Kanazawa University Press (Japan)</a></li>
-                                    <li><a href="https://phys.org/news/2018-10-atmospheric-analysis.html?fbclid=IwAR3rC23r1WwO0Sd8WRtO_rSwCpvuMfJ1SQx2wQ_PpaNCdMe3fFGgltuAaxU" target="_blank" class="flex items-center hover:text-accent transition"><i class="fas fa-external-link-alt w-5 text-accent" aria-hidden="true"></i> Phys.org</a></li>
-                                    <li><a href="https://www.sciencedaily.com/releases/2018/10/181026102715.htm?fbclid=IwAR11cwa6gB5-6vFk9FJTPn0B40Eh9MJZfS9tYZ9zKdmXGQH_9eTFXDiuHKA" target="_blank" class="flex items-center hover:text-accent transition"><i class="fas fa-external-link-alt w-5 text-accent" aria-hidden="true"></i> ScienceDaily.com</a></li>
+                                    <li><a href="https://www.kanazawa-u.ac.jp/latest-research/61550?fbclid=IwAR1Z1VY0-zn4-8grQCb4CHK5gRI0qLOADd4zJeB4diOAN9fvaEun7bAZJ1o" target="_blank" class="flex items-center hover:text-accent transition clickable"><i class="fas fa-external-link-alt w-5 text-accent" aria-hidden="true"></i> Kanazawa University Press (Japan)</a></li>
+                                    <li><a href="https://phys.org/news/2018-10-atmospheric-analysis.html?fbclid=IwAR3rC23r1WwO0Sd8WRtO_rSwCpvuMfJ1SQx2wQ_PpaNCdMe3fFGgltuAaxU" target="_blank" class="flex items-center hover:text-accent transition clickable"><i class="fas fa-external-link-alt w-5 text-accent" aria-hidden="true"></i> Phys.org</a></li>
+                                    <li><a href="https://www.sciencedaily.com/releases/2018/10/181026102715.htm?fbclid=IwAR11cwa6gB5-6vFk9FJTPn0B40Eh9MJZfS9tYZ9zKdmXGQH_9eTFXDiuHKA" target="_blank" class="flex items-center hover:text-accent transition clickable"><i class="fas fa-external-link-alt w-5 text-accent" aria-hidden="true"></i> ScienceDaily.com</a></li>
                                 </ul>
                             </div>
                         </div>
 
                         <!-- CASML -->
-                        <a href="#" class="pub-item block p-6 bg-white dark:bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition group shadow-[0_0_15px_rgba(56,189,248,0.15)]" data-cat="BESS AI">
+                        <a href="#" class="pub-item block p-6 bg-white dark:bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition-all duration-300 transform group shadow-[0_0_15px_rgba(56,189,248,0.15)] clickable" data-cat="BESS AI">
                             <div class="flex flex-wrap justify-between gap-2 mb-2">
                                 <span class="text-xs font-bold text-primary bg-accent px-2 py-0.5 rounded">Spotlight Presentation</span>
                                 <span class="text-xs font-bold text-highlight bg-highlight/10 px-2 py-0.5 rounded border border-highlight/20">Honourable Mention</span>
@@ -1089,37 +1126,37 @@
                             <p class="text-xs text-slate-500 mt-1">CASML 2024, IISc Bangalore <span class="fi fi-in"></span></p>
                         </a>
                         <!-- IEEE SEFET -->
-                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition group" data-cat="BESS AI">
+                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="BESS AI">
                             <div class="flex justify-between"><span class="text-xs font-bold text-highlight bg-highlight/10 px-2 py-1 rounded">Best Paper Award</span></div>
                             <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">BAT-TEC: Battery Anomaly Tracking via Time Delay Embedding...</h4>
                             <p class="text-sm text-slate-500 mt-1">IEEE SEFET 2025</p>
                         </a>
                         <!-- Applied Energy -->
-                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition group" data-cat="Energy">
+                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="Energy">
                             <div class="flex justify-between"><span class="text-xs font-bold text-green-500 dark:text-green-400 bg-green-500/10 dark:bg-green-400/10 px-2 py-1 rounded">500+ Citations</span></div>
                             <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">Characterizing the energy flexibility of buildings and districts</h4>
                             <p class="text-sm text-slate-500 mt-1">Applied Energy (2018)</p>
                         </a>
                         <!-- Expert Systems -->
-                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition group" data-cat="Aero AI">
+                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="Aero AI">
                             <div class="flex justify-between"><span class="text-xs font-bold text-blue-500 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10 px-2 py-1 rounded">62 Citations</span></div>
                             <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">Prognostics of gas turbine engine: An integrated approach</h4>
                             <p class="text-sm text-slate-500 mt-1">Expert Systems with Applications (2015)</p>
                         </a>
                          <!-- IEEE Trans -->
-                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition group" data-cat="BESS AI">
+                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="BESS AI">
                             <div class="flex justify-between"><span class="text-xs font-bold text-blue-500 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10 px-2 py-1 rounded">51 Citations</span></div>
                             <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">Data-driven nonlinear identification of Li-ion battery based on frequency...</h4>
                             <p class="text-sm text-slate-500 mt-1">IEEE Trans. on Control Systems Tech (2016)</p>
                         </a>
                          <!-- Energy -->
-                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition group" data-cat="BESS AI">
+                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="BESS AI">
                             <div class="flex justify-between"><span class="text-xs font-bold text-blue-500 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10 px-2 py-1 rounded">45 Citations</span></div>
                             <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">Advanced lithium ion battery modeling and nonlinear analysis...</h4>
                             <p class="text-sm text-slate-500 mt-1">Energy (2016)</p>
                         </a>
 
-                        <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" aria-label="View all 65+ publications on Google Scholar" class="block text-center py-4 mt-4 text-sm text-accent hover:underline hover:text-white transition border border-dashed border-slate-300 dark:border-white/10 rounded-xl flex items-center justify-center gap-2">
+                        <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" aria-label="View all 65+ publications on Google Scholar" class="block text-center py-4 mt-4 text-sm text-accent hover:underline hover:text-white transition border border-dashed border-slate-300 dark:border-white/10 rounded-xl flex items-center justify-center gap-2 clickable">
                             <i class="ai ai-google-scholar" aria-hidden="true"></i> View all 65+ Publications on Google Scholar
                         </a>
                     </div>
@@ -1196,15 +1233,15 @@
                 <div class="bg-white dark:bg-primary/40 p-6 rounded-xl border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-none">
                     <h4 class="text-accent font-bold uppercase text-xs tracking-widest mb-4 flex items-center"><i class="fas fa-industry mr-2" aria-hidden="true"></i> Industry Leaders</h4>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">Siemens Energy</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">Rolls-Royce plc</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">Toyota Motors Europe</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">Volvo AB</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">Siemens Gamesa</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">dSPACE GmbH</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">Umicore</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">Aero-engine controls</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">Tox-Pressotechnik</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">Siemens Energy</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">Rolls-Royce plc</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">Toyota Motors Europe</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">Volvo AB</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">Siemens Gamesa</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">dSPACE GmbH</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">Umicore</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">Aero-engine controls</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">Tox-Pressotechnik</span>
                     </div>
                 </div>
 
@@ -1212,16 +1249,16 @@
                 <div class="bg-white dark:bg-primary/40 p-6 rounded-xl border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-none">
                     <h4 class="text-highlight font-bold uppercase text-xs tracking-widest mb-4 flex items-center"><i class="fas fa-university mr-2" aria-hidden="true"></i> Academic & Research</h4>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">ETH Zürich</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">DTU Denmark</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">VUB Belgium</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">University of Helsinki</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">The University of Sheffield</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">IIT Bombay</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">IIT Delhi</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">KU Leuven</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">Fraunhofer-FOKUS</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">CIMNE Spain</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">ETH Zürich</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">DTU Denmark</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">VUB Belgium</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">University of Helsinki</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">The University of Sheffield</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">IIT Bombay</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">IIT Delhi</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">KU Leuven</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">Fraunhofer-FOKUS</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">CIMNE Spain</span>
                     </div>
                 </div>
 
@@ -1229,53 +1266,55 @@
                 <div class="bg-white dark:bg-primary/40 p-6 rounded-xl border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-none">
                     <h4 class="text-green-400 font-bold uppercase text-xs tracking-widest mb-4 flex items-center"><i class="fas fa-globe mr-2" aria-hidden="true"></i> Global Bodies & Funding</h4>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">ASME (IGTI)</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">IEEE</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">ERC (European Research Council)</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">IGSTC</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">EPSRC (UK)</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">DST India</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300">GIZ Germany</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">ASME (IGTI)</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">IEEE</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">ERC (European Research Council)</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">IGSTC</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">EPSRC (UK)</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">DST India</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded text-sm text-slate-700 dark:text-slate-300 hover:-translate-y-1 hover:shadow-md transition-transform duration-300 clickable">GIZ Germany</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Recommendations Section -->
+    <!-- NEW: Premium Masonry Recommendations Section -->
     <section id="recommendations" class="py-24 bg-slate-50 dark:bg-primary relative border-t border-slate-200 dark:border-white/5">
         <div class="container mx-auto px-6">
-            <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center">What Colleagues Say</h3>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center" data-aos="fade-up">What Colleagues Say</h3>
+            
+            <!-- Masonry Grid Container -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 w-full max-w-7xl mx-auto" data-aos="fade-up" data-aos-delay="100">
                 
                 <!-- Aditya -->
-                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full group" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
-                    <div class="text-accent text-4xl mb-4 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-                    <div class="flex-grow mb-4 relative transform transition-transform group-hover:translate-z-[10px]">
+                <div class="spotlight-card p-8 rounded-xl flex flex-col group mb-6 break-inside-avoid w-full inline-block" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-6 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+                    <div class="flex-grow mb-6 relative transform transition-transform group-hover:translate-z-[10px]">
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "In the last 5 years of working together with Rishi in different capabilities, I was continuously inspired by his unique blend of technical know-how, strategic brilliance and visionary leadership. His excellent multilingual skills, combined with his rich and diverse cultural experiences in India and abroad, make him a great storyteller with the ability to capture anyone's attention within a short span of time. My interaction with him began with accidental meeting over a topic which is one of his expertise, and later, I also had opportunity to work in his team. He consistently pushed me outside of my comfort zone, placing me in challenging, unfamiliar, and often uncomfortable situations, while always supporting me with unwavering guidance. Whenever/wherever I ever stumbled, he was there with constructive advice, helping me turn those uncomfortable moments into great learnings. He has a strong innovation mindset and always emphasizes on taking complete ownership. Any organization, team, or individual would be incredibly fortunate to have him as leader and mentor. Thank you, Rishi, for all your guidance and for shaping me into the professional that I am today."
                         </div>
-                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Aditya Dubey</p>
-                        <p class="text-xs text-slate-500">Mechanical Engineer - Heat Transfer & FE, Siemens Energy Innovation Center, Abu Dhabi</p>
+                        <p class="text-xs text-slate-500">Mechanical Engineer - Heat Transfer & FE, Siemens Energy Innovation Center</p>
                     </div>
                 </div>
 
                 <!-- Jaroslaw -->
-                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full group" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
-                    <div class="text-accent text-4xl mb-4 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-                    <div class="flex-grow mb-4 relative transform transition-transform group-hover:translate-z-[10px]">
+                <div class="spotlight-card p-8 rounded-xl flex flex-col group mb-6 break-inside-avoid w-full inline-block" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-6 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+                    <div class="flex-grow mb-6 relative transform transition-transform group-hover:translate-z-[10px]">
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "All my meetings with Rishi always confirm:<br>
                             &bull; his great knowledge and expertise in latest information technologies,<br>
                             &bull; his deep understanding of the existing challenges of implementation of digital solutions in GT engines regarding rapid time-to-market, and<br>
                             &bull; his interest in customized produces based on machine learning, genetic algorithms, artificial neural network techniques, and other digital approaches.<br><br>
                             I like very much his pro-active communication involving all stakeholders and learning different opinions before making the final decision. Rishi shares his know-how with others in comprehensive manners that do not exclude various participants. His multi-cultural behavior creates an open domain for effective team collaboration with internal members and third parties, like employees of ANSYS.<br><br>
-                            His work in Germany is a great attitude for being a local key expert. He will serve as a good mentor of successors. His interest in stepping out of the box will bring much adding values for our business and customers. By being a local key expert, his work will be more effective in terms of the best quality and new value propositions."
+                            His work in Germany is a great attitude for being a local key expert. He will serve as a good mentor of successors. His interest in stepping out of the box will bring much adding values for our business and customers."
                         </div>
-                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Jaroslaw Szwedowicz, D.Sc., Ph.D., Eng.</p>
@@ -1283,14 +1322,14 @@
                     </div>
                 </div>
 
-                <!-- Michael Hortmann (NEW) -->
-                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full group" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
-                    <div class="text-accent text-4xl mb-4 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-                    <div class="flex-grow mb-4 relative transform transition-transform group-hover:translate-z-[10px]">
+                <!-- Michael Hortmann -->
+                <div class="spotlight-card p-8 rounded-xl flex flex-col group mb-6 break-inside-avoid w-full inline-block" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-6 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+                    <div class="flex-grow mb-6 relative transform transition-transform group-hover:translate-z-[10px]">
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "Looking at and reading both [Digital Twin] presentations have been a full enjoyment for me and they have excited me, as I have experienced clarity (in regards of the intention), quality and competence (in regards of the content), easiness (in regards of understanding) and professionality (in regards of creation of the slides). Thank you for this! For sure I was also very happy to see the Ansys logo on the different pictures."
                         </div>
-                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Dr.-Ing. Michael Hortmann</p>
@@ -1298,14 +1337,14 @@
                     </div>
                 </div>
 
-                <!-- Uwe Loehse (NEW) -->
-                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full group" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
-                    <div class="text-accent text-4xl mb-4 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-                    <div class="flex-grow mb-4 relative transform transition-transform group-hover:translate-z-[10px]">
+                <!-- Uwe Loehse -->
+                <div class="spotlight-card p-8 rounded-xl flex flex-col group mb-6 break-inside-avoid w-full inline-block" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-6 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+                    <div class="flex-grow mb-6 relative transform transition-transform group-hover:translate-z-[10px]">
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "From our collaboration, I have come to know you as a highly engaged colleague who is always ready to share his knowledge in the field of machine learning and contribute his experience. I particularly appreciated that you supported Aditya in his Agile project on non-linear ROM. The collaboration with you, Aditya, and ANSYS has brought us a significant step forward. From my perspective, we are now in a position to generate an important future service product around the core of the non-linear ROM. For the next steps—connecting to plant measurement data and lifetime evaluation—I see your experience in control engineering as very helpful."
                         </div>
-                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Uwe Loehse</p>
@@ -1314,17 +1353,15 @@
                 </div>
 
                 <!-- Vignesh -->
-                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full group" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
-                    <div class="text-accent text-4xl mb-4 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-                    <div class="flex-grow mb-4 relative transform transition-transform group-hover:translate-z-[10px]">
+                <div class="spotlight-card p-8 rounded-xl flex flex-col group mb-6 break-inside-avoid w-full inline-block" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-6 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+                    <div class="flex-grow mb-6 relative transform transition-transform group-hover:translate-z-[10px]">
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "I had the privilege of working with Rishi Relan as a fellow researcher. Rishi is very pragmatic, creative with well grounded research knowledge. His domain knowledge spans across unique inter disciplinary areas such as Control systems, System identification, Machine learning and Systems health monitoring.
                             <br><br>
-                            This ability of his helped me very much through my research work and eventually lead to produce a research paper on wireless-real time control. He is also a very good critic who has the ability to look into both analytic and logical aspects of a problem which I believe is something only very few people are gifted with. We have also had many fruitful discussions throughout our research period and I have always admired his in-depth knowledge in multiple areas. His brilliance has shone upon many research sessions and workshops.
-                            <br><br>
-                            As a person, he is a good adviser with a guiding spirit. He is not only helpful and innovative but also very inspiring. I would not be surprised to see Rishi as a top notch researcher in near future. I would be more than happy to recommend Rishi as a successful researcher, experienced industrialist and an extraordinary team player."
+                            This ability of his helped me very much through my research work and eventually lead to produce a research paper on wireless-real time control. He is also a very good critic who has the ability to look into both analytic and logical aspects of a problem which I believe is something only very few people are gifted with. We have also had many fruitful discussions throughout our research period and I have always admired his in-depth knowledge in multiple areas."
                         </div>
-                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Vigneshwaran Venugopalan</p>
@@ -1333,17 +1370,15 @@
                 </div>
 
                 <!-- Ishita -->
-                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full group" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
-                    <div class="text-accent text-4xl mb-4 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-                    <div class="flex-grow mb-4 relative transform transition-transform group-hover:translate-z-[10px]">
+                <div class="spotlight-card p-8 rounded-xl flex flex-col group mb-6 break-inside-avoid w-full inline-block" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-6 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+                    <div class="flex-grow mb-6 relative transform transition-transform group-hover:translate-z-[10px]">
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "I have worked with many professionals throughout my journey, but Rishi is a unique one. His expertise in various domains like System identification & predictive modeling and simulation, AI and Machine learning and Control Engineering was unparalleled in our team. In addition to domain expertise, he also brings a clarity to problem solving and project execution that is a reflection of his expansive academic and industrial experience.
                             <br><br>
-                            He is honest and transparent in his actions but is also open to criticism and always strives to constantly improve and grow. He is blessed with extraordinary interpersonal and leadership skills. It was a pure delight working with him.
-                            <br><br>
-                            I wish him a very successful and satisfying career ahead. He is truly an asset for any team or organization that he is a part of."
+                            He is honest and transparent in his actions but is also open to criticism and always strives to constantly improve and grow. He is blessed with extraordinary interpersonal and leadership skills. It was a pure delight working with him."
                         </div>
-                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Ishita Bansal</p>
@@ -1352,40 +1387,32 @@
                 </div>
 
                 <!-- Rune -->
-                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full group" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
-                    <div class="text-accent text-4xl mb-4 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-                    <div class="flex-grow mb-4 relative transform transition-transform group-hover:translate-z-[10px]">
+                <div class="spotlight-card p-8 rounded-xl flex flex-col group mb-6 break-inside-avoid w-full inline-block" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-6 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+                    <div class="flex-grow mb-6 relative transform transition-transform group-hover:translate-z-[10px]">
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "Fortunately for me Rishi and I worked together for two years. During this time Rishi took it upon himself to teach me how research is and should be done. Furthermore, with his enormous experience-to-age-ratio he always participates actively in discussions, be they personal or professional. The way he does so is always friendly and inviting, which describes him as a person as well. Always arriving at work with a smile on his face, you will be hard pressed to remove it, and if you do, it will be back in a matter of moments.
                             <br><br>
-                            No matter what position he is hired in, I am confident that he will make himself useful by producing high quality solutions and by making everyone at work have a good time.
-                            <br><br>
-                            Rishi has my wholehearted recommendations."
+                            No matter what position he is hired in, I am confident that he will make himself useful by producing high quality solutions and by making everyone at work have a good time."
                         </div>
-                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Rune Grønborg Junker</p>
-                        <p class="text-xs text-slate-500">Assistant Professor, Technical University of Denmark, Copenhagen</p>
+                        <p class="text-xs text-slate-500">Assistant Professor, Technical University of Denmark</p>
                     </div>
                 </div>
 
                 <!-- Gurdev -->
-                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full group" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
-                    <div class="text-accent text-4xl mb-4 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-                    <div class="flex-grow mb-4 relative transform transition-transform group-hover:translate-z-[10px]">
+                <div class="spotlight-card p-8 rounded-xl flex flex-col group mb-6 break-inside-avoid w-full inline-block" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-6 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+                    <div class="flex-grow mb-6 relative transform transition-transform group-hover:translate-z-[10px]">
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "It is a pleasure to work alongside Rishi on the 'Gas Turbine Autonomous Control & Optimization' project. This ambitious project aimed to develop a cutting-edge autonomous control system platform to optimize combustion process for emissions reduction and to maximize thermal performance of power plants over time.
                             <br><br>
-                            Rishi's expertise in modeling complex stochastic combustion processes and signals and utilizing them for optimization to create robust controllers played a pivotal role in the project's success. The models he designed for various operational scenarios of the power plants demonstrated good accuracy and generalization, owing to their self-adaptive nature in near real-time. His profound understanding of process dynamics, optimization, soft-sensing, time series modeling, uncertainty analysis, signal processing and advanced process controls provided invaluable insights and implementable ideas throughout the project.
-                            <br><br>
-                            Beyond his technical expertise, Rishi proved to be an exceptional team member, collaborator, and mentor. He consistently motivated and inspired the team, and his willingness to share knowledge and expertise was evident in every interaction. Even before I brought Rishi on board as a team member, he had been providing me with valuable guidance and support. For instance, his passion for supporting others, led him to obtain special permission from management, 'allowing him to utilize electronics accessories for online teaching and knowledge sharing on the company network'. This thoughtful initiative enabled him to go the extra mile in assisting team members in grasping fundamental concepts remotely.
-                            <br><br>
-                            Rishi's approachable and supportive nature fostered an inclusive work environment where team members felt at ease seeking guidance. His patience in explaining complex topics was truly commendable, making complex subjects accessible to everyone. Throughout our collaboration, Rishi exhibited openness to constructive criticism, reflecting his adaptability and growth mindset. His empathetic communication style cultivated strong relationships with team members and stakeholders.
-                            <br><br>
-                            It is a privilege for me to recommend Rishi for any position that can benefit from his expertise and empathetic nature. Having Rishi on any team would greatly increase the probability of meeting project goals and would add an element of enjoyment/fun to the work!"
+                            Rishi's expertise in modeling complex stochastic combustion processes and signals and utilizing them for optimization to create robust controllers played a pivotal role in the project's success. The models he designed for various operational scenarios of the power plants demonstrated good accuracy and generalization, owing to their self-adaptive nature in near real-time. His profound understanding of process dynamics, optimization, soft-sensing, time series modeling, uncertainty analysis, signal processing and advanced process controls provided invaluable insights and implementable ideas throughout the project."
                         </div>
-                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Gurdev Singh</p>
@@ -1394,17 +1421,15 @@
                 </div>
 
                 <!-- Stefan -->
-                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full group" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
-                    <div class="text-accent text-4xl mb-4 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-                    <div class="flex-grow mb-4 relative transform transition-transform group-hover:translate-z-[10px]">
+                <div class="spotlight-card p-8 rounded-xl flex flex-col group mb-6 break-inside-avoid w-full inline-block" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-6 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+                    <div class="flex-grow mb-6 relative transform transition-transform group-hover:translate-z-[10px]">
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "Rishi Relan has a strong vision for Digital Twins in complex integrated environments. Paired with experiences from different industries, analytical background and social skills, Rishi is enriching any team, he is working with.
                             <br><br>
-                            Rishi worked with me in a corporate wide program to create data driven analytics and digital twins with customers to induce cutting these technologies into the enterprise. I was the technical program lead and Rishi acted as consultant with his industrial and analytical background. He was the person to fill the programs initially theoretical system-of-system digital twin approach with real life examples for applying on compressors and energy management of energy systems and turning these use cases to requirements for software development. As Product Manager for development of System-of-System capabilities Rishi acted as interface between the development team, the project teams (to apply the capabilities) and solution architects according SAFe. The outcome was a series of PoC's in a couple of months until I left the program.
-                            <br><br>
-                            I experienced Rishi as a forward looking, visionary and consensus driving person with strong technical background. I am certain he will have a bright professional future."
+                            Rishi worked with me in a corporate wide program to create data driven analytics and digital twins with customers to induce cutting these technologies into the enterprise. I was the technical program lead and Rishi acted as consultant with his industrial and analytical background. He was the person to fill the programs initially theoretical system-of-system digital twin approach with real life examples for applying on compressors and energy management of energy systems and turning these use cases to requirements for software development. As Product Manager for development of System-of-System capabilities Rishi acted as interface between the development team, the project teams."
                         </div>
-                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Stefan Lichtenberger</p>
@@ -1413,9 +1438,9 @@
                 </div>
 
                 <!-- Peter -->
-                <div class="spotlight-card p-6 rounded-xl flex flex-col h-full group" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
-                    <div class="text-accent text-4xl mb-4 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
-                    <div class="flex-grow mb-4 relative transform transition-transform group-hover:translate-z-[10px]">
+                <div class="spotlight-card p-8 rounded-xl flex flex-col group mb-6 break-inside-avoid w-full inline-block" data-tilt data-tilt-max="2" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
+                    <div class="text-accent text-4xl mb-6 transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
+                    <div class="flex-grow mb-6 relative transform transition-transform group-hover:translate-z-[10px]">
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "Rishi worked for me as a resident engineer during his work at the dSPACE headquarters as well as a resident engineer at Opel in Ruesselsheim (hardware-in-the-loop systems for vehicle dynamics controllers).
                             <br><br>
@@ -1423,7 +1448,7 @@
                             <br><br>
                             Rishi is very enthusiastic in his work and has a lot of intercultural experience. He was very well accepted internally in the company as well as by his customers. He speaks German fluently. Rishi left dSPACE to bring his research career in automatic control to the next step."
                         </div>
-                        <button class="read-more-btn text-xs font-bold text-accent mt-2 hover:underline focus:outline-none">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
+                        <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
                         <p class="text-slate-900 dark:text-white font-bold text-sm">Peter Waeltermann</p>
@@ -1533,15 +1558,15 @@
             <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-8">Let's Collaborate</h2>
             
             <div class="flex justify-center gap-6 mb-8">
-                <a href="mailto:rishirelan@gmail.com" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-accent transition" aria-label="Send an email to Rishi Relan" title="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-                <a href="tel:+91xxxxxxxxxx" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-accent transition" aria-label="Call Rishi Relan" title="+91 xxxxxxxxxx"><i class="fas fa-phone" aria-hidden="true"></i></a>
-                <a href="https://www.linkedin.com/in/rishirelan/" target="_blank" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#0077b5] transition" aria-label="Visit Rishi Relan on LinkedIn" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                <a href="skype:rishirelan?chat" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#00aff0] transition" aria-label="Chat with Rishi Relan on Skype" title="Skype: rishirelan"><i class="fab fa-skype" aria-hidden="true"></i></a>
+                <a href="mailto:rishirelan@gmail.com" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-accent transition clickable" aria-label="Send an email to Rishi Relan" title="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                <a href="tel:+91xxxxxxxxxx" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-accent transition clickable" aria-label="Call Rishi Relan" title="+91 xxxxxxxxxx"><i class="fas fa-phone" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/rishirelan/" target="_blank" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#0077b5] transition clickable" aria-label="Visit Rishi Relan on LinkedIn" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                <a href="skype:rishirelan?chat" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#00aff0] transition clickable" aria-label="Chat with Rishi Relan on Skype" title="Skype: rishirelan"><i class="fab fa-skype" aria-hidden="true"></i></a>
             </div>
             
             <div class="flex justify-center gap-6 text-sm text-slate-600 dark:text-slate-500 mb-8">
-                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" aria-label="Google Scholar Profile" class="hover:text-accent transition flex items-center gap-2"><i class="ai ai-google-scholar" aria-hidden="true"></i> Google Scholar</a>
-                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" aria-label="ResearchGate Profile" class="hover:text-accent transition flex items-center gap-2"><i class="ai ai-researchgate" aria-hidden="true"></i> ResearchGate</a>
+                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" aria-label="Google Scholar Profile" class="hover:text-accent transition flex items-center gap-2 clickable"><i class="ai ai-google-scholar" aria-hidden="true"></i> Google Scholar</a>
+                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" aria-label="ResearchGate Profile" class="hover:text-accent transition flex items-center gap-2 clickable"><i class="ai ai-researchgate" aria-hidden="true"></i> ResearchGate</a>
             </div>
 
             <p class="text-slate-500 dark:text-slate-600 text-sm">&copy; December 2025 Dr.ir. Rishi Relan.</p>
@@ -1587,6 +1612,33 @@
 
     <script>
         AOS.init({ duration: 800, once: true, offset: 100 });
+        
+        // --- Custom Digital Twin Cursor Logic ---
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        
+        if (window.matchMedia("(pointer: fine)").matches && cursorDot && cursorRing) {
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
+                // Add a slight delay/easing to the ring for a "following" effect
+                setTimeout(() => {
+                    cursorRing.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
+                }, 40);
+            });
+
+            // Expand cursor on interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, .clickable, .skill-badge');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorDot.classList.add('cursor-hover');
+                    cursorRing.classList.add('cursor-hover-ring');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorDot.classList.remove('cursor-hover');
+                    cursorRing.classList.remove('cursor-hover-ring');
+                });
+            });
+        }
 
         // Theme Toggle Logic
         const themeToggleBtn = document.getElementById('theme-toggle');
@@ -1596,28 +1648,38 @@
         // Check for saved theme preference, otherwise default to system preference
         if (localStorage.getItem('theme') === 'light') {
             htmlElement.classList.remove('dark');
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
+            if(themeIcon) {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
         } else {
             // Default to dark mode if no preference or explicitly dark
             htmlElement.classList.add('dark');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            if (htmlElement.classList.contains('dark')) {
-                htmlElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            } else {
-                htmlElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
+            if(themeIcon) {
                 themeIcon.classList.remove('fa-moon');
                 themeIcon.classList.add('fa-sun');
             }
-        });
+        }
+
+        if(themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    if(themeIcon) {
+                        themeIcon.classList.remove('fa-sun');
+                        themeIcon.classList.add('fa-moon');
+                    }
+                } else {
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    if(themeIcon) {
+                        themeIcon.classList.remove('fa-moon');
+                        themeIcon.classList.add('fa-sun');
+                    }
+                }
+            });
+        }
 
         function handleMouseMove(e) {
             const rect = e.currentTarget.getBoundingClientRect();
@@ -1629,51 +1691,86 @@
 
         // --- PERFORMANCE OPTIMIZATION: Pause Canvas when not visible ---
         const canvas = document.getElementById('hero-canvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray;
-        let mouse = { x: null, y: null, radius: 150 }
+        let ctx = null;
+        if(canvas) {
+            ctx = canvas.getContext('2d');
+        }
+        
+        let particlesArray = [];
+        let mouse = { x: null, y: null, radius: 150 };
         let isCanvasVisible = true;
 
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                isCanvasVisible = entry.isIntersecting;
-            });
-        }, { threshold: 0 });
-        heroObserver.observe(document.getElementById('home'));
+        const homeSection = document.getElementById('home');
+        if(homeSection) {
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isCanvasVisible = entry.isIntersecting;
+                });
+            }, { threshold: 0 });
+            heroObserver.observe(homeSection);
+        }
 
-        window.addEventListener('mousemove', function(event) { mouse.x = event.x; mouse.y = event.y; });
-        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initParticles(); });
+        window.addEventListener('mousemove', function(event) { 
+            mouse.x = event.x; 
+            mouse.y = event.y; 
+        });
+        
+        window.addEventListener('resize', () => { 
+            if(canvas) {
+                canvas.width = window.innerWidth; 
+                canvas.height = window.innerHeight; 
+                initParticles(); 
+            }
+        });
 
         class Particle {
             constructor(x, y, size, color) {
-                this.x = x; this.y = y; this.size = size; this.color = color;
-                this.baseX = x; this.baseY = y;
+                this.x = x; 
+                this.y = y; 
+                this.size = size; 
+                this.color = color;
+                this.baseX = x; 
+                this.baseY = y;
                 this.density = (Math.random() * 30) + 1;
             }
             draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color; ctx.fill();
+                if(!ctx) return;
+                ctx.beginPath(); 
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color; 
+                ctx.fill();
             }
             update() {
-                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
+                let dx = mouse.x - this.x; 
+                let dy = mouse.y - this.y;
                 let distance = Math.sqrt(dx*dx + dy*dy);
-                let forceDirectionX = dx / distance; let forceDirectionY = dy / distance;
-                let maxDistance = mouse.radius; let force = (maxDistance - distance) / maxDistance;
+                let forceDirectionX = dx / distance; 
+                let forceDirectionY = dy / distance;
+                let maxDistance = mouse.radius; 
+                let force = (maxDistance - distance) / maxDistance;
                 let directionX = forceDirectionX * force * this.density;
                 let directionY = forceDirectionY * force * this.density;
-                if (distance < mouse.radius) { this.x -= directionX; this.y -= directionY; } 
-                else { 
-                    if (this.x !== this.baseX) { let dx = this.x - this.baseX; this.x -= dx/10; }
-                    if (this.y !== this.baseY) { let dy = this.y - this.baseY; this.y -= dy/10; }
+                if (distance < mouse.radius) { 
+                    this.x -= directionX; 
+                    this.y -= directionY; 
+                } else { 
+                    if (this.x !== this.baseX) { 
+                        let rdx = this.x - this.baseX; 
+                        this.x -= rdx/10; 
+                    }
+                    if (this.y !== this.baseY) { 
+                        let rdy = this.y - this.baseY; 
+                        this.y -= rdy/10; 
+                    }
                 }
                 this.draw();
             }
         }
 
         function initParticles() {
+            if(!canvas) return;
             particlesArray = [];
             let numberOfParticles = (canvas.width * canvas.height) / 12000;
-            // Determine color based on theme (though canvas needs refresh on toggle for perfect sync, this sets initial)
             const isDark = document.documentElement.classList.contains('dark');
             const particleColor = isDark ? 'rgba(56, 189, 248, 0.6)' : 'rgba(56, 189, 248, 0.4)';
 
@@ -1684,19 +1781,24 @@
                 particlesArray.push(new Particle(x, y, size, particleColor));
             }
         }
+        
         function animate() {
-            if (isCanvasVisible) {
+            if (isCanvasVisible && ctx && canvas) {
                 ctx.clearRect(0, 0, innerWidth, innerHeight);
-                for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); }
+                for (let i = 0; i < particlesArray.length; i++) { 
+                    particlesArray[i].update(); 
+                }
                 for (let a = 0; a < particlesArray.length; a++) {
                     for (let b = a; b < particlesArray.length; b++) {
-                        let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
-                        + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        let dx = particlesArray[a].x - particlesArray[b].x;
+                        let dy = particlesArray[a].y - particlesArray[b].y;
+                        let distance = (dx * dx) + (dy * dy);
                         if (distance < (canvas.width/9) * (canvas.height/9)) {
                             let opacityValue = 1 - (distance/15000);
                             if(opacityValue > 0) {
-                                ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue * 0.15 + ')';
-                                ctx.lineWidth = 1; ctx.beginPath();
+                                ctx.strokeStyle = `rgba(56, 189, 248, ${opacityValue * 0.15})`;
+                                ctx.lineWidth = 1; 
+                                ctx.beginPath();
                                 ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
                                 ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
                                 ctx.stroke();
@@ -1707,18 +1809,39 @@
             }
             requestAnimationFrame(animate);
         }
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        initParticles(); animate();
+        
+        if(canvas) {
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight;
+            initParticles(); 
+            animate();
+        }
 
         const texts = ["Strategic Leadership", "Digital Twin Expert", "R&D Leadership", "AI & ML Driven Engineering"];
-        let count = 0, index = 0, currentText = "", letter = "";
-        (function type() {
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
+        
+        function typeWriter() {
             if (count === texts.length) count = 0;
-            currentText = texts[count]; letter = currentText.slice(0, ++index);
-            document.getElementById('typewriter-text').textContent = letter;
-            if (letter.length === currentText.length) { count++; index = 0; setTimeout(type, 2000); } 
-            else { setTimeout(type, 100); }
-        })();
+            currentText = texts[count]; 
+            letter = currentText.slice(0, ++index);
+            const textElement = document.getElementById('typewriter-text');
+            
+            if(textElement) {
+                textElement.textContent = letter;
+            }
+            
+            if (letter.length === currentText.length) { 
+                count++; 
+                index = 0; 
+                setTimeout(typeWriter, 2000); 
+            } else { 
+                setTimeout(typeWriter, 100); 
+            }
+        }
+        typeWriter();
 
         // --- UX POLISH: Single Session Boot Sequence ---
         const bootScreen = document.getElementById('boot-screen');
@@ -1738,11 +1861,13 @@
                 }
                 
                 if (bootScreen) {
-                    setTimeout(() => { bootScreen.style.opacity = '0'; bootScreen.style.pointerEvents = 'none'; }, 2200);
+                    setTimeout(() => { 
+                        bootScreen.style.opacity = '0'; 
+                        bootScreen.style.pointerEvents = 'none'; 
+                    }, 2200);
                 }
             }, 100);
         } else {
-            // Bypass sequence if already played in this browser tab session
             if (bootScreen) {
                 bootScreen.style.display = 'none';
             }
@@ -1805,18 +1930,26 @@
             setTimeout(() => modal.classList.add('hidden'), 300);
         }
 
-        // Filter Publications
+        // --- UPGRADED: Smooth Layout Shuffling for Publications ---
         function filterPubs(cat) {
             const allPubs = document.querySelectorAll('.pub-item');
+            
             allPubs.forEach(item => {
                 const categories = item.getAttribute('data-cat');
                 if (cat === 'all' || (categories && categories.includes(cat))) {
-                    item.style.display = 'block';
-                    item.style.opacity = '0';
-                    setTimeout(() => item.style.opacity = '1', 10);
-                    item.style.transition = 'opacity 0.3s ease';
+                    item.classList.remove('hidden');
+                    // Small delay to allow display:block to apply before animating opacity/transform
+                    setTimeout(() => { 
+                        item.style.opacity = '1'; 
+                        item.style.transform = 'scale(1)'; 
+                    }, 50);
                 } else {
-                    item.style.display = 'none';
+                    item.style.opacity = '0'; 
+                    item.style.transform = 'scale(0.95)';
+                    // Wait for CSS transition to finish before hiding from layout
+                    setTimeout(() => { 
+                        item.classList.add('hidden'); 
+                    }, 300);
                 }
             });
         }
@@ -1849,7 +1982,6 @@
         // --- UX POLISH: Recommendations "Read More" Toggle ---
         document.querySelectorAll('.read-more-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                // Fix: use currentTarget to always get the button, even if the nested icon was clicked
                 const textContainer = e.currentTarget.previousElementSibling;
                 if (textContainer.classList.contains('line-clamp-6')) {
                     textContainer.classList.remove('line-clamp-6');
@@ -1918,9 +2050,10 @@
         if (aboutSection) counterObserver.observe(aboutSection);
         if (skillsSection) counterObserver.observe(skillsSection);
 
-        // --- UX POLISH: Scroll Progress, Timeline Drawing & Active Navigation ---
+        // --- UX POLISH: Scroll Progress, Timeline Drawing, Sticky Button & Active Navigation ---
         const sections = document.querySelectorAll("section[id], header[id]");
         const navLinksDesktop = document.querySelectorAll(".nav-link");
+        const backToTopBtn = document.getElementById('backToTop');
 
         window.addEventListener('scroll', () => {
             const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -1932,8 +2065,19 @@
                 progress.style.width = (scrollTop / scrollHeight) * 100 + "%";
                 progress.setAttribute('aria-valuenow', Math.round((scrollTop / scrollHeight) * 100));
             }
+            
+            // 2. Sticky Back to Top Button
+            if(backToTopBtn) {
+                if (scrollTop > 500) {
+                    backToTopBtn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                    backToTopBtn.classList.add('opacity-100', 'translate-y-0', 'cursor-pointer');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                    backToTopBtn.classList.remove('opacity-100', 'translate-y-0', 'cursor-pointer');
+                }
+            }
 
-            // 2. Active Navigation ScrollSpy
+            // 3. Active Navigation ScrollSpy
             let current = "";
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
@@ -1949,7 +2093,7 @@
                 }
             });
             
-            // 3. Dynamic "Drawing" Experience Timeline (NEW)
+            // 4. Dynamic "Drawing" Experience Timeline
             const expSection = document.getElementById('experience');
             const timelineProgress = document.getElementById('timeline-progress');
             const timelineTrack = document.getElementById('timeline-track');
@@ -1978,6 +2122,13 @@
                 });
             }
         });
+        
+        // Back to top click event
+        if(backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+        }
         
         // Mobile Menu
         const btn = document.getElementById('mobile-menu-btn');
@@ -2009,20 +2160,6 @@
                 });
             });
         }
-        
-        // Magnetic Button Effect for Menu & Hero Buttons
-        const magneticItems = document.querySelectorAll(".magnetic-item");
-        magneticItems.forEach((btn) => {
-            btn.addEventListener("mousemove", (e) => {
-                const position = btn.getBoundingClientRect();
-                const x = e.pageX - position.left - position.width / 2;
-                const y = e.pageY - position.top - position.height / 2;
-                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-            });
-            btn.addEventListener("mouseleave", () => {
-                btn.style.transform = "translate(0px, 0px)";
-            });
-        });
 
     </script>
 </body>
