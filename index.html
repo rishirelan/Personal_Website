@@ -155,20 +155,11 @@
             animation: gridMove 60s linear infinite;
         }
 
-        /* Active Navigation Link Indicator */
-        .active-nav-link {
-            color: #38bdf8 !important;
-            font-weight: 600;
-        }
-
-        /* Custom Scrollbar & Hidden Scrollbar for Carousel */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
-        
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* Advanced Spotlight Card Effect (Transforms handled by VanillaTilt) */
         .spotlight-card {
@@ -207,34 +198,6 @@
         }
         
         .spotlight-card:hover::before { opacity: 1; }
-
-        /* Shimmer Card Effect */
-        .shimmer-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(12px);
-        }
-        .shimmer-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 10px 40px -10px rgba(56, 189, 248, 0.15);
-        }
-        .shimmer-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
-            transform: skewX(-25deg);
-            transition: left 0.5s;
-            pointer-events: none;
-        }
-        .shimmer-card:hover::before {
-            animation: shimmer 1.5s infinite;
-            left: 200%;
-        }
 
         /* Scanner Effect */
         .scanner-container { position: relative; overflow: hidden; }
@@ -341,7 +304,7 @@
         
         .fi { width: 1.2em; border-radius: 2px; vertical-align: middle; }
         
-        /* --- NEW PROFESSIONAL NAV HOVER EFFECT --- */
+        /* --- PROFESSIONAL NAV HOVER EFFECT --- */
         .nav-link { position: relative; transition: color 0.3s ease; }
         .nav-link::after {
             content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
@@ -351,16 +314,13 @@
         .nav-link:hover::after, .active-nav-link::after {
             transform: scaleX(1); transform-origin: bottom left;
         }
+        .active-nav-link { color: #38bdf8 !important; font-weight: 600; }
         
         .accordion-content {
             transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out;
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
+            max-height: 0; opacity: 0; overflow: hidden;
         }
-        .accordion-content.active {
-            opacity: 1;
-        }
+        .accordion-content.active { opacity: 1; }
         
         @media print {
             #boot-screen { display: none !important; }
@@ -381,7 +341,7 @@
     <div id="cursor-ring" class="hidden md:block"></div>
 
     <!-- STICKY BACK TO TOP BUTTON -->
-    <button id="backToTop" aria-label="Back to top" class="fixed bottom-8 right-8 w-12 h-12 bg-accent text-primary rounded-full shadow-[0_0_20px_rgba(56,189,248,0.5)] flex items-center justify-center z-50 opacity-0 translate-y-10 transition-all duration-300 pointer-events-none hover:bg-white hover:scale-110 focus:outline-none">
+    <button id="backToTop" aria-label="Back to top" class="fixed bottom-8 right-8 w-12 h-12 bg-accent text-primary rounded-full shadow-[0_0_20px_rgba(56,189,248,0.5)] flex items-center justify-center z-50 opacity-0 translate-y-10 transition-all duration-300 pointer-events-none hover:bg-white hover:scale-110 focus:outline-none clickable">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -404,7 +364,7 @@
     <!-- BLUEPRINT MODAL -->
     <div id="modal-overlay" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300" aria-modal="true" role="dialog">
         <div id="project-modal" class="w-full max-w-3xl border border-accent/30 rounded-xl p-8 relative transform scale-95 transition-transform duration-300">
-            <button onclick="closeModal()" aria-label="Close blueprint modal" class="absolute top-4 right-4 text-slate-400 hover:text-white transition"><i class="fas fa-times text-xl" aria-hidden="true"></i></button>
+            <button onclick="closeModal()" aria-label="Close blueprint modal" class="absolute top-4 right-4 text-slate-400 hover:text-white transition clickable"><i class="fas fa-times text-xl" aria-hidden="true"></i></button>
             <div class="flex items-center gap-3 mb-6 border-b border-slate-700 pb-4">
                 <i class="fas fa-project-diagram text-accent text-2xl" aria-hidden="true"></i>
                 <h3 id="modal-title" class="text-2xl font-bold text-white font-mono tracking-tight">PROJECT_BLUEPRINT</h3>
@@ -436,25 +396,25 @@
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-white/90 dark:bg-primary/90 backdrop-blur-md border-b border-slate-200 dark:border-white/5 transition-all duration-300" id="navbar" aria-label="Main Navigation">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight z-50 relative group" aria-label="Home">
+            <a href="#home" class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight z-50 relative group clickable" aria-label="Home">
                 Rishi Relan<span class="text-accent group-hover:text-slate-900 dark:group-hover:text-white transition">.Ph.D</span>
             </a>
             <div class="hidden md:flex items-center space-x-2 font-medium text-sm uppercase tracking-wider text-slate-600 dark:text-slate-300">
-                <a href="#about" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">About</a>
-                <a href="#experience" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Experience</a>
-                <a href="#education" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Education</a>
-                <a href="#leadership" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Leadership</a>
-                <a href="#publications" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Research</a>
-                <a href="#awards" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Awards</a>
-                <a href="#recommendations" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link">Recommendations</a>
-                <a href="#contact" class="px-5 py-2 ml-4 border border-accent text-accent rounded hover:bg-accent hover:text-white transition duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(56,189,248,0.4)]">Contact</a>
+                <a href="#about" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">About</a>
+                <a href="#experience" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Experience</a>
+                <a href="#education" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Education</a>
+                <a href="#leadership" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Leadership</a>
+                <a href="#publications" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Research</a>
+                <a href="#awards" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Awards</a>
+                <a href="#recommendations" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Recommendations</a>
+                <a href="#contact" class="px-5 py-2 ml-4 border border-accent text-accent rounded hover:bg-accent hover:text-white transition duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] clickable">Contact</a>
                 
                 <!-- Theme Toggle Button -->
-                <button id="theme-toggle" aria-label="Toggle dark mode" class="ml-4 px-3 py-2 rounded-full text-slate-500 hover:text-accent focus:outline-none transition">
+                <button id="theme-toggle" aria-label="Toggle dark mode" class="ml-4 px-3 py-2 rounded-full text-slate-500 hover:text-accent focus:outline-none transition clickable">
                     <i id="theme-icon" class="fas fa-sun text-xl" aria-hidden="true"></i>
                 </button>
             </div>
-             <button id="mobile-menu-btn" aria-label="Open mobile menu" aria-expanded="false" class="md:hidden text-slate-900 dark:text-white focus:outline-none z-50 relative">
+             <button id="mobile-menu-btn" aria-label="Open mobile menu" aria-expanded="false" class="md:hidden text-slate-900 dark:text-white focus:outline-none z-50 relative clickable">
                 <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
             </button>
         </div>
@@ -515,19 +475,19 @@
 
             <!-- Upgraded Clean Buttons (Removed magnetic and bounce) -->
             <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
-                <a href="https://drive.google.com/file/d/1iystB-1Pw6_GeTDxbX0KCmjdzUXeBb85/view?usp=drive_link" target="_blank" rel="noopener noreferrer" aria-label="Download CV from Google Drive" class="bg-accent text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-primary transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,189,248,0.6)] hover:-translate-y-1 flex items-center gap-2 justify-center border border-accent">
+                <a href="https://drive.google.com/file/d/1iystB-1Pw6_GeTDxbX0KCmjdzUXeBb85/view?usp=drive_link" target="_blank" rel="noopener noreferrer" aria-label="Download CV from Google Drive" class="bg-accent text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-primary transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,189,248,0.6)] hover:-translate-y-1 flex items-center gap-2 justify-center border border-accent clickable">
                     <i class="fas fa-file-download" aria-hidden="true"></i> Download CV
                 </a>
-                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Visit Google Scholar Profile" class="bg-slate-800 dark:bg-white/10 text-white px-8 py-4 rounded-lg hover:bg-slate-700 dark:hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 justify-center border border-transparent dark:border-white/5 hover:shadow-lg">
+                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Visit Google Scholar Profile" class="bg-slate-800 dark:bg-white/10 text-white px-8 py-4 rounded-lg hover:bg-slate-700 dark:hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 justify-center border border-transparent dark:border-white/5 hover:shadow-lg clickable">
                     <i class="ai ai-google-scholar text-lg" aria-hidden="true"></i> Google Scholar
                 </a>
-                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" aria-label="Visit ResearchGate Profile" class="bg-white/50 dark:bg-transparent border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 px-8 py-4 rounded-lg hover:border-accent hover:text-accent dark:hover:text-accent transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm hover:bg-slate-50 dark:hover:bg-white/5 hover:-translate-y-1 hover:shadow-lg">
+                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" aria-label="Visit ResearchGate Profile" class="bg-white/50 dark:bg-transparent border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 px-8 py-4 rounded-lg hover:border-accent hover:text-accent dark:hover:text-accent transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm hover:bg-slate-50 dark:hover:bg-white/5 hover:-translate-y-1 hover:shadow-lg clickable">
                     <i class="ai ai-researchgate text-lg" aria-hidden="true"></i> ResearchGate
                 </a>
             </div>
         </div>
         
-        <a href="#about" aria-label="Scroll down to About section" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-slate-500 hover:text-accent transition cursor-pointer z-20 hidden-print">
+        <a href="#about" aria-label="Scroll down to About section" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-slate-500 hover:text-accent transition cursor-pointer z-20 hidden-print clickable">
             <i class="fas fa-chevron-down text-2xl" aria-hidden="true"></i>
         </a>
     </header>
@@ -610,7 +570,7 @@
                         </div>
                     </div>
                     
-                     <!-- 3D GLOBE SECTION (Fixed: Robust Canvas attributes) -->
+                     <!-- 3D GLOBE SECTION (Fixed: Robust Canvas attributes without conflicting CSS 3D transforms) -->
                      <div class="col-span-2 bg-slate-100 dark:bg-tertiary/40 rounded-xl p-6 border border-slate-200 dark:border-white/5 relative flex flex-col items-center justify-center overflow-hidden min-h-[350px]">
                         <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 z-10 text-center">Global Footprint</h4>
                         <div class="w-full max-w-[300px] aspect-square relative z-0 flex items-center justify-center">
@@ -725,7 +685,7 @@
                                     </li>
                                     <li><button onclick="openProject('cbsi')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition clickable"><i class="fas fa-network-wired mr-2 text-accent" aria-hidden="true"></i>CbSI Advisory (Global)</button></li>
                                     <li><button onclick="openProject('genrel')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition clickable"><i class="fas fa-file-blueprint mr-2 text-accent" aria-hidden="true"></i>Generator Reliability Twin</button></li>
-                                    <li><button onclick="openProject('lre')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition clickable"><i class="fas fa-cogs mr-2 text-accent" aria-hidden="true"></i>LRE Digital Twin (Hot Components)</button></li>
+                                    <li><button onclick="openProject('lre')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition clickable"><i class="fas fa-cogs mr-2 text-accent" aria-hidden="true"></i>Large Gas Turbine Twin (Hot Components)</button></li>
                                     <li><button onclick="openProject('rca')" class="text-slate-800 dark:text-white hover:text-accent hover:underline text-left w-full flex items-center transition clickable"><i class="fas fa-search mr-2 text-accent" aria-hidden="true"></i>Root Cause Analysis (Blade-4)</button></li>
                                 </ul>
                             </div>
@@ -1002,7 +962,7 @@
         </div>
     </section>
 
-    <!-- Research Impact & Publications (Consolidated) -->
+    <!-- Research Impact & Publications -->
     <section id="publications" class="py-24 bg-slate-50 dark:bg-primary border-t border-slate-200 dark:border-white/5 relative">
         <div class="container mx-auto px-6 relative z-10">
             <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center">Research Impact & Publications</h3>
@@ -1081,7 +1041,7 @@
                  <div class="lg:col-span-2" data-aos="fade-left">
                     <div class="space-y-4 relative" id="pub-list">
                         
-                        <!-- NEW ASME 2025 Paper from ResearchGate -->
+                        <!-- NEW ASME 2025 Paper -->
                         <div class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group" data-cat="BESS AI">
                             <div class="flex flex-wrap justify-between gap-2 mb-2">
                                 <span class="text-xs font-bold text-primary bg-accent px-2 py-0.5 rounded">Latest Release</span>
@@ -1228,7 +1188,7 @@
         </div>
     </section>
 
-    <!-- NEW: Strategic Partners Section -->
+    <!-- Strategic Partners Section -->
     <section id="partners" class="py-20 bg-slate-100/50 dark:bg-secondary/50 relative border-t border-slate-200 dark:border-white/5">
         <div class="container mx-auto px-6 text-center">
             <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-12">Strategic Partners & Collaborators</h3>
@@ -1284,12 +1244,11 @@
         </div>
     </section>
 
-    <!-- NEW: Premium Masonry Recommendations Section -->
+    <!-- Premium Masonry Recommendations Section -->
     <section id="recommendations" class="py-24 bg-slate-50 dark:bg-primary relative border-t border-slate-200 dark:border-white/5">
         <div class="container mx-auto px-6">
             <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center" data-aos="fade-up">What Colleagues Say</h3>
             
-            <!-- Masonry Grid Container -->
             <div class="columns-1 md:columns-2 lg:columns-3 gap-6 w-full max-w-7xl mx-auto" data-aos="fade-up" data-aos-delay="100">
                 
                 <!-- Aditya -->
@@ -1432,7 +1391,7 @@
                         <div class="text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed line-clamp-6 transition-all duration-300">
                             "Rishi Relan has a strong vision for Digital Twins in complex integrated environments. Paired with experiences from different industries, analytical background and social skills, Rishi is enriching any team, he is working with.
                             <br><br>
-                            Rishi worked with me in a corporate wide program to create data driven analytics and digital twins with customers to induce cutting these technologies into the enterprise. I was the technical program lead and Rishi acted as consultant with his industrial and analytical background. He was the person to fill the programs initially theoretical system-of-system digital twin approach with real life examples for applying on compressors and energy management of energy systems and turning these use cases to requirements for software development. As Product Manager for development of System-of-System capabilities Rishi acted as interface between the development team, the project teams."
+                            Rishi worked with me in a corporate wide program to create data driven analytics and digital twins with customers to induce cutting these technologies into the enterprise. I was the technical program lead and Rishi acted as consultant with his industrial and analytical background. He was the person to fill the programs initially theoretical system-of-system digital twin approach with real life examples for applying on compressors and energy management of energy systems and turning these use cases to requirements for software development."
                         </div>
                         <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
@@ -1481,7 +1440,7 @@
                                 <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <!-- German (4 Stars) -->
+                        <!-- German -->
                         <div class="flex justify-between items-center">
                             <span class="text-slate-600 dark:text-slate-300 font-medium w-32">German <span class="fi fi-de"></span></span>
                             <div class="flex text-accent" aria-label="4 out of 5 stars">
@@ -1505,32 +1464,31 @@
                     </div>
                 </div>
 
-                <!-- Programming Skills (New Infographic Bars) -->
+                <!-- Programming Skills (Infographic Bars) -->
                 <div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8">Technical Toolkit</h3>
                     <div class="space-y-4">
-                        <div class="skill-badge" data-skill="MATLAB" onmousemove="handleMouseMove(event)">
+                        <div class="skill-badge clickable" data-skill="MATLAB" onmousemove="handleMouseMove(event)">
                             <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>MATLAB/Simulink</span> <span>Expert</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 95%" aria-valuenow="95" role="progressbar"></div></div>
                         </div>
-                        <div class="skill-badge" data-skill="Python" onmousemove="handleMouseMove(event)">
+                        <div class="skill-badge clickable" data-skill="Python" onmousemove="handleMouseMove(event)">
                             <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>Python / R (AI/ML)</span> <span>Expert</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 90%" aria-valuenow="90" role="progressbar"></div></div>
                         </div>
-                        <div class="skill-badge" data-skill="C" onmousemove="handleMouseMove(event)">
+                        <div class="skill-badge clickable" data-skill="C" onmousemove="handleMouseMove(event)">
                             <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>C/C++</span> <span>Advanced</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 85%" aria-valuenow="85" role="progressbar"></div></div>
                         </div>
-                        <div class="skill-badge" data-skill="dSPACE" onmousemove="handleMouseMove(event)">
+                        <div class="skill-badge clickable" data-skill="dSPACE" onmousemove="handleMouseMove(event)">
                             <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>dSPACE Tools / HIL</span> <span>Advanced</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 85%" aria-valuenow="85" role="progressbar"></div></div>
                         </div>
-                         <div class="skill-badge" data-skill="PLC" onmousemove="handleMouseMove(event)">
+                         <div class="skill-badge clickable" data-skill="PLC" onmousemove="handleMouseMove(event)">
                             <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>LabView / PLC</span> <span>Intermediate</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 75%" aria-valuenow="75" role="progressbar"></div></div>
                         </div>
-                        <!-- Added Robotics -->
-                        <div class="skill-badge" data-skill="Robotics" onmousemove="handleMouseMove(event)">
+                        <div class="skill-badge clickable" data-skill="Robotics" onmousemove="handleMouseMove(event)">
                             <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1"><span>Robotics</span> <span>Intermediate</span></div>
                             <div class="skill-track"><div class="skill-fill" style="--w: 70%" aria-valuenow="70" role="progressbar"></div></div>
                         </div>
@@ -1565,13 +1523,13 @@
             <div class="flex justify-center gap-6 mb-8">
                 <a href="mailto:rishirelan@gmail.com" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-accent transition clickable" aria-label="Send an email to Rishi Relan" title="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                 <a href="tel:+91xxxxxxxxxx" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-accent transition clickable" aria-label="Call Rishi Relan" title="+91 xxxxxxxxxx"><i class="fas fa-phone" aria-hidden="true"></i></a>
-                <a href="https://www.linkedin.com/in/rishirelan/" target="_blank" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#0077b5] transition clickable" aria-label="Visit Rishi Relan on LinkedIn" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/rishirelan/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#0077b5] transition clickable" aria-label="Visit Rishi Relan on LinkedIn" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                 <a href="skype:rishirelan?chat" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#00aff0] transition clickable" aria-label="Chat with Rishi Relan on Skype" title="Skype: rishirelan"><i class="fab fa-skype" aria-hidden="true"></i></a>
             </div>
             
             <div class="flex justify-center gap-6 text-sm text-slate-600 dark:text-slate-500 mb-8">
-                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" aria-label="Google Scholar Profile" class="hover:text-accent transition flex items-center gap-2 clickable"><i class="ai ai-google-scholar" aria-hidden="true"></i> Google Scholar</a>
-                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" aria-label="ResearchGate Profile" class="hover:text-accent transition flex items-center gap-2 clickable"><i class="ai ai-researchgate" aria-hidden="true"></i> ResearchGate</a>
+                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar Profile" class="hover:text-accent transition flex items-center gap-2 clickable"><i class="ai ai-google-scholar" aria-hidden="true"></i> Google Scholar</a>
+                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" aria-label="ResearchGate Profile" class="hover:text-accent transition flex items-center gap-2 clickable"><i class="ai ai-researchgate" aria-hidden="true"></i> ResearchGate</a>
             </div>
 
             <p class="text-slate-500 dark:text-slate-600 text-sm">&copy; December 2025 Dr.ir. Rishi Relan.</p>
@@ -1581,7 +1539,6 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
-        // Switched to jsdelivr for guaranteed loading and no iframe blocks
         import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe@0.6.3/+esm';
 
         const canvasElement = document.getElementById("cobe-globe");
@@ -1612,7 +1569,6 @@
                     { location: [56.2639, 9.5018], size: 0.05 },  // Denmark
                 ],
                 onRender: (state) => {
-                    // Auto-rotate if not actively dragging
                     if (pointerInteracting === null) {
                         phi += 0.005; 
                     }
@@ -1620,7 +1576,6 @@
                 }
             });
 
-            // Add manual drag interactions
             canvasElement.addEventListener('pointerdown', (e) => {
                 pointerInteracting = e.clientX - pointerInteractionMovement;
                 canvasElement.style.cursor = 'grabbing';
@@ -1704,7 +1659,6 @@
             e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
             e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
         }
-        
         window.handleMouseMove = handleMouseMove;
 
         // --- PERFORMANCE OPTIMIZATION: Pause Canvas when not visible ---
@@ -1843,10 +1797,10 @@
             
             const data = {
                 'kvbatt': {
-                    title: 'KV-Batt: High-Voltage BESS',
-                    prob: 'Designing future-proof high-voltage battery storage systems requires handling extreme thermal loads and ensuring safety compliance.',
-                    sol: 'Developed a comprehensive system architecture integrating advanced thermal management and AI-driven safety protocols.',
-                    metrics: ['<li>Partners: Fraunhofer, IIT Bombay</li><li>Status: Completed</li><li>Focus: Future Grid Stability</li>']
+                    title: 'KV-Batt: High-Voltage BESS (20 kV)',
+                    prob: 'Conventional battery storage systems experience significant energy losses during low-voltage conversion steps, limiting their efficiency during high-load grid applications.',
+                    sol: 'Researching and testing BESS designed to operate directly at high voltages (up to 20 kV) to eliminate conversion losses, damp grid oscillations, and mitigate the risks of regional blackouts.',
+                    metrics: ['<li>Partners: SPIN, Fachhochschule Dortmund</li><li>Focus: Grid Stability & High Efficiency</li><li>Tech: 20kV Direct Operation</li>']
                 },
                 'cbsi': {
                     title: 'Condition Based Service Intervention (CbSI)',
@@ -1861,10 +1815,10 @@
                     metrics: ['<li>Speedup: 20X Faster Design Cycle</li><li>Status: Completed</li><li>Impact: Global Design Standard</li>']
                 },
                 'lre': {
-                    title: 'Large Rotating Equipment (LRE) Twin',
-                    prob: 'Predicting maintenance needs for critical hot components in Large Rotating Equipment to prevent unplanned downtime.',
-                    sol: 'Led the development of a dynamic digital twin specifically for predictive maintenance of hot gas path components.',
-                    metrics: ['<li>Focus: Hot Component Predictive Maint.</li><li>Domain: Large Generator Engineering</li><li>Tech: Dynamic Digital Twin</li>']
+                    title: 'Large Gas Turbine (LGT) Twin',
+                    prob: 'Predicting Low Cycle Fatigue (LCF) and maintenance needs for critical hot components (like the outer casing) in Large Gas Turbines to prevent unplanned downtime.',
+                    sol: 'Led the development of a Nonlinear Dynamic Reduced-Order Model (ROM) digital twin specifically for predictive maintenance and fatigue prediction.<br><br><a href="https://www.researchgate.net/publication/357081440_A_Nonlinear_Dynamic_Reduced-Order_Model_for_a_Large_Gas_Turbine_Outer_Casing_Low_Cycle_Fatigue_Prediction" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline inline-flex items-center gap-2 clickable mt-1"><i class="ai ai-researchgate text-lg"></i> View Publication on ResearchGate</a>',
+                    metrics: ['<li>Focus: Low Cycle Fatigue Prediction</li><li>Domain: Large Gas Turbines</li><li>Tech: Nonlinear Dynamic ROM</li>']
                 },
                 'rca': {
                     title: 'Root Cause Analysis: Blade-4',
@@ -1875,8 +1829,10 @@
             };
             
             if(data[id]) {
-                title.innerText = data[id].title; prob.innerText = data[id].prob;
-                sol.innerText = data[id].sol; met.innerHTML = data[id].metrics.join('');
+                title.innerText = data[id].title; 
+                prob.innerHTML = data[id].prob;
+                sol.innerHTML = data[id].sol; 
+                met.innerHTML = data[id].metrics.join('');
                 modal.classList.remove('hidden');
                 setTimeout(() => modal.classList.remove('opacity-0'), 10);
             }
@@ -1993,14 +1949,12 @@
             const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             
-            // 1. Progress Bar
             const progress = document.getElementById('scroll-progress');
             if(progress) {
                 progress.style.width = (scrollTop / scrollHeight) * 100 + "%";
                 progress.setAttribute('aria-valuenow', Math.round((scrollTop / scrollHeight) * 100));
             }
             
-            // 2. Sticky Back to Top Button
             if(backToTopBtn) {
                 if (scrollTop > 500) {
                     backToTopBtn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
@@ -2011,7 +1965,6 @@
                 }
             }
 
-            // 3. Active Navigation ScrollSpy
             let current = "";
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
@@ -2023,7 +1976,6 @@
                 if (link.getAttribute("href") === `#${current}`) { link.classList.add("active-nav-link"); }
             });
             
-            // 4. Dynamic "Drawing" Experience Timeline
             const expSection = document.getElementById('experience');
             const timelineProgress = document.getElementById('timeline-progress');
             const timelineTrack = document.getElementById('timeline-track');
@@ -2053,7 +2005,6 @@
             backToTopBtn.addEventListener('click', () => { window.scrollTo({top: 0, behavior: 'smooth'}); });
         }
         
-        // Mobile Menu
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const links = document.querySelectorAll('.mobile-link');
