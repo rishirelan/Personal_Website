@@ -610,13 +610,13 @@
                         </div>
                     </div>
                     
-                     <!-- 3D GLOBE SECTION -->
-                     <div class="col-span-2 bg-slate-100 dark:bg-tertiary/40 rounded-xl p-6 border border-slate-200 dark:border-white/5 relative flex flex-col items-center justify-center overflow-hidden min-h-[350px]" data-tilt data-tilt-max="2" data-tilt-speed="400">
-                        <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 z-10 text-center transform transition-transform group-hover:translate-z-[30px]">Global Footprint</h4>
-                        <div class="w-full max-w-[300px] aspect-square relative z-0 flex items-center justify-center cursor-move transform transition-transform group-hover:translate-z-[10px]">
-                            <canvas id="cobe-globe" class="w-full h-full object-contain"></canvas>
+                     <!-- 3D GLOBE SECTION (Fixed: Robust Canvas attributes) -->
+                     <div class="col-span-2 bg-slate-100 dark:bg-tertiary/40 rounded-xl p-6 border border-slate-200 dark:border-white/5 relative flex flex-col items-center justify-center overflow-hidden min-h-[350px]">
+                        <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 z-10 text-center">Global Footprint</h4>
+                        <div class="w-full max-w-[300px] aspect-square relative z-0 flex items-center justify-center">
+                            <canvas id="cobe-globe" class="w-full h-full object-contain cursor-grab active:cursor-grabbing" width="600" height="600" style="contain: layout paint size;"></canvas>
                         </div>
-                        <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs font-mono text-accent z-10 bg-white/50 dark:bg-primary/50 px-5 py-2.5 rounded-full backdrop-blur-md border border-slate-200 dark:border-white/5 transform transition-transform group-hover:translate-z-[30px]">
+                        <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs font-mono text-accent z-10 bg-white/50 dark:bg-primary/50 px-5 py-2.5 rounded-full backdrop-blur-md border border-slate-200 dark:border-white/5">
                             <span class="flex items-center gap-1.5" title="India"><span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span> <span class="fi fi-in rounded-sm text-sm" aria-hidden="true"></span> IN</span>
                             <span class="flex items-center gap-1.5" title="Germany"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 0.2s"></span> <span class="fi fi-de rounded-sm text-sm" aria-hidden="true"></span> DE</span>
                             <span class="flex items-center gap-1.5" title="United Kingdom"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 0.4s"></span> <span class="fi fi-gb rounded-sm text-sm" aria-hidden="true"></span> UK</span>
@@ -1456,7 +1456,7 @@
                         <button class="read-more-btn text-xs font-bold text-accent mt-3 hover:underline focus:outline-none clickable">Read More <i class="fas fa-chevron-down ml-1" aria-hidden="true"></i></button>
                     </div>
                     <div class="border-t border-slate-200 dark:border-white/10 pt-4 mt-auto transform transition-transform group-hover:translate-z-[15px]">
-                        <p class="text-slate-900 dark:text-white font-bold text-sm">Dr.-Ing. Peter Waeltermann</p>
+                        <p class="text-slate-900 dark:text-white font-bold text-sm">Peter Waeltermann</p>
                         <p class="text-xs text-slate-500">CEO at dSPACE Inc</p>
                     </div>
                 </div>
@@ -1581,24 +1581,28 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
-        import createGlobe from 'https://cdn.skypack.dev/cobe';
+        // Switched to jsdelivr for guaranteed loading and no iframe blocks
+        import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe@0.6.3/+esm';
 
-        // 3D Interactive Globe Initializer
-        let phi = 0;
-        let canvasElement = document.getElementById("cobe-globe");
+        const canvasElement = document.getElementById("cobe-globe");
+        
         if (canvasElement) {
+            let phi = 0;
+            let pointerInteracting = null;
+            let pointerInteractionMovement = 0;
+
             const globe = createGlobe(canvasElement, {
                 devicePixelRatio: 2,
                 width: 600,
                 height: 600,
                 phi: 0,
                 theta: 0.3,
-                dark: 1, // Looks better with the dark/cyber aesthetic
+                dark: 1, 
                 diffuse: 1.2,
                 mapSamples: 16000,
                 mapBrightness: 6,
                 baseColor: [0.1, 0.1, 0.15],
-                markerColor: [56/255, 189/255, 248/255], // Tailwind Accent Color
+                markerColor: [56/255, 189/255, 248/255], 
                 glowColor: [0.1, 0.1, 0.2],
                 markers: [
                     { location: [20.5937, 78.9629], size: 0.08 }, // India
@@ -1608,8 +1612,31 @@
                     { location: [56.2639, 9.5018], size: 0.05 },  // Denmark
                 ],
                 onRender: (state) => {
-                    state.phi = phi;
-                    phi += 0.003;
+                    // Auto-rotate if not actively dragging
+                    if (pointerInteracting === null) {
+                        phi += 0.005; 
+                    }
+                    state.phi = phi + pointerInteractionMovement;
+                }
+            });
+
+            // Add manual drag interactions
+            canvasElement.addEventListener('pointerdown', (e) => {
+                pointerInteracting = e.clientX - pointerInteractionMovement;
+                canvasElement.style.cursor = 'grabbing';
+            });
+            canvasElement.addEventListener('pointerup', () => {
+                pointerInteracting = null;
+                canvasElement.style.cursor = 'grab';
+            });
+            canvasElement.addEventListener('pointerout', () => {
+                pointerInteracting = null;
+                canvasElement.style.cursor = 'grab';
+            });
+            canvasElement.addEventListener('pointermove', (e) => {
+                if (pointerInteracting !== null) {
+                    const delta = e.clientX - pointerInteracting;
+                    pointerInteractionMovement = delta * 0.01;
                 }
             });
         }
@@ -1625,13 +1652,11 @@
         if (window.matchMedia("(pointer: fine)").matches && cursorDot && cursorRing) {
             window.addEventListener('mousemove', (e) => {
                 cursorDot.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
-                // Add a slight delay/easing to the ring for a "following" effect
                 setTimeout(() => {
                     cursorRing.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
                 }, 40);
             });
 
-            // Expand cursor on interactive elements
             const interactiveElements = document.querySelectorAll('a, button, .clickable, .skill-badge');
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => {
@@ -1650,20 +1675,12 @@
         const themeIcon = document.getElementById('theme-icon');
         const htmlElement = document.documentElement;
 
-        // Check for saved theme preference, otherwise default to system preference
         if (localStorage.getItem('theme') === 'light') {
             htmlElement.classList.remove('dark');
-            if(themeIcon) {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
+            if(themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
         } else {
-            // Default to dark mode if no preference or explicitly dark
             htmlElement.classList.add('dark');
-            if(themeIcon) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            }
+            if(themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
         }
 
         if(themeToggleBtn) {
@@ -1671,17 +1688,11 @@
                 if (htmlElement.classList.contains('dark')) {
                     htmlElement.classList.remove('dark');
                     localStorage.setItem('theme', 'light');
-                    if(themeIcon) {
-                        themeIcon.classList.remove('fa-sun');
-                        themeIcon.classList.add('fa-moon');
-                    }
+                    if(themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
                 } else {
                     htmlElement.classList.add('dark');
                     localStorage.setItem('theme', 'dark');
-                    if(themeIcon) {
-                        themeIcon.classList.remove('fa-moon');
-                        themeIcon.classList.add('fa-sun');
-                    }
+                    if(themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
                 }
             });
         }
@@ -1693,13 +1704,13 @@
             e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
             e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
         }
+        
+        window.handleMouseMove = handleMouseMove;
 
         // --- PERFORMANCE OPTIMIZATION: Pause Canvas when not visible ---
         const canvas = document.getElementById('hero-canvas');
         let ctx = null;
-        if(canvas) {
-            ctx = canvas.getContext('2d');
-        }
+        if(canvas) { ctx = canvas.getContext('2d'); }
         
         let particlesArray = [];
         let mouse = { x: null, y: null, radius: 150 };
@@ -1708,65 +1719,42 @@
         const homeSection = document.getElementById('home');
         if(homeSection) {
             const heroObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    isCanvasVisible = entry.isIntersecting;
-                });
+                entries.forEach(entry => { isCanvasVisible = entry.isIntersecting; });
             }, { threshold: 0 });
             heroObserver.observe(homeSection);
         }
 
         window.addEventListener('mousemove', function(event) { 
-            mouse.x = event.x; 
-            mouse.y = event.y; 
+            mouse.x = event.x; mouse.y = event.y; 
         });
         
         window.addEventListener('resize', () => { 
-            if(canvas) {
-                canvas.width = window.innerWidth; 
-                canvas.height = window.innerHeight; 
-                initParticles(); 
-            }
+            if(canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initParticles(); }
         });
 
         class Particle {
             constructor(x, y, size, color) {
-                this.x = x; 
-                this.y = y; 
-                this.size = size; 
-                this.color = color;
-                this.baseX = x; 
-                this.baseY = y;
+                this.x = x; this.y = y; this.size = size; this.color = color;
+                this.baseX = x; this.baseY = y;
                 this.density = (Math.random() * 30) + 1;
             }
             draw() {
                 if(!ctx) return;
-                ctx.beginPath(); 
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color; 
-                ctx.fill();
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color; ctx.fill();
             }
             update() {
-                let dx = mouse.x - this.x; 
-                let dy = mouse.y - this.y;
+                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
                 let distance = Math.sqrt(dx*dx + dy*dy);
-                let forceDirectionX = dx / distance; 
-                let forceDirectionY = dy / distance;
-                let maxDistance = mouse.radius; 
-                let force = (maxDistance - distance) / maxDistance;
+                let forceDirectionX = dx / distance; let forceDirectionY = dy / distance;
+                let maxDistance = mouse.radius; let force = (maxDistance - distance) / maxDistance;
                 let directionX = forceDirectionX * force * this.density;
                 let directionY = forceDirectionY * force * this.density;
                 if (distance < mouse.radius) { 
-                    this.x -= directionX; 
-                    this.y -= directionY; 
+                    this.x -= directionX; this.y -= directionY; 
                 } else { 
-                    if (this.x !== this.baseX) { 
-                        let rdx = this.x - this.baseX; 
-                        this.x -= rdx/10; 
-                    }
-                    if (this.y !== this.baseY) { 
-                        let rdy = this.y - this.baseY; 
-                        this.y -= rdy/10; 
-                    }
+                    if (this.x !== this.baseX) { let rdx = this.x - this.baseX; this.x -= rdx/10; }
+                    if (this.y !== this.baseY) { let rdy = this.y - this.baseY; this.y -= rdy/10; }
                 }
                 this.draw();
             }
@@ -1781,8 +1769,7 @@
 
             for (let i = 0; i < numberOfParticles; i++) {
                 let size = Math.random() * 2 + 0.5;
-                let x = Math.random() * innerWidth;
-                let y = Math.random() * innerHeight;
+                let x = Math.random() * innerWidth; let y = Math.random() * innerHeight;
                 particlesArray.push(new Particle(x, y, size, particleColor));
             }
         }
@@ -1790,9 +1777,7 @@
         function animate() {
             if (isCanvasVisible && ctx && canvas) {
                 ctx.clearRect(0, 0, innerWidth, innerHeight);
-                for (let i = 0; i < particlesArray.length; i++) { 
-                    particlesArray[i].update(); 
-                }
+                for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); }
                 for (let a = 0; a < particlesArray.length; a++) {
                     for (let b = a; b < particlesArray.length; b++) {
                         let dx = particlesArray[a].x - particlesArray[b].x;
@@ -1802,8 +1787,7 @@
                             let opacityValue = 1 - (distance/15000);
                             if(opacityValue > 0) {
                                 ctx.strokeStyle = `rgba(56, 189, 248, ${opacityValue * 0.15})`;
-                                ctx.lineWidth = 1; 
-                                ctx.beginPath();
+                                ctx.lineWidth = 1; ctx.beginPath();
                                 ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
                                 ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
                                 ctx.stroke();
@@ -1816,35 +1800,21 @@
         }
         
         if(canvas) {
-            canvas.width = window.innerWidth; 
-            canvas.height = window.innerHeight;
-            initParticles(); 
-            animate();
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            initParticles(); animate();
         }
 
         const texts = ["Strategic Leadership", "Digital Twin Expert", "R&D Leadership", "AI & ML Driven Engineering"];
-        let count = 0;
-        let index = 0;
-        let currentText = "";
-        let letter = "";
+        let count = 0; let index = 0; let currentText = ""; let letter = "";
         
         function typeWriter() {
             if (count === texts.length) count = 0;
-            currentText = texts[count]; 
-            letter = currentText.slice(0, ++index);
+            currentText = texts[count]; letter = currentText.slice(0, ++index);
             const textElement = document.getElementById('typewriter-text');
-            
-            if(textElement) {
-                textElement.textContent = letter;
-            }
-            
+            if(textElement) { textElement.textContent = letter; }
             if (letter.length === currentText.length) { 
-                count++; 
-                index = 0; 
-                setTimeout(typeWriter, 2000); 
-            } else { 
-                setTimeout(typeWriter, 100); 
-            }
+                count++; index = 0; setTimeout(typeWriter, 2000); 
+            } else { setTimeout(typeWriter, 100); }
         }
         typeWriter();
 
@@ -1855,27 +1825,12 @@
             setTimeout(() => {
                 const bootBar = document.getElementById('boot-bar');
                 const bootText = document.getElementById('boot-text');
-                
-                if (bootBar) {
-                    bootBar.style.width = '100%';
-                    bootBar.style.transition = 'width 1.5s ease-in-out';
-                }
-                
-                if (bootText) {
-                    setTimeout(() => { bootText.innerHTML += '> Loading Modules... OK<br>> Connecting to Grid... OK<br>> Access Granted.'; }, 800);
-                }
-                
-                if (bootScreen) {
-                    setTimeout(() => { 
-                        bootScreen.style.opacity = '0'; 
-                        bootScreen.style.pointerEvents = 'none'; 
-                    }, 2200);
-                }
+                if (bootBar) { bootBar.style.width = '100%'; bootBar.style.transition = 'width 1.5s ease-in-out'; }
+                if (bootText) { setTimeout(() => { bootText.innerHTML += '> Loading Modules... OK<br>> Connecting to Grid... OK<br>> Access Granted.'; }, 800); }
+                if (bootScreen) { setTimeout(() => { bootScreen.style.opacity = '0'; bootScreen.style.pointerEvents = 'none'; }, 2200); }
             }, 100);
         } else {
-            if (bootScreen) {
-                bootScreen.style.display = 'none';
-            }
+            if (bootScreen) { bootScreen.style.display = 'none'; }
         }
 
         // Modals
@@ -1920,69 +1875,52 @@
             };
             
             if(data[id]) {
-                title.innerText = data[id].title;
-                prob.innerText = data[id].prob;
-                sol.innerText = data[id].sol;
-                met.innerHTML = data[id].metrics.join('');
+                title.innerText = data[id].title; prob.innerText = data[id].prob;
+                sol.innerText = data[id].sol; met.innerHTML = data[id].metrics.join('');
                 modal.classList.remove('hidden');
                 setTimeout(() => modal.classList.remove('opacity-0'), 10);
             }
         }
+        window.openProject = openProject;
         
         function closeModal() {
             const modal = document.getElementById('modal-overlay');
             modal.classList.add('opacity-0');
             setTimeout(() => modal.classList.add('hidden'), 300);
         }
+        window.closeModal = closeModal;
 
         // --- UPGRADED: Smooth Layout Shuffling for Publications ---
         function filterPubs(cat) {
             const allPubs = document.querySelectorAll('.pub-item');
-            
             allPubs.forEach(item => {
                 const categories = item.getAttribute('data-cat');
                 if (cat === 'all' || (categories && categories.includes(cat))) {
                     item.classList.remove('hidden');
-                    // Small delay to allow display:block to apply before animating opacity/transform
-                    setTimeout(() => { 
-                        item.style.opacity = '1'; 
-                        item.style.transform = 'scale(1)'; 
-                    }, 50);
+                    setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 50);
                 } else {
-                    item.style.opacity = '0'; 
-                    item.style.transform = 'scale(0.95)';
-                    // Wait for CSS transition to finish before hiding from layout
-                    setTimeout(() => { 
-                        item.classList.add('hidden'); 
-                    }, 300);
+                    item.style.opacity = '0'; item.style.transform = 'scale(0.95)';
+                    setTimeout(() => { item.classList.add('hidden'); }, 300);
                 }
             });
         }
+        window.filterPubs = filterPubs;
 
         // Accordion Toggling
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             const icon = document.getElementById(id + '-icon');
-            
-            if (!content || !icon) {
-                console.error("Accordion element not found: " + id);
-                return;
-            }
+            if (!content || !icon) return;
 
             if (content.classList.contains('active')) {
-                // Close it
-                content.classList.remove('active');
-                content.style.maxHeight = null;
-                icon.style.transform = 'rotate(0deg)';
-                content.previousElementSibling.setAttribute('aria-expanded', 'false');
+                content.classList.remove('active'); content.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)'; content.previousElementSibling.setAttribute('aria-expanded', 'false');
             } else {
-                // Open it
-                content.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + "px";
-                icon.style.transform = 'rotate(180deg)';
-                content.previousElementSibling.setAttribute('aria-expanded', 'true');
+                content.classList.add('active'); content.style.maxHeight = content.scrollHeight + "px";
+                icon.style.transform = 'rotate(180deg)'; content.previousElementSibling.setAttribute('aria-expanded', 'true');
             }
         }
+        window.toggleAccordion = toggleAccordion;
 
         // --- UX POLISH: Recommendations "Read More" Toggle ---
         document.querySelectorAll('.read-more-btn').forEach(btn => {
@@ -2027,31 +1965,22 @@
                         let current = 0; const inc = target / 50;
                         const update = () => {
                             if(current < target) { 
-                                current += inc; 
-                                counter.innerText = Math.ceil(current); 
-                                setTimeout(update, 30); 
-                            } else {
-                                counter.innerText = target;
-                            }
+                                current += inc; counter.innerText = Math.ceil(current); setTimeout(update, 30); 
+                            } else { counter.innerText = target; }
                         }; 
                         update();
                     });
                     
-                    // Trigger Skill Bar Animation
                     const skillBars = entry.target.querySelectorAll('.skill-fill');
-                    skillBars.forEach(bar => {
-                        bar.classList.add('active');
-                    });
+                    skillBars.forEach(bar => { bar.classList.add('active'); });
 
                     counterObserver.unobserve(entry.target);
                 }
             });
         });
         
-        // Attach observer to About (for counters) and Skills (for bars)
         const aboutSection = document.querySelector('#about');
         const skillsSection = document.querySelector('#skills');
-        
         if (aboutSection) counterObserver.observe(aboutSection);
         if (skillsSection) counterObserver.observe(skillsSection);
 
@@ -2086,16 +2015,12 @@
             let current = "";
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
-                if (scrollY >= sectionTop - 250) {
-                    current = section.getAttribute("id");
-                }
+                if (scrollY >= sectionTop - 250) { current = section.getAttribute("id"); }
             });
 
             navLinksDesktop.forEach((link) => {
                 link.classList.remove("active-nav-link");
-                if (link.getAttribute("href") === `#${current}`) {
-                    link.classList.add("active-nav-link");
-                }
+                if (link.getAttribute("href") === `#${current}`) { link.classList.add("active-nav-link"); }
             });
             
             // 4. Dynamic "Drawing" Experience Timeline
@@ -2106,15 +2031,11 @@
 
             if(expSection && timelineProgress && timelineTrack) {
                 const trackRect = timelineTrack.getBoundingClientRect();
-                const scrollStartTrigger = window.innerHeight * 0.65; // Trigger point on screen (65% down)
-                
-                // Calculate percentage filled based on track's position relative to the trigger point
+                const scrollStartTrigger = window.innerHeight * 0.65;
                 let fillPercentage = (scrollStartTrigger - trackRect.top) / trackRect.height;
-                fillPercentage = Math.max(0, Math.min(1, fillPercentage)); // clamp 0 to 1
-                
+                fillPercentage = Math.max(0, Math.min(1, fillPercentage));
                 timelineProgress.style.transform = `scaleY(${fillPercentage})`;
 
-                // Light up timeline dots as the line reaches them
                 timelineDots.forEach(dot => {
                     const dotRect = dot.getBoundingClientRect();
                     if(dotRect.top < scrollStartTrigger) {
@@ -2128,11 +2049,8 @@
             }
         });
         
-        // Back to top click event
         if(backToTopBtn) {
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            });
+            backToTopBtn.addEventListener('click', () => { window.scrollTo({top: 0, behavior: 'smooth'}); });
         }
         
         // Mobile Menu
@@ -2144,16 +2062,11 @@
             btn.addEventListener('click', () => {
                 const isHidden = menu.classList.contains('hidden');
                 btn.setAttribute('aria-expanded', !isHidden);
-                
                 menu.classList.toggle('hidden');
                 if(!menu.classList.contains('hidden')) { 
-                    setTimeout(() => { 
-                        menu.classList.remove('opacity-0', 'translate-y-[-20px]'); 
-                        menu.classList.add('opacity-100', 'translate-y-0'); 
-                    }, 10); 
+                    setTimeout(() => { menu.classList.remove('opacity-0', 'translate-y-[-20px]'); menu.classList.add('opacity-100', 'translate-y-0'); }, 10); 
                 } else { 
-                    menu.classList.remove('opacity-100', 'translate-y-0'); 
-                    menu.classList.add('opacity-0', 'translate-y-[-20px]'); 
+                    menu.classList.remove('opacity-100', 'translate-y-0'); menu.classList.add('opacity-0', 'translate-y-[-20px]'); 
                 }
             });
 
@@ -2165,7 +2078,6 @@
                 });
             });
         }
-
     </script>
 </body>
 </html>
