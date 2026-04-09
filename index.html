@@ -36,292 +36,82 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#020617', // Slate 950 (Dark Mode Bg)
-                        secondary: '#0f172a', // Slate 900
-                        tertiary: '#1e293b', // Slate 800
-                        lightBg: '#f8fafc', // Slate 50 (Light Mode Bg)
-                        lightCard: '#ffffff', // White
-                        accent: '#38bdf8', // Sky 400
-                        accentDark: '#0284c7', // Sky 600
-                        highlight: '#fbbf24', // Amber 400
-                        success: '#10b981', // Emerald 500
+                        primary: '#020617', secondary: '#0f172a', tertiary: '#1e293b',
+                        lightBg: '#f8fafc', lightCard: '#ffffff', accent: '#38bdf8',
+                        accentDark: '#0284c7', highlight: '#fbbf24', success: '#10b981',
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'], mono: ['JetBrains Mono', 'monospace'],
                     },
                     animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'grid-move': 'gridMove 20s linear infinite',
-                        'grow-bar': 'growBar 1.5s ease-out forwards',
-                        'blink': 'blink 1s infinite',
-                        'scan': 'scan 3s linear infinite',
+                        'float': 'float 6s ease-in-out infinite', 'grid-move': 'gridMove 20s linear infinite',
+                        'grow-bar': 'growBar 1.5s ease-out forwards', 'blink': 'blink 1s infinite', 'scan': 'scan 3s linear infinite',
                         'shimmer': 'shimmer 2s linear infinite',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
-                        gridMove: {
-                            '0%': { backgroundPosition: '0 0' },
-                            '100%': { backgroundPosition: '50px 50px' },
-                        },
-                        growBar: {
-                            '0%': { width: '0%' },
-                            '100%': { width: 'var(--w)' },
-                        },
-                        blink: {
-                            '0%, 100%': { opacity: '1' },
-                            '50%': { opacity: '0' },
-                        },
-                        scan: {
-                            '0%': { top: '-5%' },
-                            '50%': { top: '105%' },
-                            '100%': { top: '-5%' },
-                        },
-                        shimmer: {
-                            '0%': { backgroundPosition: '-1000px 0' },
-                            '100%': { backgroundPosition: '1000px 0' }
-                        }
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+                        gridMove: { '0%': { backgroundPosition: '0 0' }, '100%': { backgroundPosition: '50px 50px' } },
+                        growBar: { '0%': { width: '0%' }, '100%': { width: 'var(--w)' } },
+                        blink: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0' } },
+                        scan: { '0%': { top: '-5%' }, '50%': { top: '105%' }, '100%': { top: '-5%' } },
+                        shimmer: { '0%': { backgroundPosition: '-1000px 0' }, '100%': { backgroundPosition: '1000px 0' } }
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Base Variables */
-        :root {
-            --bg-color: #f8fafc;
-            --text-main: #0f172a;
-            --text-sub: #475569;
-            --card-bg: rgba(255, 255, 255, 0.7);
-            --card-border: rgba(0, 0, 0, 0.05);
-            --grid-color: rgba(56, 189, 248, 0.03);
-            --spotlight-opacity: 0.1;
-        }
-
-        /* Dark Mode Variables */
-        .dark {
-            --bg-color: #020617;
-            --text-main: #e2e8f0;
-            --text-sub: #94a3b8;
-            --card-bg: rgba(30, 41, 59, 0.6);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --grid-color: rgba(56, 189, 248, 0.05);
-            --spotlight-opacity: 0.6;
-        }
-
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
+        :root { --bg-color: #f8fafc; --text-main: #0f172a; --text-sub: #475569; --card-bg: rgba(255, 255, 255, 0.7); --card-border: rgba(0, 0, 0, 0.05); --grid-color: rgba(56, 189, 248, 0.03); --spotlight-opacity: 0.1; }
+        .dark { --bg-color: #020617; --text-main: #e2e8f0; --text-sub: #94a3b8; --card-bg: rgba(30, 41, 59, 0.6); --card-border: rgba(255, 255, 255, 0.1); --grid-color: rgba(56, 189, 248, 0.05); --spotlight-opacity: 0.6; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-main); transition: background-color 0.3s, color 0.3s; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        
-        /* CUSTOM DIGITAL TWIN CURSOR */
         @media (pointer: fine) {
-            body, a, button, .clickable { cursor: none; }
-            
-            #cursor-dot {
-                position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: #38bdf8; border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: width 0.2s cubic-bezier(0.25, 1, 0.5, 1), height 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s; box-shadow: 0 0 10px #38bdf8;
-            }
-            #cursor-ring {
-                position: fixed; top: 0; left: 0; width: 36px; height: 36px; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, background-color 0.3s; transition-property: width, height, border-color, background-color;
-            }
+            body, a, button, .clickable { cursor: none !important; }
+            #cursor-dot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: #38bdf8; border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s; box-shadow: 0 0 10px #38bdf8; }
+            #cursor-ring { position: fixed; top: 0; left: 0; width: 36px; height: 36px; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, border-color 0.3s; }
             .cursor-hover #cursor-dot { width: 12px; height: 12px; background: #fbbf24; box-shadow: 0 0 15px #fbbf24; }
             .cursor-hover-ring { width: 50px !important; height: 50px !important; border-color: rgba(251, 191, 36, 0.8) !important; background: rgba(251, 191, 36, 0.1); }
         }
-
-        /* DIGITAL TWIN THEME: Technical Grid Background */
-        .tech-grid-bg {
-            background-image: 
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 60s linear infinite;
-        }
-
-        /* Custom Scrollbar */
+        .tech-grid-bg { background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 50px 50px; animation: gridMove 60s linear infinite; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
-
-        /* Advanced Spotlight Card Effect (Transforms handled by VanillaTilt) */
-        .spotlight-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            position: relative;
-            overflow: hidden;
-            transition: opacity 0.3s ease, filter 0.3s ease, border-color 0.3s ease, background 0.3s, box-shadow 0.3s;
-            backdrop-filter: blur(12px);
-            transform-style: preserve-3d;
-        }
-        
-        /* Light mode specific shadow for depth */
-        html:not(.dark) .spotlight-card {
-            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        .spotlight-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: inherit;
-            padding: 1.5px;
-            background: radial-gradient(
-                800px circle at var(--mouse-x) var(--mouse-y),
-                rgba(56, 189, 248, var(--spotlight-opacity)),
-                transparent 40%
-            );
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-            transform: translateZ(-1px);
-        }
-        
+        .spotlight-card { background: var(--card-bg); border: 1px solid var(--card-border); position: relative; overflow: hidden; transition: opacity 0.3s ease, filter 0.3s ease, border-color 0.3s ease, background 0.3s, box-shadow 0.3s; backdrop-filter: blur(12px); transform-style: preserve-3d; }
+        html:not(.dark) .spotlight-card { box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05); }
+        .spotlight-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: inherit; padding: 1.5px; background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(56, 189, 248, var(--spotlight-opacity)), transparent 40%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity 0.3s; pointer-events: none; transform: translateZ(-1px); }
         .spotlight-card:hover::before { opacity: 1; }
-
-        /* Scanner Effect */
         .scanner-container { position: relative; overflow: hidden; }
-        .scanner-line {
-            position: absolute; width: 100%; height: 2px; background: #38bdf8;
-            box-shadow: 0 0 10px #38bdf8, 0 0 20px #38bdf8; opacity: 0.6;
-            animation: scan 3s ease-in-out infinite; z-index: 10;
-        }
-
-        /* Interaction Classes for Skill Mapping */
+        .scanner-line { position: absolute; width: 100%; height: 2px; background: #38bdf8; box-shadow: 0 0 10px #38bdf8, 0 0 20px #38bdf8; opacity: 0.6; animation: scan 3s ease-in-out infinite; z-index: 10; }
         .dimmed { opacity: 0.2 !important; filter: grayscale(100%) blur(1px); transition: all 0.3s ease; }
-        .highlighted { 
-            border-color: #38bdf8 !important; 
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
-            z-index: 10;
-            background: rgba(30, 41, 59, 0.95);
-        }
-        html:not(.dark) .highlighted {
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        /* Boot Sequence Overlay */
-        #boot-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #020617; z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            font-family: 'JetBrains Mono', monospace; color: #38bdf8;
-            flex-direction: column;
-        }
-
-        /* Blueprint Modal */
-        #project-modal {
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
-            background-color: #0f172a;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Typewriter Cursor */
+        .highlighted { border-color: #38bdf8 !important; box-shadow: 0 0 25px rgba(56, 189, 248, 0.2); z-index: 10; background: rgba(30, 41, 59, 0.95); }
+        html:not(.dark) .highlighted { background: rgba(255, 255, 255, 0.95); }
+        #boot-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #020617; z-index: 9999; display: flex; justify-content: center; align-items: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; flex-direction: column; }
+        #project-modal { background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px); background-size: 20px 20px; background-color: #0f172a; box-shadow: 0 0 50px rgba(0, 0, 0, 0.8); }
         .cursor { display: inline-block; width: 3px; background-color: #38bdf8; animation: blink 1s infinite; }
-        
         #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: #38bdf8; z-index: 100; width: 0%; transition: width 0.1s; }
         #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-        
-        /* Technical Toolkit Skill Bars */
         .skill-track { width: 100%; height: 6px; background-color: #e2e8f0; border-radius: 999px; transition: height 0.3s ease; }
         html.dark .skill-track { background-color: #1e293b; }
         .skill-fill { height: 100%; background-color: #38bdf8; width: 0%; transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1), background-color 0.3s ease, box-shadow 0.3s ease; border-radius: 999px; }
         .skill-fill.active { width: var(--w) !important; }
-        
-        .skill-badge { 
-            padding: 8px 12px; 
-            margin: -8px -12px; 
-            border-radius: 8px; 
-            transition: all 0.3s ease; 
-            cursor: pointer; 
-            border: 1px solid transparent; 
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        .skill-badge::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: inherit;
-            background: radial-gradient(
-                200px circle at var(--mouse-x, -100px) var(--mouse-y, -100px),
-                rgba(56, 189, 248, 0.15),
-                transparent 40%
-            );
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: -1;
-            pointer-events: none;
-        }
-        .skill-badge:hover { 
-            background: rgba(56, 189, 248, 0.02); 
-            border-color: rgba(56, 189, 248, 0.2); 
-            transform: translateX(8px); 
-        }
-        .skill-badge:hover::before {
-            opacity: 1;
-        }
-        .skill-badge:hover .skill-track {
-            height: 10px;
-        }
-        .skill-badge:hover .skill-fill { 
-            background-color: #fbbf24; 
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.6); 
-            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
-            background-size: 20px 20px;
-            animation: moveStripes 0.8s linear infinite;
-        }
+        .skill-badge { padding: 8px 12px; margin: -8px -12px; border-radius: 8px; transition: all 0.3s ease; cursor: pointer; border: 1px solid transparent; position: relative; overflow: hidden; z-index: 1; }
+        .skill-badge::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: inherit; background: radial-gradient(200px circle at var(--mouse-x, -100px) var(--mouse-y, -100px), rgba(56, 189, 248, 0.15), transparent 40%); opacity: 0; transition: opacity 0.3s; z-index: -1; pointer-events: none; }
+        .skill-badge:hover { background: rgba(56, 189, 248, 0.02); border-color: rgba(56, 189, 248, 0.2); transform: translateX(8px); }
+        .skill-badge:hover::before { opacity: 1; }
+        .skill-badge:hover .skill-track { height: 10px; }
+        .skill-badge:hover .skill-fill { background-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.6); background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent); background-size: 20px 20px; animation: moveStripes 0.8s linear infinite; }
         .skill-badge .flex span { transition: color 0.3s ease; }
         .skill-badge:hover .flex span { color: #38bdf8 !important; }
-        
-        @keyframes moveStripes {
-            0% { background-position: 0 0; }
-            100% { background-position: 20px 0; }
-        }
-        
+        @keyframes moveStripes { 0% { background-position: 0 0; } 100% { background-position: 20px 0; } }
         .fi { width: 1.2em; border-radius: 2px; vertical-align: middle; }
-        
-        /* --- PROFESSIONAL NAV HOVER EFFECT --- */
         .nav-link { position: relative; transition: color 0.3s ease; }
-        .nav-link::after {
-            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px;
-            bottom: -4px; left: 0; background-color: #38bdf8; transform-origin: bottom right;
-            transition: transform 0.3s ease-out;
-        }
-        .nav-link:hover::after, .active-nav-link::after {
-            transform: scaleX(1); transform-origin: bottom left;
-        }
+        .nav-link::after { content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 2px; bottom: -4px; left: 0; background-color: #38bdf8; transform-origin: bottom right; transition: transform 0.3s ease-out; }
+        .nav-link:hover::after, .active-nav-link::after { transform: scaleX(1); transform-origin: bottom left; }
         .active-nav-link { color: #38bdf8 !important; font-weight: 600; }
-        
-        .accordion-content {
-            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out;
-            max-height: 0; opacity: 0; overflow: hidden;
-        }
+        .accordion-content { transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out; max-height: 0; opacity: 0; overflow: hidden; }
         .accordion-content.active { opacity: 1; }
-        
-        @media print {
-            #boot-screen { display: none !important; }
-            .tech-grid-bg { animation: none; background: white; }
-            body, a, button { cursor: auto !important; }
-            #cursor-dot, #cursor-ring { display: none !important; }
-            .text-white { color: black !important; }
-            .spotlight-card, .shimmer-card { background: none; border: 1px solid #ccc; box-shadow: none; transform: none !important; }
-            .hidden-print { display: none !important; }
-            .skill-fill { width: var(--w) !important; }
-        }
+        @media print { #boot-screen { display: none !important; } .tech-grid-bg { animation: none; background: white; } body, a, button { cursor: auto !important; } #cursor-dot, #cursor-ring { display: none !important; } .text-white { color: black !important; } .spotlight-card, .shimmer-card { background: none; border: 1px solid #ccc; box-shadow: none; transform: none !important; } .hidden-print { display: none !important; } .skill-fill { width: var(--w) !important; } }
     </style>
 </head>
 <body class="overflow-x-hidden selection:bg-accent selection:text-white antialiased tech-grid-bg transition-colors duration-300">
@@ -396,9 +186,7 @@
                     <i id="theme-icon" class="fas fa-sun text-xl" aria-hidden="true"></i>
                 </button>
             </div>
-             <button id="mobile-menu-btn" aria-label="Open mobile menu" aria-expanded="false" class="md:hidden text-slate-900 dark:text-white focus:outline-none z-50 relative clickable">
-                <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
-            </button>
+             <button id="mobile-menu-btn" aria-label="Open mobile menu" aria-expanded="false" class="md:hidden text-slate-900 dark:text-white focus:outline-none z-50 relative clickable"><i class="fas fa-bars text-2xl" aria-hidden="true"></i></button>
         </div>
         
         <div id="mobile-menu" class="fixed inset-0 bg-white/98 dark:bg-primary/98 backdrop-blur-xl z-40 hidden flex flex-col justify-center items-center space-y-6 transition-all duration-300 opacity-0 translate-y-[-20px]" role="menu">
@@ -456,7 +244,7 @@
                     <i class="fas fa-file-download" aria-hidden="true"></i> Download CV
                 </a>
                 <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Visit Google Scholar Profile" class="bg-slate-800 dark:bg-white/10 text-white px-8 py-4 rounded-lg hover:bg-slate-700 dark:hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 justify-center border border-transparent dark:border-white/5 hover:shadow-lg clickable">
-                    <i class="ai ai-google-scholar text-lg" aria-hidden="true"></i> Google Scholar
+                    <i class="ai ai-google-scholar text-lg" aria-hidden="true"></i> Scholar
                 </a>
                 <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" aria-label="Visit ResearchGate Profile" class="bg-white/50 dark:bg-transparent border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 px-8 py-4 rounded-lg hover:border-accent hover:text-accent dark:hover:text-accent transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm hover:bg-slate-50 dark:hover:bg-white/5 hover:-translate-y-1 hover:shadow-lg clickable">
                     <i class="ai ai-researchgate text-lg" aria-hidden="true"></i> ResearchGate
@@ -592,13 +380,12 @@
         </div>
     </section>
 
-    <section id="experience" class="py-24 relative">
+    <section id="experience" class="py-24 relative border-t border-slate-200 dark:border-white/5">
         <div class="container mx-auto px-6 relative z-10">
             <h2 class="text-4xl font-bold text-slate-900 dark:text-white text-center mb-4" data-aos="fade-up">Professional Journey</h2>
             <p class="text-center text-slate-500 dark:text-slate-400 mb-16">Detailed Roles, Projects & Industrial Collaborations</p>
             
             <div class="max-w-5xl mx-auto relative">
-                
                 <div id="timeline-track" class="absolute left-[15px] md:left-[31px] top-12 bottom-0 w-1 bg-slate-200 dark:bg-slate-800 hidden sm:block z-0 rounded-full"></div>
                 <div id="timeline-progress" class="absolute left-[15px] md:left-[31px] top-12 bottom-0 w-1 bg-accent hidden sm:block z-0 rounded-full origin-top transform scale-y-0 transition-transform duration-[0.1s] ease-out shadow-[0_0_15px_#38bdf8]"></div>
                 
@@ -726,7 +513,6 @@
                     
                     <div class="relative sm:pl-12 md:pl-20" data-aos="fade-up">
                         <div class="timeline-dot absolute left-[9px] md:left-[25px] top-10 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 ring-4 ring-white dark:ring-primary hidden sm:block z-10 transition-all duration-500 shadow-none"></div>
-                        
                         <div class="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm dark:shadow-none">
                             <button onclick="toggleAccordion('early-career')" aria-expanded="false" aria-controls="early-career" class="w-full p-6 flex justify-between items-center bg-slate-100 dark:bg-tertiary/50 hover:bg-slate-200 dark:hover:bg-tertiary transition text-left group focus:outline-none clickable">
                                 <span class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-accent transition">Foundational Career (2002 - 2013)</span>
@@ -739,19 +525,16 @@
                                         <p class="text-sm text-accent mb-1">Industrial Researcher</p>
                                         <p class="text-sm text-slate-600 dark:text-slate-400">Gas turbine health monitoring using statistical signal processing & ML. Fault diagnosis, prognosis, FMECA, IPR patent analysis.</p>
                                     </div>
-                                    
                                     <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="VibrationControl">
                                         <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold"><a href="https://home.iitd.ac.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">IIT Delhi</a> (India <span class="fi fi-in"></span>)</h5><span class="text-xs font-mono text-slate-500">Sep 2008 - Sep 2010</span></div>
                                         <p class="text-sm text-accent mb-1">Senior Research Fellow</p>
                                         <p class="text-sm text-slate-600 dark:text-slate-400">Active vibration control for rotor shaft systems. Experiment design, simulation, control framework.</p>
                                     </div>
-                                    
                                     <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="HIL dSPACE">
                                         <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold"><a href="https://www.dspace.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">dSPACE GmbH</a> (Germany <span class="fi fi-de"></span>)</h5><span class="text-xs font-mono text-slate-500">Oct 2006 - Sep 2008</span></div>
                                         <p class="text-sm text-accent mb-1">Application Engineer / Resident Engineer</p>
                                         <p class="text-sm text-slate-600 dark:text-slate-400">Resident Engineer at GM Europe. Integrated ESP, ABS, AWD on HIL simulators. Automated failsafe testing. Delivered simulator for Conti-Teves AG.</p>
                                     </div>
-                                    
                                     <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 experience-card" data-tags="PLC LabView">
                                         <div class="flex justify-between"><h5 class="text-slate-900 dark:text-white font-bold"><a href="https://www.tox-pressotechnik.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Tox-Pressotechnik</a> (Germany <span class="fi fi-de"></span>)</h5><span class="text-xs font-mono text-slate-500">Feb 2005 - Jun 2006</span></div>
                                         <p class="text-sm text-accent mb-1">Industrial Researcher</p>
@@ -880,6 +663,7 @@
                                  <li><strong>Adjunct Professor:</strong> <a href="https://www.srmist.edu.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">SRM University</a> <span class="fi fi-in"></span> (2023-24), <a href="https://www.bmu.edu.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">BML Munjal University</a> <span class="fi fi-in"></span> (2019-20, 2026-27).</li>
                                  <li><strong>PhD Co-Supervision:</strong> Michael Nauheimer (<a href="https://www.siemensgamesa.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Siemens Gamesa</a>/<a href="https://www.compute.dtu.dk/english" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">DTU</a> <span class="fi fi-dk"></span>), Rune Grøborg Junker (<a href="https://smart-cities-centre.org/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">CITIES</a>/<a href="https://www.compute.dtu.dk/english" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">DTU</a> <span class="fi fi-dk"></span>).</li>
                                  <li><strong>Industrial Mentor & Master Thesis Advisor:</strong> Vishnu Nair (<a href="https://www.siemens-energy.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Siemens Energy India Limited</a>), Work Integrated Learning Program (M.Tech. in Data Science and Engineering), <a href="https://www.bits-pilani.ac.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">BITS Pilani</a> <span class="fi fi-in"></span> (2024-2026).</li>
+                                 <li><strong>Industrial Mentor & Master Thesis Advisor:</strong> Vikas Yadav (<a href="https://www.siemens-energy.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Siemens Energy India Limited</a>), Work Integrated Learning Program (M.Tech. in AI & Machine Learning), <a href="https://www.bits-pilani.ac.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">BITS Pilani</a> <span class="fi fi-in"></span> (2025-2027).</li>
                              </ul>
                         </div>
                     </div>
@@ -933,7 +717,7 @@
                          <div class="mb-6 transform transition-transform group-hover:translate-z-[15px]">
                              <div class="flex justify-between items-end mb-2">
                                  <span class="text-sm text-slate-500 dark:text-slate-400">Total Citations</span>
-                                 <span class="text-2xl font-bold text-slate-900 dark:text-white">907</span>
+                                 <span class="text-2xl font-bold text-slate-900 dark:text-white count-up" data-target="907">0</span>
                              </div>
                              <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 mb-4">
                                  <div class="bg-highlight h-2 rounded-full" style="width: 100%"></div>
@@ -1010,6 +794,39 @@
                             <p class="text-sm text-slate-500 mt-2">Proceedings of the ASME (2025)</p>
                         </div>
 
+                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="BESS AI">
+                            <div class="flex justify-between"><span class="text-xs font-bold text-highlight bg-highlight/10 px-2 py-1 rounded">Best Paper Award</span></div>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">BAT-TEC: Battery Anomaly Tracking via Time Delay Embedding Features Clustering</h4>
+                            <p class="text-sm text-slate-500 mt-1">IEEE SEFET 2025</p>
+                        </a>
+
+                        <a href="#" class="pub-item block p-6 bg-white dark:bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition-all duration-300 transform group shadow-[0_0_15px_rgba(56,189,248,0.15)] clickable" data-cat="BESS AI">
+                            <div class="flex flex-wrap justify-between gap-2 mb-2">
+                                <span class="text-xs font-bold text-primary bg-accent px-2 py-0.5 rounded">Spotlight Presentation</span>
+                                <span class="text-xs font-bold text-highlight bg-highlight/10 px-2 py-0.5 rounded border border-highlight/20">Honourable Mention</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-1 group-hover:text-accent transition">Digital twin framework for enhancing BESS performance, safety and reliability</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">Vishnu Nair, Vikas... <strong class="text-slate-700 dark:text-slate-200">Rishi Relan</strong></p>
+                            <p class="text-xs text-slate-500 mt-1">CASML 2024, IISc Bangalore <span class="fi fi-in"></span></p>
+                        </a>
+
+                        <div class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition group" data-cat="Energy AI Aero">
+                            <div class="flex flex-wrap justify-between gap-2 mb-2">
+                                <span class="text-xs font-bold text-accent bg-accent/10 px-2 py-0.5 rounded border border-accent/20 uppercase tracking-widest">Soft Sensor Application</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-1 group-hover:text-accent transition">Enhancing Turbine Inlet Temperature Prediction in Single Shaft Combined Cycle Power Plants Using Soft Sensor: A Grey-Box Modelling Approach</h4>
+                            <p class="text-sm text-slate-500 mt-1">ASME GTINDIA (2023)</p>
+                        </div>
+
+                        <div class="pub-item block p-6 bg-white dark:bg-secondary/80 rounded-xl border border-pink-500/30 hover:border-pink-500 transition-all duration-300 transform group shadow-sm" data-cat="Bio AI">
+                            <div class="flex flex-wrap justify-between gap-2 mb-2">
+                                <span class="text-xs font-bold text-pink-600 dark:text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded border border-pink-500/20 uppercase tracking-wide">Healthcare AI Research</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-1 group-hover:text-pink-500 transition">Unsupervised sorting of retinal vessels using locally consistent Gaussian mixtures</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">D Relan, <strong class="text-slate-700 dark:text-slate-200">R Relan</strong></p>
+                            <p class="text-sm text-slate-500 mt-2">Computer methods and programs in biomedicine (2021)</p>
+                        </div>
+
                         <div class="pub-item block p-6 bg-white dark:bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition-all duration-300 transform group shadow-[0_0_15px_rgba(56,189,248,0.15)]" data-cat="AI">
                             <div class="flex flex-wrap justify-between gap-2 mb-2">
                                 <span class="text-xs font-bold text-primary bg-highlight px-2 py-0.5 rounded">Global Media Feature</span>
@@ -1033,45 +850,35 @@
                             </div>
                         </div>
 
-                        <a href="#" class="pub-item block p-6 bg-white dark:bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition-all duration-300 transform group shadow-[0_0_15px_rgba(56,189,248,0.15)] clickable" data-cat="BESS AI">
+                        <div class="pub-item block p-6 bg-white dark:bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition-all duration-300 transform group shadow-[0_0_15px_rgba(56,189,248,0.15)]" data-cat="Energy">
                             <div class="flex flex-wrap justify-between gap-2 mb-2">
-                                <span class="text-xs font-bold text-primary bg-accent px-2 py-0.5 rounded">Spotlight Presentation</span>
-                                <span class="text-xs font-bold text-highlight bg-highlight/10 px-2 py-0.5 rounded border border-highlight/20">Honourable Mention</span>
-                            </div>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-1 group-hover:text-accent transition">Digital twin framework for enhancing BESS performance, safety and reliability</h4>
-                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">Vishnu Nair, Vikas... <strong class="text-slate-700 dark:text-slate-200">Rishi Relan</strong></p>
-                            <p class="text-xs text-slate-500 mt-1">CASML 2024, IISc Bangalore <span class="fi fi-in"></span></p>
-                        </a>
-                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="BESS AI">
-                            <div class="flex justify-between"><span class="text-xs font-bold text-highlight bg-highlight/10 px-2 py-1 rounded">Best Paper Award</span></div>
-                            <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">BAT-TEC: Battery Anomaly Tracking via Time Delay Embedding Features Clustering</h4>
-                            <p class="text-sm text-slate-500 mt-1">IEEE SEFET 2025</p>
-                        </a>
-                        
-                        <a href="#" class="pub-item block p-6 bg-white dark:bg-secondary/80 rounded-xl border border-accent/40 hover:border-accent transition-all duration-300 transform group shadow-[0_0_15px_rgba(56,189,248,0.15)] clickable" data-cat="Energy">
-                            <div class="flex flex-wrap justify-between gap-2 mb-2">
-                                <span class="text-xs font-bold text-primary bg-highlight px-2 py-0.5 rounded flex items-center gap-1"><i class="fas fa-trophy" aria-hidden="true"></i> Highly Cited Paper Award (2018)</span>
+                                <span class="text-xs font-bold text-primary bg-highlight px-2 py-0.5 rounded flex items-center gap-1"><i class="fas fa-trophy" aria-hidden="true"></i> Highly Cited Award</span>
                                 <span class="text-xs font-bold text-green-500 dark:text-green-400 bg-green-500/10 dark:bg-green-400/10 px-2 py-0.5 rounded">509 Citations</span>
                             </div>
                             <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-1 group-hover:text-accent transition">Characterizing the energy flexibility of buildings and districts</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">RG Junker, AG Azar, RA Lopes, KB Lindberg, G Reynders, <strong class="text-slate-700 dark:text-slate-200">R Relan</strong>, ...</p>
                             <p class="text-sm text-slate-500 mt-1">Applied Energy (2018)</p>
-                        </a>
-                        
-                        <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="Aero AI">
+                        </div>
+
+                        <div class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="Aero AI">
                             <div class="flex justify-between"><span class="text-xs font-bold text-blue-500 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10 px-2 py-1 rounded">61 Citations</span></div>
                             <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">Prognostics of gas turbine engine: An integrated approach</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">MA Zaidan, <strong class="text-slate-700 dark:text-slate-200">R Relan</strong>, AR Mills, RF Harrison</p>
                             <p class="text-sm text-slate-500 mt-1">Expert Systems with Applications (2015)</p>
-                        </a>
-                         <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="BESS AI">
+                        </div>
+
+                        <div class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group experience-card clickable" data-cat="BESS AI" data-tags="MATLAB">
                             <div class="flex justify-between"><span class="text-xs font-bold text-blue-500 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10 px-2 py-1 rounded">51 Citations</span></div>
-                            <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">Data-driven nonlinear identification of Li-ion battery based on frequency...</h4>
-                            <p class="text-sm text-slate-500 mt-1">IEEE Trans. on Control Systems Tech (2016)</p>
-                        </a>
-                         <a href="#" class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="BESS AI">
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">Data-driven nonlinear identification of Li-ion battery based on a frequency domain nonparametric analysis</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1"><strong class="text-slate-700 dark:text-slate-200">R Relan</strong>, Y Firouz, JM Timmermans, J Schoukens</p>
+                            <p class="text-sm text-slate-500 mt-1">IEEE Transactions on control systems technology (2016)</p>
+                        </div>
+
+                        <div class="pub-item block p-6 bg-slate-100 dark:bg-tertiary/40 rounded-xl border border-slate-200 dark:border-white/5 hover:border-accent transition-all duration-300 transform group clickable" data-cat="BESS AI">
                             <div class="flex justify-between"><span class="text-xs font-bold text-blue-500 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10 px-2 py-1 rounded">45 Citations</span></div>
                             <h4 class="text-lg font-bold text-slate-900 dark:text-white mt-2 group-hover:text-accent transition">Advanced lithium ion battery modeling and nonlinear analysis based on robust method in frequency domain: Nonlinear characterization and non-parametric modeling</h4>
                             <p class="text-sm text-slate-500 mt-1">Energy (2016)</p>
-                        </a>
+                        </div>
 
                         <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="View all 65+ publications on Google Scholar" class="block text-center py-4 mt-4 text-sm text-accent hover:underline hover:text-white transition border border-dashed border-slate-300 dark:border-white/10 rounded-xl flex items-center justify-center gap-2 clickable">
                             <i class="ai ai-google-scholar" aria-hidden="true"></i> View all 65+ Publications on Google Scholar
@@ -1127,7 +934,6 @@
                      <div class="text-yellow-500 mb-2 text-xl transform transition-transform group-hover:translate-z-[20px]"><i class="fas fa-medal" aria-hidden="true"></i></div>
                      <h4 class="text-slate-900 dark:text-white font-bold transform transition-transform group-hover:translate-z-[15px]">Dorothy Hodgkin Postgraduate Award (DHPA)</h4>
                      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1 transform transition-transform group-hover:translate-z-[10px]"><strong>Conferrer:</strong> EPSRC & <a href="https://www.rolls-royce.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Rolls-Royce plc</a> (UK <span class="fi fi-gb"></span>)</p>
-                     <p class="text-xs text-slate-500 dark:text-slate-500 mt-2 border-t border-slate-200 dark:border-white/10 pt-2 transform transition-transform group-hover:translate-z-[10px]">Only awarded to 30 candidates/year in the developing world.</p>
                  </div>
 
                  <div class="spotlight-card p-6 rounded-xl" data-tilt data-tilt-max="5" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
@@ -1367,25 +1173,25 @@
                 <div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8">Language Proficiency</h3>
                     <div class="space-y-4 bg-white dark:bg-tertiary/20 p-6 rounded-xl border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-none">
-                        <div class="flex justify-between items-center">
+                        <div class="flex justify-between items-center text-sm">
                             <span class="text-slate-600 dark:text-slate-300 font-medium w-32">English <span class="fi fi-gb"></span></span>
                             <div class="flex text-accent" aria-label="5 out of 5 stars">
                                 <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <div class="flex justify-between items-center">
+                        <div class="flex justify-between items-center text-sm">
                             <span class="text-slate-600 dark:text-slate-300 font-medium w-32">German <span class="fi fi-de"></span></span>
                             <div class="flex text-accent" aria-label="4 out of 5 stars">
                                 <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="far fa-star text-slate-400 dark:text-slate-600" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <div class="flex justify-between items-center">
+                        <div class="flex justify-between items-center text-sm">
                             <span class="text-slate-600 dark:text-slate-300 font-medium w-32">Hindi <span class="fi fi-in"></span></span>
                             <div class="flex text-accent" aria-label="5 out of 5 stars">
                                 <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <div class="flex justify-between items-center">
+                        <div class="flex justify-between items-center text-sm">
                             <span class="text-slate-600 dark:text-slate-300 font-medium w-32">Punjabi <span class="fi fi-in"></span></span>
                             <div class="flex text-accent" aria-label="5 out of 5 stars">
                                 <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
@@ -1443,24 +1249,18 @@
         </div>
     </section>
 
-    <footer id="contact" class="bg-white dark:bg-[#010409] py-12 border-t border-slate-200 dark:border-white/5">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-8">Let's Collaborate</h2>
-            
-            <div class="flex justify-center gap-6 mb-8">
-                <a href="mailto:rishirelan@gmail.com" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-accent transition clickable" aria-label="Send an email to Rishi Relan" title="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-                <a href="tel:+91xxxxxxxxxx" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-accent transition clickable" aria-label="Call Rishi Relan" title="+91 xxxxxxxxxx"><i class="fas fa-phone" aria-hidden="true"></i></a>
-                <a href="https://www.linkedin.com/in/rishirelan/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#0077b5] transition clickable" aria-label="Visit Rishi Relan on LinkedIn" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                <a href="skype:rishirelan?chat" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#00aff0] transition clickable" aria-label="Chat with Rishi Relan on Skype" title="Skype: rishirelan"><i class="fab fa-skype" aria-hidden="true"></i></a>
-            </div>
-            
-            <div class="flex justify-center gap-6 text-sm text-slate-600 dark:text-slate-500 mb-8">
-                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar Profile" class="hover:text-accent transition flex items-center gap-2 clickable"><i class="ai ai-google-scholar" aria-hidden="true"></i> Google Scholar</a>
-                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" aria-label="ResearchGate Profile" class="hover:text-accent transition flex items-center gap-2 clickable"><i class="ai ai-researchgate" aria-hidden="true"></i> ResearchGate</a>
-            </div>
-
-            <p class="text-slate-500 dark:text-slate-600 text-sm">&copy; December 2025 Dr.ir. Rishi Relan.</p>
+    <footer id="contact" class="bg-white dark:bg-[#010409] py-12 border-t border-slate-200 dark:border-white/5 text-center">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-8">Let's Collaborate</h2>
+        <div class="flex justify-center gap-6 mb-8 text-sm">
+            <a href="mailto:rishirelan@gmail.com" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-accent transition clickable" title="Email"><i class="fas fa-envelope text-xl" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/rishirelan/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#0077b5] transition clickable" title="LinkedIn"><i class="fab fa-linkedin text-xl" aria-hidden="true"></i></a>
+            <a href="skype:rishirelan?chat" class="w-12 h-12 rounded-full bg-slate-100 dark:bg-tertiary flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-white hover:bg-[#00aff0] transition clickable" title="Skype"><i class="fab fa-skype text-xl" aria-hidden="true"></i></a>
         </div>
+        <div class="flex justify-center gap-6 text-sm text-slate-600 dark:text-slate-500 mb-8">
+            <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition flex items-center gap-2 clickable"><i class="ai ai-google-scholar text-lg" aria-hidden="true"></i> Google Scholar</a>
+            <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition flex items-center gap-2 clickable"><i class="ai ai-researchgate text-lg" aria-hidden="true"></i> ResearchGate</a>
+        </div>
+        <p class="text-slate-500 text-xs font-mono">&copy; 2026 Dr.ir. Rishi Relan.</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -1839,31 +1639,33 @@
 
         // Intersection Observer for Counters
         const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counters = entry.target.querySelectorAll('.count-up');
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const counters = e.target.querySelectorAll('.count-up');
                     counters.forEach(counter => {
-                        const target = +counter.getAttribute('data-target');
-                        let current = 0; const inc = target / 50;
-                        const update = () => {
-                            if(current < target) { 
-                                current += inc; counter.innerText = Math.ceil(current); setTimeout(update, 30); 
-                            } else { counter.innerText = target; }
+                        const targetVal = +counter.getAttribute('data-target');
+                        let current = 0; const inc = targetVal / 50;
+                        const updateFn = () => {
+                            if(current < targetVal) { 
+                                current += inc; counter.innerText = Math.ceil(current); setTimeout(updateFn, 30); 
+                            } else { counter.innerText = targetVal; }
                         }; 
-                        update();
+                        updateFn();
                     });
                     
-                    const skillBars = entry.target.querySelectorAll('.skill-fill');
+                    const skillBars = e.target.querySelectorAll('.skill-fill');
                     skillBars.forEach(bar => { bar.classList.add('active'); });
 
-                    counterObserver.unobserve(entry.target);
+                    counterObserver.unobserve(e.target);
                 }
             });
         });
         
         const aboutSection = document.querySelector('#about');
+        const publicationsSection = document.querySelector('#publications');
         const skillsSection = document.querySelector('#skills');
         if (aboutSection) counterObserver.observe(aboutSection);
+        if (publicationsSection) counterObserver.observe(publicationsSection);
         if (skillsSection) counterObserver.observe(skillsSection);
 
         // --- UX POLISH: Scroll Progress, Timeline Drawing, Sticky Button & Active Navigation ---
