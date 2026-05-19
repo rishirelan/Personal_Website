@@ -1758,5 +1758,68 @@
             });
         }
     </script>
+
+    <script>
+        // --- AUTOMATED CITATION UPDATER ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Only attempt to fetch if the JSON exists (prevents console errors during local testing)
+            fetch('./citations_data.json')
+                .then(response => {
+                    if (!response.ok) throw new Error("JSON not found");
+                    return response.json();
+                })
+                .then(data => {
+                    // 1. Update the "Total Citations" metric
+                    // Look for the span that contains the text "Total Citations"
+                    const labels = document.querySelectorAll('span.text-sm.text-slate-500');
+                    labels.forEach(label => {
+                        if (label.textContent.trim() === 'Total Citations') {
+                            // The count-up element is the next sibling in your HTML
+                            const countUpSpan = label.nextElementSibling;
+                            if (countUpSpan && data.total_citations) {
+                                // Update the target for your existing scroll animation
+                                countUpSpan.setAttribute('data-target', data.total_citations);
+                                // If the animation already triggered before the fetch finished, update it directly
+                                if (countUpSpan.innerText !== "0") {
+                                    countUpSpan.innerText = data.total_citations;
+                                }
+                            }
+                        }
+                    });
+
+                    // 2. Update individual paper citations
+                    const pubItems = document.querySelectorAll('.pub-item');
+                    
+                    pubItems.forEach(item => {
+                        const titleElement = item.querySelector('h4');
+                        if (!titleElement) return;
+
+                        // Normalize the title to make matching easier (lowercase, trim spaces)
+                        const htmlTitle = titleElement.textContent.trim().toLowerCase();
+                        
+                        // Find a matching paper in the JSON data
+                        const matchedKey = Object.keys(data.publications).find(jsonTitle => {
+                            const normalizedJsonTitle = jsonTitle.toLowerCase().trim();
+                            // Match if the HTML title starts with the JSON title or vice versa
+                            return htmlTitle.includes(normalizedJsonTitle) || normalizedJsonTitle.includes(htmlTitle);
+                        });
+
+                        if (matchedKey && data.publications[matchedKey] !== undefined) {
+                            const newCitationCount = data.publications[matchedKey];
+                            
+                            // Find the pill/span that currently says "X Citations" inside this pub-item
+                            const spans = item.querySelectorAll('span');
+                            spans.forEach(span => {
+                                if (span.textContent.includes('Citation')) {
+                                    // Keep any existing icons/HTML inside the span if you ever add them, but update text
+                                    span.textContent = `${newCitationCount} Citations`;
+                                }
+                            });
+                        }
+                    });
+                })
+                .catch(error => console.log('Citation data not yet generated or unavailable.', error));
+        });
+    </script>
 </body>
 </html>
