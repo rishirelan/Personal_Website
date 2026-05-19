@@ -6,10 +6,9 @@ AUTHOR_ID = 'E5-emBEAAAAJ'
 
 def fetch_data():
     try:
-        print("Setting up proxies to avoid Google Scholar blocks...")
-        # Initialize the proxy generator
+        print("Setting up proxies...")
         pg = ProxyGenerator()
-        # Fetch free proxies to route our request through
+        # Use FreeProxies to avoid datacenter blocks
         pg.FreeProxies()
         scholarly.use_proxy(pg)
         
@@ -35,6 +34,9 @@ def fetch_data():
         
     except Exception as e:
         print(f"Error fetching data: {e}")
+        # Print more detail about the error if possible
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
 
 if __name__ == "__main__":
