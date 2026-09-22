@@ -519,6 +519,24 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-6" data-aos="fade-left">
+                     <div class="col-span-2 bg-slate-100 dark:bg-tertiary/40 rounded-xl p-6 border border-slate-200 dark:border-white/5 relative flex flex-col items-center justify-center overflow-hidden min-h-[350px]">
+                        <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1 z-10 text-center">Global Footprint</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2 z-10 text-center">6 countries across 3 continents</p>
+                        <p class="text-[10px] text-slate-400 dark:text-slate-500 mb-3 z-10 text-center uppercase tracking-widest"><i class="fas fa-arrows-left-right mr-1" aria-hidden="true"></i>Drag to explore</p>
+                        <div class="w-full max-w-[300px] aspect-square relative z-0 flex items-center justify-center">
+                            <div class="absolute inset-0 rounded-full border border-dashed border-accent/20 animate-[spin_40s_linear_infinite]" aria-hidden="true"></div>
+                            <div class="absolute inset-0 rounded-full bg-accent/10 blur-3xl opacity-60" aria-hidden="true"></div>
+                            <canvas id="cobe-globe" class="w-full h-full object-contain cursor-grab active:cursor-grabbing clickable relative z-10" width="600" height="600" style="contain: layout paint size;"></canvas>
+                        </div>
+                        <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs font-mono text-accent z-10 bg-white/50 dark:bg-primary/50 px-5 py-2.5 rounded-full backdrop-blur-md border border-slate-200 dark:border-white/5">
+                            <span class="flex items-center gap-1.5" title="India"><span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span> <span class="fi fi-in rounded-sm text-sm" aria-hidden="true"></span> IN</span>
+                            <span class="flex items-center gap-1.5" title="Germany"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 0.2s"></span> <span class="fi fi-de rounded-sm text-sm" aria-hidden="true"></span> DE</span>
+                            <span class="flex items-center gap-1.5" title="United Kingdom"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 0.4s"></span> <span class="fi fi-gb rounded-sm text-sm" aria-hidden="true"></span> UK</span>
+                            <span class="flex items-center gap-1.5" title="Belgium"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 0.6s"></span> <span class="fi fi-be rounded-sm text-sm" aria-hidden="true"></span> BE</span>
+                            <span class="flex items-center gap-1.5" title="Denmark"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 0.8s"></span> <span class="fi fi-dk rounded-sm text-sm" aria-hidden="true"></span> DK</span>
+                            <span class="flex items-center gap-1.5" title="Switzerland"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 1.0s"></span> <span class="fi fi-ch rounded-sm text-sm" aria-hidden="true"></span> CH</span>
+                        </div>
+                     </div>
                     <div class="spotlight-card p-6 rounded-xl text-center group flex flex-col h-full" data-tilt data-tilt-max="3" data-tilt-speed="400" onmousemove="handleMouseMove(event)">
                         <div class="flex-grow transform transition-transform group-hover:translate-z-[20px]">
                             <i class="fas fa-users text-3xl text-accent mb-3 group-hover:text-slate-900 dark:group-hover:text-white transition" aria-hidden="true"></i>
@@ -562,24 +580,6 @@
                             <p class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-1">Years Experience</p>
                         </div>
                     </div>
-                    
-                     <div class="col-span-2 bg-slate-100 dark:bg-tertiary/40 rounded-xl p-6 border border-slate-200 dark:border-white/5 relative flex flex-col items-center justify-center overflow-hidden min-h-[350px]">
-                        <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 z-10 text-center">Global Footprint</h4>
-                        <div class="w-full max-w-[300px] aspect-square relative z-0 flex items-center justify-center">
-                            <div class="absolute inset-0 rounded-full border border-dashed border-accent/20 animate-[spin_40s_linear_infinite]" aria-hidden="true"></div>
-                            <div class="absolute inset-[8%] rounded-full border border-dashed border-accent/10 animate-[spin_60s_linear_infinite_reverse]" aria-hidden="true"></div>
-                            <div class="absolute inset-0 rounded-full bg-accent/10 blur-3xl" aria-hidden="true"></div>
-                            <canvas id="cobe-globe" class="w-full h-full object-contain cursor-grab active:cursor-grabbing clickable relative z-10" width="600" height="600" style="contain: layout paint size;"></canvas>
-                        </div>
-                        <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs font-mono text-accent z-10 bg-white/50 dark:bg-primary/50 px-5 py-2.5 rounded-full backdrop-blur-md border border-slate-200 dark:border-white/5">
-                            <span class="flex items-center gap-1.5" title="India"><span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span> <span class="fi fi-in rounded-sm text-sm" aria-hidden="true"></span> IN</span>
-                            <span class="flex items-center gap-1.5" title="Germany"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 0.2s"></span> <span class="fi fi-de rounded-sm text-sm" aria-hidden="true"></span> DE</span>
-                            <span class="flex items-center gap-1.5" title="United Kingdom"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 0.4s"></span> <span class="fi fi-gb rounded-sm text-sm" aria-hidden="true"></span> UK</span>
-                            <span class="flex items-center gap-1.5" title="Belgium"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 0.6s"></span> <span class="fi fi-be rounded-sm text-sm" aria-hidden="true"></span> BE</span>
-                            <span class="flex items-center gap-1.5" title="Denmark"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 0.8s"></span> <span class="fi fi-dk rounded-sm text-sm" aria-hidden="true"></span> DK</span>
-                            <span class="flex items-center gap-1.5" title="Switzerland"><span class="w-2 h-2 rounded-full bg-accent animate-pulse" style="animation-delay: 1.0s"></span> <span class="fi fi-ch rounded-sm text-sm" aria-hidden="true"></span> CH</span>
-                        </div>
-                     </div>
                 </div>
             </div>
 
@@ -2019,6 +2019,7 @@
             let phi = 0;
             let pointerInteracting = null;
             let pointerInteractionMovement = 0;
+            const isLightMode = !document.documentElement.classList.contains('dark');
 
             const globe = createGlobe(canvasElement, {
                 devicePixelRatio: 2,
@@ -2026,20 +2027,20 @@
                 height: 600,
                 phi: 0,
                 theta: 0.3,
-                dark: 1,
+                dark: isLightMode ? 0.6 : 1,
                 diffuse: 1.2,
                 mapSamples: 16000,
-                mapBrightness: 6,
-                baseColor: [0.1, 0.1, 0.15],
+                mapBrightness: isLightMode ? 11 : 9,
+                baseColor: isLightMode ? [0.25, 0.25, 0.32] : [0.1, 0.1, 0.15],
                 markerColor: [56/255, 189/255, 248/255],
-                glowColor: [0.1, 0.1, 0.2],
+                glowColor: isLightMode ? [0.3, 0.3, 0.38] : [0.1, 0.1, 0.2],
                 markers: [
-                    { location: [20.5937, 78.9629], size: 0.08 }, // India
-                    { location: [51.1657, 10.4515], size: 0.06 }, // Germany
-                    { location: [55.3781, -3.4360], size: 0.06 }, // UK
-                    { location: [50.5039, 4.4699], size: 0.05 },  // Belgium
-                    { location: [56.2639, 9.5018], size: 0.05 },  // Denmark
-                    { location: [47.3769, 8.5417], size: 0.05 },  // Switzerland
+                    { location: [20.5937, 78.9629], size: 0.16 }, // India
+                    { location: [51.1657, 10.4515], size: 0.12 }, // Germany
+                    { location: [55.3781, -3.4360], size: 0.12 }, // UK
+                    { location: [50.5039, 4.4699], size: 0.10 },  // Belgium
+                    { location: [56.2639, 9.5018], size: 0.10 },  // Denmark
+                    { location: [47.3769, 8.5417], size: 0.10 },  // Switzerland
                 ],
                 onRender: (state) => {
                     if (pointerInteracting === null) {
@@ -2542,5 +2543,8 @@
             });
         }
     </script>
+    <!-- Cloudflare Web Analytics -->
+    <script defer type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d218b911eb06429eb60557b310573991"}'></script>
+    <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
