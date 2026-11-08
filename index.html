@@ -225,6 +225,7 @@
         .active-nav-link { color: #38bdf8 !important; font-weight: 600; }
         .accordion-content { transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out; max-height: 0; opacity: 0; overflow: hidden; }
         .accordion-content.active { opacity: 1; }
+        .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
         .seen-logo { filter: brightness(0); opacity: .45; transition: opacity .3s ease; }
         .dark .seen-logo { filter: brightness(0) invert(1); opacity: .55; }
         .seen-link:hover .seen-logo, .seen-link:focus-visible .seen-logo { opacity: .9; }
@@ -244,6 +245,10 @@
     <div id="side-dot-nav" class="hidden lg:flex flex-col gap-4 fixed right-6 top-1/2 -translate-y-1/2 z-40" aria-label="Section navigation">
         <a href="#home" class="dot-nav-link group relative flex items-center justify-end clickable" aria-label="Home">
             <span class="absolute right-6 whitespace-nowrap text-xs font-medium bg-white dark:bg-tertiary text-slate-700 dark:text-slate-200 px-2 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none border border-slate-200 dark:border-white/10">Home</span>
+            <span class="dot-indicator w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-accent transition-all duration-300"></span>
+        </a>
+        <a href="#speaking" class="dot-nav-link group relative flex items-center justify-end clickable" aria-label="Speaking">
+            <span class="absolute right-6 whitespace-nowrap text-xs font-medium bg-white dark:bg-tertiary text-slate-700 dark:text-slate-200 px-2 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none border border-slate-200 dark:border-white/10">Speaking</span>
             <span class="dot-indicator w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-accent transition-all duration-300"></span>
         </a>
         <a href="#about" class="dot-nav-link group relative flex items-center justify-end clickable" aria-label="About">
@@ -311,11 +316,10 @@
                 <span class="text-accent group-hover:text-slate-900 dark:group-hover:text-white transition">Dr.ir.</span> Rishi Relan
             </a>
             <div class="hidden md:flex items-center space-x-2 font-medium text-sm uppercase tracking-wider text-slate-600 dark:text-slate-300">
+                <a href="#speaking" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Speaking</a>
                 <a href="#about" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">About</a>
-                <a href="#recommendations" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Recommendations</a>
                 <a href="#experience" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Experience</a>
-                <a href="#education" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Education</a>
-                <a href="#recognition" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Recognition</a>
+                <a href="#recognition" class="px-3 py-2 hover:text-slate-900 dark:hover:text-white nav-link clickable">Research</a>
                 <a href="#invite" class="hidden lg:inline-flex items-center gap-1.5 px-5 py-2 ml-4 bg-highlight text-primary font-bold rounded hover:bg-amber-300 transition duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(251,191,36,0.5)] clickable"><i class="fas fa-microphone-alt" aria-hidden="true"></i> Invite Me</a>
                 <a href="#contact" class="px-5 py-2 ml-4 border border-accent text-accent rounded hover:bg-accent hover:text-white transition duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] clickable">Contact</a>
                 
@@ -327,11 +331,10 @@
         </div>
         
         <div id="mobile-menu" class="fixed inset-0 bg-white/98 dark:bg-primary/98 backdrop-blur-xl z-40 hidden flex flex-col justify-center items-center space-y-6 transition-all duration-300 opacity-0 translate-y-[-20px]" role="menu">
+            <a href="#speaking" class="text-2xl font-bold text-slate-900 dark:text-white hover:text-accent mobile-link" role="menuitem">Speaking</a>
             <a href="#about" class="text-2xl font-bold text-slate-900 dark:text-white hover:text-accent mobile-link" role="menuitem">About</a>
-            <a href="#recommendations" class="text-2xl font-bold text-slate-900 dark:text-white hover:text-accent mobile-link" role="menuitem">Recommendations</a>
             <a href="#experience" class="text-2xl font-bold text-slate-900 dark:text-white hover:text-accent mobile-link" role="menuitem">Experience</a>
-            <a href="#education" class="text-2xl font-bold text-slate-900 dark:text-white hover:text-accent mobile-link" role="menuitem">Education</a>
-            <a href="#recognition" class="text-2xl font-bold text-slate-900 dark:text-white hover:text-accent mobile-link" role="menuitem">Recognition</a>
+            <a href="#recognition" class="text-2xl font-bold text-slate-900 dark:text-white hover:text-accent mobile-link" role="menuitem">Research</a>
             <a href="#invite" class="text-2xl font-bold text-primary bg-highlight px-8 py-2 rounded-full mobile-link" role="menuitem"><i class="fas fa-microphone-alt mr-2" aria-hidden="true"></i>Invite Me</a>
             <a href="#contact" class="text-2xl font-bold text-accent border border-accent px-8 py-2 rounded-full mobile-link" role="menuitem">Contact</a>
         </div>
@@ -379,18 +382,17 @@
             </div>
 
             <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10" data-aos="fade-up" data-aos-delay="750">
-                <a href="#invite" data-invite-type="CV request" aria-label="Request CV" class="bg-accent text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-primary transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,189,248,0.6)] hover:-translate-y-1 flex items-center gap-2 justify-center border border-accent clickable">
-                    <i class="fas fa-paper-plane" aria-hidden="true"></i> Request CV
-                </a>
-                <a href="#invite" aria-label="Invite me to speak or advise" class="bg-highlight text-primary font-bold px-8 py-4 rounded-lg hover:bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center gap-2 justify-center border border-highlight clickable">
+                <a href="#invite" aria-label="Invite me to speak or advise" class="bg-highlight text-primary font-bold text-lg px-10 py-4 rounded-lg hover:bg-amber-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(251,191,36,0.5)] flex items-center gap-2 justify-center clickable">
                     <i class="fas fa-microphone-alt" aria-hidden="true"></i> Invite Me
                 </a>
-                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Visit Google Scholar Profile" class="bg-slate-800 dark:bg-white/10 text-white px-8 py-4 rounded-lg hover:bg-slate-700 dark:hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 justify-center border border-transparent dark:border-white/5 hover:shadow-lg clickable">
-                    <i class="ai ai-google-scholar text-lg" aria-hidden="true"></i> Scholar
+                <a href="#invite" data-invite-type="CV request" aria-label="Request CV" class="bg-transparent text-accent font-bold px-8 py-4 rounded-lg border-2 border-accent hover:bg-accent hover:text-white transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 justify-center clickable">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i> Request CV
                 </a>
-                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" aria-label="Visit ResearchGate Profile" class="bg-white/50 dark:bg-transparent border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 px-8 py-4 rounded-lg hover:border-accent hover:text-accent dark:hover:text-accent transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm hover:bg-slate-50 dark:hover:bg-white/5 hover:-translate-y-1 hover:shadow-lg clickable">
-                    <i class="ai ai-researchgate text-lg" aria-hidden="true"></i> ResearchGate
-                </a>
+            </div>
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-5 text-sm relative z-10" data-aos="fade-up" data-aos-delay="800">
+                <a href="https://scholar.google.be/citations?user=E5-emBEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Visit Google Scholar Profile" class="text-slate-500 dark:text-slate-400 hover:text-accent transition flex items-center gap-1.5 clickable"><i class="ai ai-google-scholar text-lg" aria-hidden="true"></i> Google Scholar</a>
+                <a href="https://www.researchgate.net/profile/Rishi-Relan?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" aria-label="Visit ResearchGate Profile" class="text-slate-500 dark:text-slate-400 hover:text-accent transition flex items-center gap-1.5 clickable"><i class="ai ai-researchgate text-lg" aria-hidden="true"></i> ResearchGate</a>
+                <a href="https://www.linkedin.com/in/rishirelan/" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn Profile" class="text-slate-500 dark:text-slate-400 hover:text-accent transition flex items-center gap-1.5 clickable"><i class="fab fa-linkedin text-lg" aria-hidden="true"></i> LinkedIn</a>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto mt-12 relative z-10" data-aos="fade-up" data-aos-delay="900">
@@ -451,9 +453,6 @@
             </div>
         </div>
 
-        <a href="#about" id="hero-bounce" aria-label="Scroll down to About section" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-slate-500 hover:text-accent transition cursor-pointer z-20 hidden-print clickable">
-            <i class="fas fa-chevron-down text-2xl" aria-hidden="true"></i>
-        </a>
     </header>
 
     <section class="py-16 bg-white dark:bg-secondary/60 border-t border-slate-200 dark:border-white/5 relative">
@@ -471,11 +470,11 @@
                     <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Peer-reviewed rigor across 70 publications (h-index 11), backed by ERC, EPSRC and FWO funding, with active PhD co-supervision and guest professorships.</p>
                     <p class="text-xs font-bold text-purple-500 mt-3 flex items-center gap-1.5">See Research & Publications <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></p>
                 </a>
-                <a href="#recognition" class="hero-cta-link group p-6 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-tertiary/30 hover:border-amber-400/50 hover:-translate-y-1 transition-all duration-300 block clickable">
+                <a href="#speaking" class="hero-cta-link group p-6 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-tertiary/30 hover:border-amber-400/50 hover:-translate-y-1 transition-all duration-300 block clickable">
                     <div class="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500 mb-4"><i class="fas fa-bullhorn" aria-hidden="true"></i></div>
                     <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-2">For Thought Leaders</h3>
                     <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Invited to shape the conversation — panellist at IISc and IIT Delhi, spotlight speaker at ASME IMECE India, ASME IMECE session chair, and keynote speaker across three continents, with an active professional network of ~4000 followers.</p>
-                    <p class="text-xs font-bold text-amber-500 mt-3 flex items-center gap-1.5">See Recognition & Thought Leadership <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></p>
+                    <p class="text-xs font-bold text-amber-500 mt-3 flex items-center gap-1.5">See Speaking &amp; Panels <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></p>
                 </a>
                 <a href="#contact" class="hero-cta-link group p-6 rounded-xl border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-tertiary/30 hover:border-emerald-400/50 hover:-translate-y-1 transition-all duration-300 block clickable">
                     <div class="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-4"><i class="fas fa-briefcase" aria-hidden="true"></i></div>
@@ -521,22 +520,275 @@
                     <a href="https://www.hindustantimes.com/ht-insight/future-tech/ai-infrastructure-is-powering-the-next-research-frontier-101783163826541.html" target="_blank" rel="noopener noreferrer" class="seen-link flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-accent transition-colors duration-300 clickable" aria-label="Hindustan Times op-ed" title="Hindustan Times op-ed"><img src="images/logos/hindustan-times.svg" alt="" width="187" height="24" class="seen-logo h-6 w-auto" loading="lazy"></a>
                 </div>
             </div>
-            <div class="mt-12 max-w-5xl mx-auto" data-aos="fade-up">
-                <div class="grid md:grid-cols-3 gap-8">
-                    <figure class="border-l-4 border-accent pl-5">
-                        <blockquote class="text-sm text-slate-700 dark:text-slate-200 italic leading-relaxed">"Rishi is very enthusiastic in his work and has a lot of intercultural experience. He was very well accepted internally in the company as well as by his customers."</blockquote>
-                        <figcaption class="text-xs text-slate-500 dark:text-slate-400 mt-3"><strong class="text-slate-700 dark:text-slate-200">Peter Waeltermann</strong>, CEO, dSPACE Inc</figcaption>
+            <div class="mt-10 text-center" data-aos="fade-up">
+                <a href="#recommendations" class="text-sm font-bold text-accent hover:underline clickable inline-flex items-center gap-1.5">Read 13 recommendations from CEOs, directors and colleagues <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="speaking" class="py-24 bg-slate-50 dark:bg-primary border-t border-slate-200 dark:border-white/5 relative scroll-mt-16">
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white text-center mb-4" data-aos="fade-up">Speaking &amp; Panels</h2>
+            <p class="text-center text-slate-500 dark:text-slate-400 mb-12 max-w-2xl mx-auto">Keynotes, invited talks, panels and lectures on AI, digital twins and energy storage &mdash; from IIT Delhi and IISc to ASME IMECE.</p>
+            <div class="relative mb-14" data-aos="fade-up">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Recent stages</p>
+                    <div class="hidden sm:flex gap-2">
+                        <button type="button" class="stage-strip-btn w-9 h-9 rounded-full border border-slate-300 dark:border-white/15 text-slate-500 dark:text-slate-300 hover:text-accent hover:border-accent transition clickable" data-dir="-1" aria-label="Scroll photos left"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <button type="button" class="stage-strip-btn w-9 h-9 rounded-full border border-slate-300 dark:border-white/15 text-slate-500 dark:text-slate-300 hover:text-accent hover:border-accent transition clickable" data-dir="1" aria-label="Scroll photos right"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div id="stage-strip" class="no-scrollbar flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-1" tabindex="0" aria-label="Photos from recent talks and panels">
+                    <figure class="snap-start shrink-0 w-64 sm:w-72 relative rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 group">
+                        <img src="images/strip/asme-imece-2026.jpg" alt="Rishi Relan presenting on the main stage of the Gas Turbine India Conference, ASME IMECE India 2026" width="720" height="480" loading="lazy" class="w-full aspect-[3/2] object-cover group-hover:scale-105 transition-transform duration-500">
+                        <figcaption class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent">
+                            <span class="block text-sm font-bold text-white">ASME IMECE India</span>
+                            <span class="block text-xs text-slate-200">Spotlight talk · Chennai 2026</span>
+                        </figcaption>
                     </figure>
-                    <figure class="border-l-4 border-accent pl-5">
-                        <blockquote class="text-sm text-slate-700 dark:text-slate-200 italic leading-relaxed">"I like very much his pro-active communication involving all stakeholders and learning different opinions before making the final decision."</blockquote>
-                        <figcaption class="text-xs text-slate-500 dark:text-slate-400 mt-3"><strong class="text-slate-700 dark:text-slate-200">Jaroslaw Szwedowicz, D.Sc., Ph.D., Eng.</strong>, Senior Principal Key Expert for Gas Turbine Modules, Siemens, ASME Fellow</figcaption>
+                    <figure class="snap-start shrink-0 w-64 sm:w-72 relative rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 group">
+                        <img src="images/strip/isme-iitd-2026.jpg" alt="Rishi Relan presenting at the ISME Golden Jubilee Conclave, IIT Delhi" width="720" height="480" loading="lazy" class="w-full aspect-[3/2] object-cover group-hover:scale-105 transition-transform duration-500">
+                        <figcaption class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent">
+                            <span class="block text-sm font-bold text-white">ISME Golden Jubilee</span>
+                            <span class="block text-xs text-slate-200">Invited talk · IIT Delhi 2026</span>
+                        </figcaption>
                     </figure>
-                    <figure class="border-l-4 border-accent pl-5">
-                        <blockquote class="text-sm text-slate-700 dark:text-slate-200 italic leading-relaxed">"Looking at and reading both [Digital Twin] presentations have been a full enjoyment for me and they have excited me, as I have experienced clarity (in regards of the intention), quality and competence (in regards of the content)&hellip;"</blockquote>
-                        <figcaption class="text-xs text-slate-500 dark:text-slate-400 mt-3"><strong class="text-slate-700 dark:text-slate-200">Dr.-Ing. Michael Hortmann</strong>, Director, Enterprise Account Management, ANSYS</figcaption>
+                    <figure class="snap-start shrink-0 w-64 sm:w-72 relative rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 group">
+                        <img src="images/strip/chemrd2-iitd-2026.jpg" alt="Rishi Relan speaking on the ChemRD2 2026 panel at IIT Delhi" width="720" height="480" loading="lazy" class="w-full aspect-[3/2] object-cover group-hover:scale-105 transition-transform duration-500">
+                        <figcaption class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent">
+                            <span class="block text-sm font-bold text-white">ChemRD2</span>
+                            <span class="block text-xs text-slate-200">Panel · IIT Delhi 2026</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="snap-start shrink-0 w-64 sm:w-72 relative rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 group">
+                        <img src="images/strip/udaan-2026.jpg" alt="Rishi Relan delivering the inaugural keynote at UDAAN 2026" width="720" height="480" loading="lazy" class="w-full aspect-[3/2] object-cover group-hover:scale-105 transition-transform duration-500">
+                        <figcaption class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent">
+                            <span class="block text-sm font-bold text-white">UDAAN 2026</span>
+                            <span class="block text-xs text-slate-200">Inaugural keynote · Sonipat</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="snap-start shrink-0 w-64 sm:w-72 relative rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 group">
+                        <img src="images/strip/casml-iisc-2024.jpg" alt="Rishi Relan presenting a spotlight talk at CASML 2024, IISc Bengaluru" width="720" height="480" loading="lazy" class="w-full aspect-[3/2] object-cover group-hover:scale-105 transition-transform duration-500">
+                        <figcaption class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent">
+                            <span class="block text-sm font-bold text-white">CASML</span>
+                            <span class="block text-xs text-slate-200">Spotlight · IISc Bengaluru 2024</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="snap-start shrink-0 w-64 sm:w-72 relative rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 group">
+                        <img src="images/strip/incmdao-iisc-2024.jpg" alt="Rishi Relan on the iNCMDAO 2024 panel at IISc Bengaluru" width="720" height="480" loading="lazy" class="w-full aspect-[3/2] object-cover group-hover:scale-105 transition-transform duration-500">
+                        <figcaption class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent">
+                            <span class="block text-sm font-bold text-white">iNCMDAO</span>
+                            <span class="block text-xs text-slate-200">Panel · IISc Bengaluru 2024</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="snap-start shrink-0 w-64 sm:w-72 relative rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 group">
+                        <img src="images/strip/asme-imece-cps-2026.jpg" alt="Rishi Relan with fellow session chairs of the CPS AI/ML track at ASME IMECE India 2026" width="720" height="480" loading="lazy" class="w-full aspect-[3/2] object-cover group-hover:scale-105 transition-transform duration-500">
+                        <figcaption class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent">
+                            <span class="block text-sm font-bold text-white">CPS – AI/ML track</span>
+                            <span class="block text-xs text-slate-200">Session chair · IMECE 2026</span>
+                        </figcaption>
                     </figure>
                 </div>
-                <a href="#recommendations" class="text-sm font-bold text-accent hover:underline clickable flex items-center justify-center gap-1.5 mt-6">Read all 13 recommendations <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+            </div>
+                <div id="recent-upcoming" class="mb-16 scroll-mt-24">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center"><i class="fas fa-calendar-check text-highlight mr-3" aria-hidden="true"></i> Recent &amp; Upcoming in 2026</h3>
+                    <div class="glow-blink mb-4 bg-highlight/5 dark:bg-highlight/10 border border-highlight/40 border-l-4 border-l-highlight rounded-xl overflow-hidden grid lg:grid-cols-5">
+                        <a href="images/asme-gt-india-2026-talk.jpg" target="_blank" rel="noopener noreferrer" class="lg:col-span-2 block clickable" aria-label="Open full photo of the invited talk at the Gas Turbine India Conference, ASME IMECE India 2026">
+                            <img src="images/asme-gt-india-2026-talk.jpg" alt="Rishi Relan presenting on the Energy System-of-Systems at the Gas Turbine India Conference, ASME IMECE India 2026" width="1200" height="900" loading="lazy" class="w-full h-full object-cover aspect-[4/3] lg:aspect-auto">
+                        </a>
+                        <div class="lg:col-span-3 p-6 sm:p-8 flex flex-col justify-center">
+                            <div class="flex flex-wrap items-center gap-3 mb-3">
+                                <span class="inline-flex items-center gap-1 text-xs font-bold text-primary bg-highlight px-2 py-0.5 rounded"><i class="fas fa-star" aria-hidden="true"></i> Spotlight Speaker</span>
+                                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">3&ndash;5 Sep 2026</span>
+                            </div>
+                            <h4 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-snug">Gas Turbine India Conference track, ASME IMECE 2026</h4>
+                            <p class="text-base font-bold text-slate-800 dark:text-slate-100 mt-3">"The Energy System-of-Systems Rethinking Cyber-Physical Assets via AI and Digital Twins"</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Invited talk on the main stage of the Gas Turbine India Conference at ASME's International Mechanical Engineering Congress &amp; Exposition (IMECE) India 2026, Chennai <span class="fi fi-in"></span></p>
+                            <div class="mt-4 flex items-center gap-3 p-3 rounded-lg bg-white/70 dark:bg-white/5 border border-highlight/30">
+                                <a href="images/asme-imece-2026-cps-session.jpg" target="_blank" rel="noopener noreferrer" class="w-24 shrink-0 block rounded-md overflow-hidden clickable" aria-label="Open photo of the Cyber Physical Systems AI/ML track at ASME IMECE India 2026">
+                                    <img src="images/asme-imece-2026-cps-session.jpg" alt="Rishi Relan with fellow session chairs of the Cyber Physical Systems AI/ML track, ASME IMECE India 2026" width="1200" height="900" loading="lazy" class="w-full aspect-[4/3] object-cover">
+                                </a>
+                                <div class="min-w-0">
+                                    <p class="text-xs font-bold text-slate-900 dark:text-white"><i class="fas fa-chair text-highlight mr-1" aria-hidden="true"></i> Also Session Chair</p>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Aerospace &amp; Propulsion Health session, CPS &amp; AI/ML track</p>
+                                </div>
+                            </div>
+                            <a href="https://lnkd.in/dvURvv_v" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-bold text-accent hover:underline clickable mt-4"><i class="fas fa-link" aria-hidden="true"></i> Event link</a>
+                        </div>
+                    </div>
+                    <div class="p-5 mb-4 bg-white dark:bg-tertiary/40 border border-slate-200 dark:border-white/5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="flex flex-wrap items-center gap-3 mb-2">
+                            <span class="inline-flex items-center gap-1 text-xs font-bold text-primary bg-accent px-2 py-0.5 rounded"><i class="fas fa-newspaper" aria-hidden="true"></i> Op-Ed</span>
+                            <span class="text-xs font-mono text-slate-500 dark:text-slate-400">Hindustan Times &middot; Jul 2026</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white leading-snug">AI infrastructure is powering the next research frontier</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">With Manisha Saini, BML Munjal University &mdash; why hybrid ML &amp; control engineering, high-fidelity digital twins and HIL validation, not bigger models alone, are the real bottleneck for industrial AI.</p>
+                        <a href="https://www.hindustantimes.com/ht-insight/future-tech/ai-infrastructure-is-powering-the-next-research-frontier-101783163826541.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-bold text-accent hover:underline clickable mt-3"><i class="fas fa-link" aria-hidden="true"></i> Read the article</a>
+                    </div>
+                    <div class="mb-4 bg-white dark:bg-tertiary/40 border border-highlight/40 rounded-xl overflow-hidden grid lg:grid-cols-5 transition-all duration-300 hover:shadow-lg">
+                        <a href="images/isme-conclave-2026.jpg" target="_blank" rel="noopener noreferrer" class="lg:col-span-2 block relative group clickable" aria-label="Open full photo collage from the ISME Golden Jubilee Conclave">
+                            <img src="images/isme-conclave-2026-talk.jpg" alt="Rishi Relan presenting 'Between the Boxes: The Machine Never Stood Alone' at the ISME Golden Jubilee Conclave, IIT Delhi" width="1200" height="801" loading="lazy" class="w-full h-full object-cover aspect-[3/2] lg:aspect-auto">
+                            <span class="absolute bottom-3 left-3 inline-flex items-center gap-1.5 text-xs font-bold text-white bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full opacity-90 group-hover:opacity-100"><i class="fas fa-images" aria-hidden="true"></i> More photos</span>
+                        </a>
+                        <div class="lg:col-span-3 p-6 sm:p-8">
+                            <div class="flex flex-wrap items-center gap-3 mb-2">
+                                <span class="inline-flex items-center gap-1 text-xs font-bold text-primary bg-highlight px-2 py-0.5 rounded"><i class="fas fa-microphone-alt" aria-hidden="true"></i> Invited Talk &amp; Panel</span>
+                                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">24 Oct 2026</span>
+                            </div>
+                            <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">Engineering the Future: An Industry-Academia Conclave</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">ISME Golden Jubilee &middot; <a href="https://home.iitd.ac.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">IIT Delhi</a> <span class="fi fi-in"></span></p>
+                            <div class="grid sm:grid-cols-2 gap-5 mt-5">
+                                <div>
+                                    <p class="text-[11px] font-bold text-amber-600 dark:text-highlight uppercase tracking-widest">Invited Talk</p>
+                                    <p class="text-sm font-bold text-slate-900 dark:text-white mt-1">"Between the Boxes: The Machine Never Stood Alone"</p>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">System-of-systems engineering for product and solution development</p>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-bold text-amber-600 dark:text-highlight uppercase tracking-widest">Panellist</p>
+                                    <p class="text-sm font-bold text-slate-900 dark:text-white mt-1">"How to improve engineering education for making Mechanical Engineers more industry-ready"</p>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Alongside Prof. Prem Vrat, Sujata Sahay (India Welds), Tanmay Vyas (Cummins), Pratyush Lenka (L&amp;T), Pranay Garg (Advance Valves) and other panellists &middot; moderated by Prof. M. R. Ravi</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-highlight/5 dark:bg-highlight/10 border border-highlight/30 rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                            <a href="images/chemrd2-iitd-2026.jpg" target="_blank" rel="noopener noreferrer" class="block clickable" aria-label="Open full photo from the ChemRD2 2026 panel at IIT Delhi">
+                                <img src="images/chemrd2-iitd-2026.jpg" alt="Rishi Relan speaking on the ChemRD2 2026 panel, Department of Chemical Engineering, IIT Delhi" width="1200" height="800" loading="lazy" class="w-full aspect-[3/2] object-cover">
+                            </a>
+                            <div class="p-5">
+                                <p class="text-xs font-mono text-slate-500 dark:text-slate-400">11 Oct 2026</p>
+                                <p class="text-sm font-bold text-slate-900 dark:text-white mt-1"><i class="fas fa-users text-highlight mr-1" aria-hidden="true"></i> Panel Member</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">"Transformed By AI or Transformed With AI?" &mdash; Multiscale Simulation &amp; Data Analytics vertical, Industry-Academia Symposium (ChemRD2 2026: Research &middot; Development &middot; Demonstration), Dept. of Chemical Engineering, <a href="https://home.iitd.ac.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">IIT Delhi</a> <span class="fi fi-in"></span></p>
+                            </div>
+                        </div>
+                        <div class="bg-highlight/5 dark:bg-highlight/10 border border-highlight/30 rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                            <a href="images/igstc-2026-poster.jpg" target="_blank" rel="noopener noreferrer" class="block clickable" aria-label="Open the full IGSTC event poster">
+                                <img src="images/igstc-2026-card.jpg" alt="IGSTC Research &amp; Innovation Dialogue Series poster: Batteries in the Energy System-of-Systems, Dr. Rishi Relan, 5 November 2026" width="1200" height="800" loading="lazy" class="w-full aspect-[3/2] object-cover">
+                            </a>
+                            <div class="p-5">
+                            <p class="text-xs font-mono text-slate-500 dark:text-slate-400">5 Nov 2026 &middot; Online</p>
+                            <p class="text-sm font-bold text-slate-900 dark:text-white mt-1"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> Invited Speaker</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">"Batteries in the Energy System-of-Systems: Rethinking Cyber-Physical Assets via AI and Digital Twins" &mdash; IGSTC Research &amp; Innovation Dialogue Series, Indo-German Science &amp; Technology Centre <span class="fi fi-in"></span> <span class="fi fi-de"></span></p>
+                            <a href="https://lnkd.in/p/gX6DNK9f" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:underline clickable mt-2"><i class="fas fa-link" aria-hidden="true"></i> Event post</a>
+                            </div>
+                        </div>
+                        <div class="bg-highlight/5 dark:bg-highlight/10 border border-highlight/30 rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                            <a href="images/synergy-6-2026-poster.jpg" target="_blank" rel="noopener noreferrer" class="block clickable" aria-label="Open the full IndiaWelds Synergy 6.0 speaker poster">
+                                <img src="images/synergy-6-2026-card.jpg" alt="IndiaWelds Synergy 6.0 flagship session poster: Dr.ir. Rishi Relan, Automation in Welding &amp; Inspection, 17 November 2026, The Ashok, New Delhi" width="1200" height="800" loading="lazy" class="w-full aspect-[3/2] object-cover">
+                            </a>
+                            <div class="p-5">
+                                <p class="text-xs font-mono text-slate-500 dark:text-slate-400">17 Nov 2026</p>
+                                <p class="text-sm font-bold text-slate-900 dark:text-white mt-1"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> Flagship Session Speaker</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">"From Technology Built Around Processes to Processes Built Around Technology: Automation in Welding &amp; Inspection" &mdash; IndiaWelds Synergy 6.0: The Manufacturing Leadership Summit (FICCI), The Ashok, New Delhi <span class="fi fi-in"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div id="on-stage" class="scroll-mt-24">
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center"><i class="fas fa-microphone-alt text-highlight mr-3" aria-hidden="true"></i> On stage</h3>
+
+                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Flagship appearances</p>
+                        <div class="grid md:grid-cols-3 gap-4 mb-4">
+                            <div class="p-4 bg-highlight/5 dark:bg-highlight/10 border-l-4 border-highlight rounded-r-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-highlight/10 dark:hover:bg-highlight/20">
+                                <strong class="text-slate-900 dark:text-white block mb-1"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> Keynote Speaker</strong>
+                                <p class="text-sm text-slate-600 dark:text-slate-300">International Conference on Advances in Materials, Design and Manufacturing (ICAMDM-2025), India <span class="fi fi-in"></span></p>
+                            </div>
+                            <div class="p-4 bg-highlight/5 dark:bg-highlight/10 border-l-4 border-highlight rounded-r-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-highlight/10 dark:hover:bg-highlight/20 md:col-span-2">
+                                <strong class="text-slate-900 dark:text-white block mb-1"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> ASME E-Fest Careers Online Seminar 2024</strong>
+                                <p class="text-sm text-slate-600 dark:text-slate-300">"Accelerating Energy Transition and Sustainability: The Digital Twin and AI Advantage" &mdash; delivered to <strong>1,200+ attendees</strong> (Sep 2024).</p>
+                            </div>
+                        </div>
+
+                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Invited talks &amp; panels</p>
+                        <div class="grid sm:grid-cols-2 gap-3 mb-4 items-start">
+                            <div class="sm:col-span-2 p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
+                                <div class="md:flex md:gap-5 md:items-center">
+                                <div class="flex-1 min-w-0">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-highlight/10 text-highlight">Panel</span>
+                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-users text-highlight mr-1" aria-hidden="true"></i> Panel Member</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Panel Discussion 4: "Optimization at the Cross-roads of Machine Learning (ML), Generative AI (Gen AI) &amp; Model Based Systems Engineering (MBSE)", 1st International and 7th National Conference on Multidisciplinary Design, Analysis and Optimization (iNCMDAO 2024), IISc Bengaluru <span class="fi fi-in"></span> (Dec 16&ndash;18, 2024)</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Moderated by Dr. Vinay Ramanath (Siemens), alongside Dr. Dhanesh Padmanabhan, Dr. Shamik Chaudhuri (Walmart Labs) and Prof. Faez Ahmed (MIT) &middot; J N Tata Auditorium</p>
+                                </div>
+                                <a href="images/incmdao-2024-iisc-panel.jpg" target="_blank" rel="noopener noreferrer" class="block md:w-[42%] shrink-0 rounded-md overflow-hidden mt-3 md:mt-0 clickable" aria-label="Open photo of the iNCMDAO 2024 panel at IISc Bengaluru">
+                                    <img src="images/incmdao-2024-iisc-panel.jpg" alt="Rishi Relan on stage with fellow panellists at Panel Discussion 4, iNCMDAO 2024, IISc Bengaluru" width="1200" height="675" loading="lazy" class="w-full aspect-video object-cover hover:scale-105 transition-transform duration-300">
+                                </a>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-highlight/10 text-highlight">Speaking</span>
+                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> Invited Guest Speaker</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">"Idea to Impact 2026" at Siemens Energy India Limited <span class="fi fi-in"></span></p>
+                            </div>
+                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-dashed border-slate-300 dark:border-white/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-slate-200 dark:bg-white/10 text-slate-500 dark:text-slate-400">Invitation</span>
+                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-envelope-open-text text-highlight mr-1" aria-hidden="true"></i> Invited Panellist</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Germany Country Session, "India-Germany Energy Partnership: 'Make in India' Solar, Wind, Storage &amp; Skills for a Global Clean Energy Market", 6th CII International Energy Conference &amp; Exhibition, organised by the Confederation of Indian Industry with the Ministry of External Affairs and the Ministry of New &amp; Renewable Energy <span class="fi fi-in"></span> <span class="fi fi-de"></span> (Sep 2024)</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Invited alongside the Minister of State for Power and New &amp; Renewable Energy, the German Ambassador to India and industry leaders.</p>
+                            </div>
+                        </div>
+
+                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Seminars &amp; lectures</p>
+                        <div class="sm:columns-2 lg:columns-3 gap-3 [&>*]:mb-3 [&>*]:break-inside-avoid mb-3">
+                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-accent/10 text-accent">Seminar</span>
+                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-chalkboard text-accent mr-1" aria-hidden="true"></i> Invited Lecture</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">"Digital Twin and AI: Industry 4.0 Perspective" at the Faculty Development Programme on Smart Manufacturing and Industry 4.0 (2&ndash;6 Dec 2024, organised by the Dept. of Mechanical Engineering), <a href="https://srmap.edu.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">SRM University-AP</a>, Amaravati <span class="fi fi-in"></span> (5 Dec 2024)</p>
+                                <a href="images/srm-ap-2024-fdp-collage.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden mt-3 clickable" aria-label="Open photo and Invited Speaker plaque from the SRM University-AP Faculty Development Programme">
+                                    <img src="images/srm-ap-2024-fdp-collage.jpg" alt="Rishi Relan being felicitated after his lecture 'Digital Twin and AI: Industry 4.0 Perspective' at SRM University-AP, next to the Invited Speaker plaque for the Faculty Development Program on Smart Manufacturing, 2-6 Dec 2024" width="1444" height="720" loading="lazy" class="w-full h-auto hover:scale-105 transition-transform duration-300">
+                                </a>
+                            </div>
+                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-accent/10 text-accent">Career Talk</span>
+                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-laptop text-accent mr-1" aria-hidden="true"></i> Invited Speaker &middot; Online</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">"Career Opportunities: Robotics, Automation &amp; Industrial AI &mdash; Industry 4.0" at <a href="https://www.bmu.edu.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">BML Munjal University</a> <span class="fi fi-in"></span>, with Prof. Anupam Asthana (19 Jun 2020)</p>
+                                <a href="images/BML_CareerTalk.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden mt-3 clickable" aria-label="Open the BML Munjal University career talk poster">
+                                    <img src="images/bml-career-talk-2020-card.jpg" alt="BML Munjal University poster: Career Opportunities in Robotics, Automation and Industrial AI, Industry 4.0, with Dr. Rishi Relan and Prof. Anupam Asthana" width="1200" height="800" loading="lazy" class="w-full aspect-[3/2] object-cover hover:scale-105 transition-transform duration-300">
+                                </a>
+                            </div>
+                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-accent/10 text-accent">Seminar</span>
+                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-chalkboard text-accent mr-1" aria-hidden="true"></i> IEEE Technical Seminar</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">"Modelling of Nonlinear Systems: From White to Black to Grey-Box Models &mdash; Learnings through real-world problems", invited seminar for the IEEE Delhi Section at <a href="https://home.iitd.ac.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">IIT Delhi</a> <span class="fi fi-in"></span> (2 May 2018)</p>
+                                <a href="https://enotice.vtools.ieee.org/public/32628" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:underline clickable mt-1"><i class="fas fa-link" aria-hidden="true"></i> IEEE event notice</a>
+                                <a href="images/ieee-seminar-iitd-2018.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden mt-3 clickable" aria-label="Open the IEEE seminar banner, IIT Delhi 2018">
+                                    <img src="images/ieee-seminar-iitd-2018.jpg" alt="IEEE Delhi Section invited seminar banner: Modelling of Nonlinear Systems, Dr. Rishi Relan, IIT Delhi, 2 May 2018" width="1000" height="558" loading="lazy" class="w-full aspect-[3/2] object-cover object-left hover:scale-105 transition-transform duration-300">
+                                </a>
+                            </div>
+                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-accent/10 text-accent">Seminar</span>
+                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-chalkboard text-accent mr-1" aria-hidden="true"></i> ASME Seminar &middot; Guest of Honour</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">ASME-GT India Student Seminar Series 2023, Dept. of Mechanical Engineering, University Institute of Engineering, <a href="https://www.cuchd.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Chandigarh University</a> <span class="fi fi-in"></span> (2023 &middot; 300+ participants)</p>
+                                <a href="images/chandigarh-univ-2023-asme-gt.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden mt-3 clickable" aria-label="Open photo and Guest of Honour plaque from the ASME-GT India Student Seminar Series 2023, Chandigarh University">
+                                    <img src="images/chandigarh-univ-2023-asme-gt.jpg" alt="Rishi Relan with students and faculty on stage at Chandigarh University, next to the Guest of Honour plaque for the ASME-GT India Student Seminar Series 2023" width="1492" height="720" loading="lazy" class="w-full h-auto hover:scale-105 transition-transform duration-300">
+                                </a>
+                            </div>
+                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-highlight/10 text-highlight">Keynote</span>
+                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> Inaugural Keynote &mdash; UDAAN 2026</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Corporate orientation &amp; pre-placement program, GVM Girls College, Sonipat <span class="fi fi-in"></span> (30 Sep 2026)</p>
+                                <div class="grid grid-cols-2 gap-2 mt-3">
+                                    <a href="images/udaan-2026-keynote.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden clickable" aria-label="Open photo of the UDAAN 2026 keynote">
+                                        <img src="images/udaan-2026-keynote.jpg" alt="Rishi Relan delivering the inaugural keynote at UDAAN 2026, GVM Girls College, Sonipat" width="800" height="1066" loading="lazy" class="w-full aspect-[4/3] object-cover object-[center_45%] hover:scale-105 transition-transform duration-300">
+                                    </a>
+                                    <a href="images/udaan-2026-session.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden clickable" aria-label="Open photo of the UDAAN 2026 session">
+                                        <img src="images/udaan-2026-session.jpg" alt="Students and guests at the Confluence @ UDAAN 2026 session, with Rishi Relan on the dais" width="1200" height="900" loading="lazy" class="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-300">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Global reach</p>
+                        <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-slate-500/10 text-slate-500 dark:text-slate-400">Global Reach</span>
+                            <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-globe text-accent mr-1" aria-hidden="true"></i> Presentations</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5"><a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">ETH Zürich</a> <span class="fi fi-ch"></span>, Hausdorff Center <span class="fi fi-de"></span>, IITs (Delhi, Mandi, Ropar) <span class="fi fi-in"></span>, <a href="https://www.rolls-royce.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Rolls-Royce</a> (UK <span class="fi fi-gb"></span>), <a href="https://www.volvogroup.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Volvo AB</a> <span class="fi fi-se"></span>, <a href="https://www.toyota-europe.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Toyota ME</a> <span class="fi fi-be"></span>, <a href="https://www.umicore.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Umicore</a> <span class="fi fi-be"></span></p>
+                        </div>
+                    </div>
+
+            <div class="text-center mt-12">
+                <a href="#invite" class="inline-flex items-center gap-2 bg-highlight text-primary font-bold px-8 py-4 rounded-lg hover:bg-amber-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg clickable"><i class="fas fa-microphone-alt" aria-hidden="true"></i> Invite me to your event</a>
             </div>
         </div>
     </section>
@@ -1399,7 +1651,7 @@
                 </div>
 
                 <div class="grid lg:grid-cols-5 gap-6">
-                    <div class="glow-blink lg:col-span-3 p-6 sm:p-8 bg-white dark:bg-secondary/80 rounded-xl border border-highlight/40 border-l-4 border-l-highlight shadow-sm dark:shadow-none flex flex-col sm:flex-row gap-6">
+                    <div class="glow-blink lg:col-span-3 p-6 sm:p-8 bg-white dark:bg-secondary/80 rounded-xl border border-highlight/40 border-l-4 border-l-highlight shadow-sm dark:shadow-none flex flex-col sm:flex-row sm:items-center gap-6">
                         <div class="sm:w-40 shrink-0">
                             <p class="text-6xl font-bold text-slate-900 dark:text-white leading-none">573</p>
                             <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">citations on Google Scholar</p>
@@ -1428,7 +1680,7 @@
                                 <p class="text-sm font-bold text-slate-900 dark:text-white mt-0.5"><i class="fas fa-star text-highlight mr-1" aria-hidden="true"></i> Spotlight presentation &middot; Honourable Mention</p>
                                 <p class="text-sm text-slate-700 dark:text-slate-200 mt-1">Digital twin framework for enhancing BESS performance, safety and reliability</p>
                                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Vishnu Nair, Vikas... <strong class="text-slate-700 dark:text-slate-200">Rishi Relan</strong> &middot; CASML 2024, IISc Bangalore <span class="fi fi-in"></span></p>
-                                <a href="images/casml-2024-iisc-spotlight.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden mt-3 clickable" aria-label="Open photo of the CASML 2024 spotlight presentation at IISc">
+                                <a href="images/casml-2024-iisc-spotlight.jpg" target="_blank" rel="noopener noreferrer" class="inline-block w-44 rounded-md overflow-hidden mt-3 clickable" aria-label="Open photo of the CASML 2024 spotlight presentation at IISc">
                                     <img src="images/casml-2024-iisc-spotlight.jpg" alt="Rishi Relan presenting the BESS digital twin data analytics layer on stage at CASML 2024, IISc Bangalore" width="1200" height="675" loading="lazy" class="w-full aspect-[16/9] object-cover hover:scale-105 transition-transform duration-300">
                                 </a>
                             </li>
@@ -1698,103 +1950,6 @@
                     <a href="#honours" class="px-3 py-1.5 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-white/10 hover:border-accent transition clickable">Honours &amp; Awards</a>
                 </nav>
 
-                <div id="recent-upcoming" class="mb-14 scroll-mt-24">
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center"><i class="fas fa-calendar-check text-highlight mr-3" aria-hidden="true"></i> Recent &amp; Upcoming in 2026</h3>
-                    <div class="glow-blink mb-4 bg-highlight/5 dark:bg-highlight/10 border border-highlight/40 border-l-4 border-l-highlight rounded-xl overflow-hidden grid lg:grid-cols-5">
-                        <a href="images/asme-gt-india-2026-talk.jpg" target="_blank" rel="noopener noreferrer" class="lg:col-span-2 block clickable" aria-label="Open full photo of the invited talk at the Gas Turbine India Conference, ASME IMECE India 2026">
-                            <img src="images/asme-gt-india-2026-talk.jpg" alt="Rishi Relan presenting on the Energy System-of-Systems at the Gas Turbine India Conference, ASME IMECE India 2026" width="1200" height="900" loading="lazy" class="w-full h-full object-cover aspect-[4/3] lg:aspect-auto">
-                        </a>
-                        <div class="lg:col-span-3 p-6 sm:p-8 flex flex-col justify-center">
-                            <div class="flex flex-wrap items-center gap-3 mb-3">
-                                <span class="inline-flex items-center gap-1 text-xs font-bold text-primary bg-highlight px-2 py-0.5 rounded"><i class="fas fa-star" aria-hidden="true"></i> Spotlight Speaker</span>
-                                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">3&ndash;5 Sep 2026</span>
-                            </div>
-                            <h4 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-snug">Gas Turbine India Conference track, ASME IMECE 2026</h4>
-                            <p class="text-base font-bold text-slate-800 dark:text-slate-100 mt-3">"The Energy System-of-Systems Rethinking Cyber-Physical Assets via AI and Digital Twins"</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Invited talk on the main stage of the Gas Turbine India Conference at ASME's International Mechanical Engineering Congress &amp; Exposition (IMECE) India 2026, Chennai <span class="fi fi-in"></span></p>
-                            <a href="https://lnkd.in/dvURvv_v" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-bold text-accent hover:underline clickable mt-4"><i class="fas fa-link" aria-hidden="true"></i> Event link</a>
-                        </div>
-                    </div>
-                    <div class="p-5 mb-4 bg-white dark:bg-tertiary/40 border border-slate-200 dark:border-white/5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                        <div class="flex flex-wrap items-center gap-3 mb-2">
-                            <span class="inline-flex items-center gap-1 text-xs font-bold text-primary bg-accent px-2 py-0.5 rounded"><i class="fas fa-newspaper" aria-hidden="true"></i> Op-Ed</span>
-                            <span class="text-xs font-mono text-slate-500 dark:text-slate-400">Hindustan Times &middot; Jul 2026</span>
-                        </div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white leading-snug">AI infrastructure is powering the next research frontier</h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">With Manisha Saini, BML Munjal University &mdash; why hybrid ML &amp; control engineering, high-fidelity digital twins and HIL validation, not bigger models alone, are the real bottleneck for industrial AI.</p>
-                        <a href="https://www.hindustantimes.com/ht-insight/future-tech/ai-infrastructure-is-powering-the-next-research-frontier-101783163826541.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-bold text-accent hover:underline clickable mt-3"><i class="fas fa-link" aria-hidden="true"></i> Read the article</a>
-                    </div>
-                    <div class="mb-4 bg-white dark:bg-tertiary/40 border border-highlight/40 rounded-xl overflow-hidden grid lg:grid-cols-5 transition-all duration-300 hover:shadow-lg">
-                        <a href="images/isme-conclave-2026.jpg" target="_blank" rel="noopener noreferrer" class="lg:col-span-2 block relative group clickable" aria-label="Open full photo collage from the ISME Golden Jubilee Conclave">
-                            <img src="images/isme-conclave-2026-talk.jpg" alt="Rishi Relan presenting 'Between the Boxes: The Machine Never Stood Alone' at the ISME Golden Jubilee Conclave, IIT Delhi" width="1200" height="801" loading="lazy" class="w-full h-full object-cover aspect-[3/2] lg:aspect-auto">
-                            <span class="absolute bottom-3 left-3 inline-flex items-center gap-1.5 text-xs font-bold text-white bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full opacity-90 group-hover:opacity-100"><i class="fas fa-images" aria-hidden="true"></i> More photos</span>
-                        </a>
-                        <div class="lg:col-span-3 p-6 sm:p-8">
-                            <div class="flex flex-wrap items-center gap-3 mb-2">
-                                <span class="inline-flex items-center gap-1 text-xs font-bold text-primary bg-highlight px-2 py-0.5 rounded"><i class="fas fa-microphone-alt" aria-hidden="true"></i> Invited Talk &amp; Panel</span>
-                                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">24 Oct 2026</span>
-                            </div>
-                            <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">Engineering the Future: An Industry-Academia Conclave</h4>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">ISME Golden Jubilee &middot; <a href="https://home.iitd.ac.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">IIT Delhi</a> <span class="fi fi-in"></span></p>
-                            <div class="grid sm:grid-cols-2 gap-5 mt-5">
-                                <div>
-                                    <p class="text-[11px] font-bold text-amber-600 dark:text-highlight uppercase tracking-widest">Invited Talk</p>
-                                    <p class="text-sm font-bold text-slate-900 dark:text-white mt-1">"Between the Boxes: The Machine Never Stood Alone"</p>
-                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">System-of-systems engineering for product and solution development</p>
-                                </div>
-                                <div>
-                                    <p class="text-[11px] font-bold text-amber-600 dark:text-highlight uppercase tracking-widest">Panellist</p>
-                                    <p class="text-sm font-bold text-slate-900 dark:text-white mt-1">"How to improve engineering education for making Mechanical Engineers more industry-ready"</p>
-                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Alongside Prof. Prem Vrat, Sujata Sahay (India Welds), Tanmay Vyas (Cummins), Pratyush Lenka (L&amp;T), Pranay Garg (Advance Valves) and other panellists &middot; moderated by Prof. M. R. Ravi</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid md:grid-cols-3 gap-4">
-                        <div class="bg-highlight/5 dark:bg-highlight/10 border border-highlight/30 rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                            <a href="images/chemrd2-iitd-2026.jpg" target="_blank" rel="noopener noreferrer" class="block clickable" aria-label="Open full photo from the ChemRD2 2026 panel at IIT Delhi">
-                                <img src="images/chemrd2-iitd-2026.jpg" alt="Rishi Relan speaking on the ChemRD2 2026 panel, Department of Chemical Engineering, IIT Delhi" width="1200" height="800" loading="lazy" class="w-full aspect-[3/2] object-cover">
-                            </a>
-                            <div class="p-5">
-                                <p class="text-xs font-mono text-slate-500 dark:text-slate-400">11 Oct 2026</p>
-                                <p class="text-sm font-bold text-slate-900 dark:text-white mt-1"><i class="fas fa-users text-highlight mr-1" aria-hidden="true"></i> Panel Member</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">"Transformed By AI or Transformed With AI?" &mdash; Multiscale Simulation &amp; Data Analytics vertical, Industry-Academia Symposium (ChemRD2 2026: Research &middot; Development &middot; Demonstration), Dept. of Chemical Engineering, <a href="https://home.iitd.ac.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">IIT Delhi</a> <span class="fi fi-in"></span></p>
-                            </div>
-                        </div>
-                        <div class="bg-highlight/5 dark:bg-highlight/10 border border-highlight/30 rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                            <a href="images/igstc-2026-poster.jpg" target="_blank" rel="noopener noreferrer" class="block clickable" aria-label="Open the full IGSTC event poster">
-                                <img src="images/igstc-2026-card.jpg" alt="IGSTC Research &amp; Innovation Dialogue Series poster: Batteries in the Energy System-of-Systems, Dr. Rishi Relan, 5 November 2026" width="1200" height="800" loading="lazy" class="w-full aspect-[3/2] object-cover">
-                            </a>
-                            <div class="p-5">
-                            <p class="text-xs font-mono text-slate-500 dark:text-slate-400">5 Nov 2026 &middot; Online</p>
-                            <p class="text-sm font-bold text-slate-900 dark:text-white mt-1"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> Invited Speaker</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">"Batteries in the Energy System-of-Systems: Rethinking Cyber-Physical Assets via AI and Digital Twins" &mdash; IGSTC Research &amp; Innovation Dialogue Series, Indo-German Science &amp; Technology Centre <span class="fi fi-in"></span> <span class="fi fi-de"></span></p>
-                            <a href="https://lnkd.in/p/gX6DNK9f" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:underline clickable mt-2"><i class="fas fa-link" aria-hidden="true"></i> Event post</a>
-                            </div>
-                        </div>
-                        <div class="bg-highlight/5 dark:bg-highlight/10 border border-highlight/30 rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                            <a href="images/synergy-6-2026-poster.jpg" target="_blank" rel="noopener noreferrer" class="block clickable" aria-label="Open the full IndiaWelds Synergy 6.0 speaker poster">
-                                <img src="images/synergy-6-2026-card.jpg" alt="IndiaWelds Synergy 6.0 flagship session poster: Dr.ir. Rishi Relan, Automation in Welding &amp; Inspection, 17 November 2026, The Ashok, New Delhi" width="1200" height="800" loading="lazy" class="w-full aspect-[3/2] object-cover">
-                            </a>
-                            <div class="p-5">
-                                <p class="text-xs font-mono text-slate-500 dark:text-slate-400">17 Nov 2026</p>
-                                <p class="text-sm font-bold text-slate-900 dark:text-white mt-1"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> Flagship Session Speaker</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">"From Technology Built Around Processes to Processes Built Around Technology: Automation in Welding &amp; Inspection" &mdash; IndiaWelds Synergy 6.0: The Manufacturing Leadership Summit (FICCI), The Ashok, New Delhi <span class="fi fi-in"></span></p>
-                            </div>
-                        </div>
-                        <div class="bg-highlight/5 dark:bg-highlight/10 border border-highlight/30 rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                            <a href="images/asme-imece-2026-cps-session.jpg" target="_blank" rel="noopener noreferrer" class="block clickable" aria-label="Open full photo of the Cyber Physical Systems AI/ML track at ASME IMECE India 2026">
-                                <img src="images/asme-imece-2026-cps-session.jpg" alt="Rishi Relan with fellow session chairs and speakers of the Cyber Physical Systems AI/ML track, ASME IMECE India 2026" width="1200" height="900" loading="lazy" class="w-full aspect-[3/2] object-cover object-center">
-                            </a>
-                            <div class="p-5">
-                                <p class="text-xs font-mono text-slate-500 dark:text-slate-400">3&ndash;5 Sep 2026</p>
-                                <p class="text-sm font-bold text-slate-900 dark:text-white mt-1"><i class="fas fa-chair text-highlight mr-1" aria-hidden="true"></i> Session Chair</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">ASME IMECE 2026: Aerospace &amp; Propulsion Health session, CPS &amp; AI/ML track.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="space-y-14">
 
                     <div id="leadership-roles" class="scroll-mt-24">
@@ -1809,7 +1964,7 @@
                                 <p class="text-sm text-slate-600 dark:text-slate-300">SPEL Competency Hub Diversity Council &mdash; including an inaugural keynote at UDAAN 2026, GVM Girls College.</p>
                             </div>
                         </div>
-                        <div class="grid sm:grid-cols-3 gap-3">
+                        <div class="sm:columns-3 gap-3 [&>*]:mb-3 [&>*]:break-inside-avoid">
                             <div class="p-3 bg-accent/5 dark:bg-accent/10 rounded-lg border-l-4 border-accent transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-accent/10 dark:hover:bg-accent/20">
                                 <p class="text-sm text-slate-800 dark:text-white font-bold"><i class="fas fa-users text-accent mr-1" aria-hidden="true"></i> R&amp;D Workstream Lead</p>
                                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">RE-INVEST 2024, 4th Global Renewable Energy Investors Meet &amp; Expo <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400 align-middle">GIZ</span> &middot; Mahatma Mandir, Gandhinagar <span class="fi fi-in"></span> (16&ndash;18 Sep 2024)</p>
@@ -1830,103 +1985,6 @@
                                 <p class="text-sm text-slate-800 dark:text-white font-bold"><i class="fas fa-chair text-accent mr-1" aria-hidden="true"></i> Session Co-chair</p>
                                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Indian Control Conference (ICC) 2019 <span class="fi fi-in"></span></p>
                             </div>
-                        </div>
-                    </div>
-
-                    <div id="on-stage" class="scroll-mt-24">
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center"><i class="fas fa-microphone-alt text-highlight mr-3" aria-hidden="true"></i> On stage</h3>
-
-                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Flagship appearances</p>
-                        <div class="grid md:grid-cols-3 gap-4 mb-4">
-                            <div class="p-4 bg-highlight/5 dark:bg-highlight/10 border-l-4 border-highlight rounded-r-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-highlight/10 dark:hover:bg-highlight/20">
-                                <strong class="text-slate-900 dark:text-white block mb-1"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> Keynote Speaker</strong>
-                                <p class="text-sm text-slate-600 dark:text-slate-300">International Conference on Advances in Materials, Design and Manufacturing (ICAMDM-2025), India <span class="fi fi-in"></span></p>
-                            </div>
-                            <div class="p-4 bg-highlight/5 dark:bg-highlight/10 border-l-4 border-highlight rounded-r-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-highlight/10 dark:hover:bg-highlight/20 md:col-span-2">
-                                <strong class="text-slate-900 dark:text-white block mb-1"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> ASME E-Fest Careers Online Seminar 2024</strong>
-                                <p class="text-sm text-slate-600 dark:text-slate-300">"Accelerating Energy Transition and Sustainability: The Digital Twin and AI Advantage" &mdash; delivered to <strong>1,200+ attendees</strong> (Sep 2024).</p>
-                            </div>
-                        </div>
-
-                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Invited talks &amp; panels</p>
-                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
-                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-highlight/10 text-highlight">Speaking</span>
-                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> Invited Guest Speaker</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">"Idea to Impact 2026" at Siemens Energy India Limited <span class="fi fi-in"></span></p>
-                            </div>
-                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-highlight/10 text-highlight">Panel</span>
-                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-users text-highlight mr-1" aria-hidden="true"></i> Panel Member</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Panel Discussion 4: "Optimization at the Cross-roads of Machine Learning (ML), Generative AI (Gen AI) &amp; Model Based Systems Engineering (MBSE)", 1st International and 7th National Conference on Multidisciplinary Design, Analysis and Optimization (iNCMDAO 2024), IISc Bengaluru <span class="fi fi-in"></span> (Dec 16&ndash;18, 2024)</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Moderated by Dr. Vinay Ramanath (Siemens), alongside Dr. Dhanesh Padmanabhan, Dr. Shamik Chaudhuri (Walmart Labs) and Prof. Faez Ahmed (MIT) &middot; J N Tata Auditorium</p>
-                                <a href="images/incmdao-2024-iisc-panel.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden mt-3 clickable" aria-label="Open photo of the iNCMDAO 2024 panel at IISc Bengaluru">
-                                    <img src="images/incmdao-2024-iisc-panel.jpg" alt="Rishi Relan on stage with fellow panellists at Panel Discussion 4, iNCMDAO 2024, IISc Bengaluru" width="1200" height="675" loading="lazy" class="w-full aspect-[3/2] object-cover hover:scale-105 transition-transform duration-300">
-                                </a>
-                            </div>
-                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-dashed border-slate-300 dark:border-white/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-slate-200 dark:bg-white/10 text-slate-500 dark:text-slate-400">Invitation</span>
-                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-envelope-open-text text-highlight mr-1" aria-hidden="true"></i> Invited Panellist</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Germany Country Session, "India-Germany Energy Partnership: 'Make in India' Solar, Wind, Storage &amp; Skills for a Global Clean Energy Market", 6th CII International Energy Conference &amp; Exhibition, organised by the Confederation of Indian Industry with the Ministry of External Affairs and the Ministry of New &amp; Renewable Energy <span class="fi fi-in"></span> <span class="fi fi-de"></span> (Sep 2024)</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Invited alongside the Minister of State for Power and New &amp; Renewable Energy, the German Ambassador to India and industry leaders.</p>
-                            </div>
-                        </div>
-
-                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Seminars &amp; lectures</p>
-                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-3">
-                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-accent/10 text-accent">Seminar</span>
-                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-chalkboard text-accent mr-1" aria-hidden="true"></i> Invited Lecture</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">"Digital Twin and AI: Industry 4.0 Perspective" at the Faculty Development Programme on Smart Manufacturing and Industry 4.0 (2&ndash;6 Dec 2024, organised by the Dept. of Mechanical Engineering), <a href="https://srmap.edu.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">SRM University-AP</a>, Amaravati <span class="fi fi-in"></span> (5 Dec 2024)</p>
-                                <a href="images/srm-ap-2024-fdp-collage.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden mt-3 clickable" aria-label="Open photo and Invited Speaker plaque from the SRM University-AP Faculty Development Programme">
-                                    <img src="images/srm-ap-2024-fdp-collage.jpg" alt="Rishi Relan being felicitated after his lecture 'Digital Twin and AI: Industry 4.0 Perspective' at SRM University-AP, next to the Invited Speaker plaque for the Faculty Development Program on Smart Manufacturing, 2-6 Dec 2024" width="1444" height="720" loading="lazy" class="w-full h-auto hover:scale-105 transition-transform duration-300">
-                                </a>
-                            </div>
-                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-accent/10 text-accent">Career Talk</span>
-                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-laptop text-accent mr-1" aria-hidden="true"></i> Invited Speaker &middot; Online</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">"Career Opportunities: Robotics, Automation &amp; Industrial AI &mdash; Industry 4.0" at <a href="https://www.bmu.edu.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">BML Munjal University</a> <span class="fi fi-in"></span>, with Prof. Anupam Asthana (19 Jun 2020)</p>
-                                <a href="images/BML_CareerTalk.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden mt-3 clickable" aria-label="Open the BML Munjal University career talk poster">
-                                    <img src="images/bml-career-talk-2020-card.jpg" alt="BML Munjal University poster: Career Opportunities in Robotics, Automation and Industrial AI, Industry 4.0, with Dr. Rishi Relan and Prof. Anupam Asthana" width="1200" height="800" loading="lazy" class="w-full aspect-[3/2] object-cover hover:scale-105 transition-transform duration-300">
-                                </a>
-                            </div>
-                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-accent/10 text-accent">Seminar</span>
-                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-chalkboard text-accent mr-1" aria-hidden="true"></i> IEEE Technical Seminar</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">"Modelling of Nonlinear Systems: From White to Black to Grey-Box Models &mdash; Learnings through real-world problems", invited seminar for the IEEE Delhi Section at <a href="https://home.iitd.ac.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">IIT Delhi</a> <span class="fi fi-in"></span> (2 May 2018)</p>
-                                <a href="https://enotice.vtools.ieee.org/public/32628" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:underline clickable mt-1"><i class="fas fa-link" aria-hidden="true"></i> IEEE event notice</a>
-                                <a href="images/ieee-seminar-iitd-2018.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden mt-3 clickable" aria-label="Open the IEEE seminar banner, IIT Delhi 2018">
-                                    <img src="images/ieee-seminar-iitd-2018.jpg" alt="IEEE Delhi Section invited seminar banner: Modelling of Nonlinear Systems, Dr. Rishi Relan, IIT Delhi, 2 May 2018" width="1000" height="558" loading="lazy" class="w-full aspect-[3/2] object-cover object-left hover:scale-105 transition-transform duration-300">
-                                </a>
-                            </div>
-                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-accent/10 text-accent">Seminar</span>
-                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-chalkboard text-accent mr-1" aria-hidden="true"></i> ASME Seminar &middot; Guest of Honour</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">ASME-GT India Student Seminar Series 2023, Dept. of Mechanical Engineering, University Institute of Engineering, <a href="https://www.cuchd.in/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Chandigarh University</a> <span class="fi fi-in"></span> (2023 &middot; 300+ participants)</p>
-                                <a href="images/chandigarh-univ-2023-asme-gt.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden mt-3 clickable" aria-label="Open photo and Guest of Honour plaque from the ASME-GT India Student Seminar Series 2023, Chandigarh University">
-                                    <img src="images/chandigarh-univ-2023-asme-gt.jpg" alt="Rishi Relan with students and faculty on stage at Chandigarh University, next to the Guest of Honour plaque for the ASME-GT India Student Seminar Series 2023" width="1492" height="720" loading="lazy" class="w-full h-auto hover:scale-105 transition-transform duration-300">
-                                </a>
-                            </div>
-                            <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-highlight/10 text-highlight">Keynote</span>
-                                <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-microphone-alt text-highlight mr-1" aria-hidden="true"></i> Inaugural Keynote &mdash; UDAAN 2026</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Corporate orientation &amp; pre-placement program, GVM Girls College, Sonipat <span class="fi fi-in"></span> (30 Sep 2026)</p>
-                                <div class="grid grid-cols-2 gap-2 mt-3">
-                                    <a href="images/udaan-2026-keynote.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden clickable" aria-label="Open photo of the UDAAN 2026 keynote">
-                                        <img src="images/udaan-2026-keynote.jpg" alt="Rishi Relan delivering the inaugural keynote at UDAAN 2026, GVM Girls College, Sonipat" width="800" height="1066" loading="lazy" class="w-full aspect-[4/3] object-cover object-[center_45%] hover:scale-105 transition-transform duration-300">
-                                    </a>
-                                    <a href="images/udaan-2026-session.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-md overflow-hidden clickable" aria-label="Open photo of the UDAAN 2026 session">
-                                        <img src="images/udaan-2026-session.jpg" alt="Students and guests at the Confluence @ UDAAN 2026 session, with Rishi Relan on the dais" width="1200" height="900" loading="lazy" class="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-300">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Global reach</p>
-                        <div class="p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-highlight/50 dark:hover:border-highlight/50">
-                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest bg-slate-500/10 text-slate-500 dark:text-slate-400">Global Reach</span>
-                            <p class="text-sm text-slate-800 dark:text-white font-bold mt-2"><i class="fas fa-globe text-accent mr-1" aria-hidden="true"></i> Presentations</p>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5"><a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">ETH Zürich</a> <span class="fi fi-ch"></span>, Hausdorff Center <span class="fi fi-de"></span>, IITs (Delhi, Mandi, Ropar) <span class="fi fi-in"></span>, <a href="https://www.rolls-royce.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Rolls-Royce</a> (UK <span class="fi fi-gb"></span>), <a href="https://www.volvogroup.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Volvo AB</a> <span class="fi fi-se"></span>, <a href="https://www.toyota-europe.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Toyota ME</a> <span class="fi fi-be"></span>, <a href="https://www.umicore.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline transition-colors clickable">Umicore</a> <span class="fi fi-be"></span></p>
                         </div>
                     </div>
 
@@ -2324,6 +2382,14 @@
 
     <script>
         (function () {
+            var strip = document.getElementById('stage-strip');
+            if (strip) {
+                document.querySelectorAll('.stage-strip-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        strip.scrollBy({ left: Number(btn.getAttribute('data-dir')) * strip.clientWidth * 0.8, behavior: 'smooth' });
+                    });
+                });
+            }
             var form = document.getElementById('invite-form');
             if (!form) return;
             document.querySelectorAll('[data-invite-type]').forEach(function (link) {
