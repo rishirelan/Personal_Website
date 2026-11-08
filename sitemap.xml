@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://rishirelan.com/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image><image:loc>https://rishirelan.com/BusinessRishiRelan8.jpg</image:loc></image:image>
+    <image:image><image:loc>https://rishirelan.com/images/asme-gt-india-2026-talk.jpg</image:loc></image:image>
+    <image:image><image:loc>https://rishirelan.com/images/isme-conclave-2026-talk.jpg</image:loc></image:image>
+    <image:image><image:loc>https://rishirelan.com/images/chemrd2-iitd-2026.jpg</image:loc></image:image>
+    <image:image><image:loc>https://rishirelan.com/images/incmdao-2024-iisc-panel.jpg</image:loc></image:image>
+    <image:image><image:loc>https://rishirelan.com/images/casml-2024-iisc-spotlight.jpg</image:loc></image:image>
   </url>
 </urlset>
