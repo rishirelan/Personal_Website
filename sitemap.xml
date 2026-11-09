@@ -34,4 +34,10 @@
     <image:image><image:loc>https://rishirelan.com/images/research/bess-cps-twin-ecosystem.jpg</image:loc></image:image>
     <image:image><image:loc>https://rishirelan.com/images/research/dt-sos-hierarchy-v2.jpg</image:loc></image:image>
   </url>
+  <url>
+    <loc>https://rishirelan.com/teaching.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
